@@ -1,0 +1,13 @@
+.classpath
+.gradle
+.project
+.settings/
+bin/
+build/
+node_modules
+npm-debug.log
+*.sw[op]
+.idea
+.gradle
+build
+.DS_Store
