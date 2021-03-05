@@ -1,0 +1,6 @@
+= Test Document
+
+[source,xml]
+----
+<!-- /**/ test -->
+----

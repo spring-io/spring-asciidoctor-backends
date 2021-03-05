@@ -1,0 +1,9 @@
+= Test Document
+:chomp: formatters
+
+[source,java]
+----
+// @formatter:off
+public class Example {}
+// @formatter:on
+----

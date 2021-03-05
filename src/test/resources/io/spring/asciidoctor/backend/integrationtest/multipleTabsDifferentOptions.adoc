@@ -1,0 +1,29 @@
+[source,indent=0,role="primary"]
+.Alpha
+----
+Alpha 1
+----
+
+[source,indent=0,role="secondary"]
+.Bravo
+----
+Bravo 1
+----
+
+[source,indent=0,role="primary"]
+.Charlie
+----
+Charlie 1
+----
+
+[source,indent=0,role="secondary"]
+.Delta
+----
+Delta 1
+----
+
+[source,indent=0,role="secondary"]
+.Echo
+----
+Echo 1
+----

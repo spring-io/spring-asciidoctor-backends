@@ -1,0 +1,19 @@
+= Test Document
+
+[source,java]
+----
+public class Example {
+
+	// @fold:on // getters...
+	private final String first;
+
+	private final String second;
+	// @fold:off
+
+	public Example(String first, String second) {
+		this.first = first;
+		this.second = second;
+	}
+
+}
+----

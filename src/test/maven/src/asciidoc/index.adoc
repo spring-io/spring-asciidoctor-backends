@@ -1,0 +1,22 @@
+= Maven Example
+Phillip Webb
+:toc: left
+:toc-levels: 4
+:sectnums:
+
+This is an example used to test the `asciidoctor-maven-plugin`.
+
+
+
+== Code
+Here's the XML that was used:
+
+[source,xml,indent=0]
+----
+include::../../pom.xml[tag=asciidoctor-maven-plugin]
+----
+
+
+
+== Summary
+That's all folks!

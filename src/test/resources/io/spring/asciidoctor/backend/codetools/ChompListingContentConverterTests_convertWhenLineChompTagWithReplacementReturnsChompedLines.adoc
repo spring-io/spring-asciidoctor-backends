@@ -1,0 +1,6 @@
+= Test Document
+
+[source,java]
+----
+Object o = /* @chomp:line // ... your instance */ new Object();
+----

@@ -1,0 +1,9 @@
+= Test Document
+
+[source,java]
+----
+public class Example {}
+// @chomp:file
+
+public class AnotherExample {}
+----

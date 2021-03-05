@@ -1,0 +1,9 @@
+= Asciidoctor Spring Backend
+
+This is an example Asciidoctor index page.
+It provides links to other samples.
+
+[horizontal]
+<<standard.adoc#standard,Standard>> :: Example that uses standard markup.
+<<spring.adoc#spring,Spring>> :: Example that highlights the `spring-html` backend features.
+<<notoc.adoc#notoc,No TOC>> :: Example has not table of contents.

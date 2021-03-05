@@ -1,0 +1,6 @@
+= Test Document
+
+[source,java]
+----
+Object nonChomp = /* comment */ new Object();
+----

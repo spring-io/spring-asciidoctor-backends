@@ -1,0 +1,24 @@
+pluginManagement {
+	plugins {
+		id "io.spring.javaformat" version springJavaFormatVersion
+	}
+	resolutionStrategy {
+		eachPlugin {
+			if (requested.id.id == "io.spring.javaformat") {
+				useModule "io.spring.javaformat:spring-javaformat-gradle-plugin:$springJavaFormatVersion"
+			}
+		}
+	}
+	repositories {
+		gradlePluginPortal()
+		mavenCentral()
+		maven { url "https://repo.spring.io/plugins-release" }
+	}
+}
+
+plugins {
+	id "com.gradle.enterprise" version "3.3.1"
+	id "io.spring.gradle-enterprise-conventions" version "0.0.4"
+}
+
+rootProject.name = "asciidoctor-spring-backends"

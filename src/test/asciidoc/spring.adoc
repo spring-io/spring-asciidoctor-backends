@@ -1,0 +1,213 @@
+[[spring]]
+= Asciidoctor Spring Extensions Document
+Andy Wilkinson; Phillip Webb
+:description: Asciidoctor using Spring extensions
+:toc: left
+:toc-levels: 4
+:sectnums:
+
+This is an example asciidoctor file uses specific features of the Spring backend.
+
+
+== Tab Roles
+You can use the `role` attribute on source code to create tabs.
+You have one `primary` roles and one or more `secondary` roles.
+
+We render these as tabs in the same was as the `spring-asciidoctor-extensions` project does.
+Although the CSS and Javascript are baked-in directly to our assets rather than being in the `<head>`.
+
+[source,xml,indent=0,role="primary"]
+.Maven
+----
+<dependency>
+    <groupId>com.example</groupId>
+    <artifactId>some-library</artifactId>
+    <version>1.2.3</version>
+</dependency>
+----
+
+[source,indent=0,role="secondary"]
+.Gradle
+----
+compile 'com.example:some-library:1.2.3'
+----
+
+
+
+=== Tab Blocks
+You can also use a block do define your tabs.
+
+[primary]
+.Spring
+--
+This is the first tab
+
+NOTE: It looks nice!
+
+[source,xml]
+----
+<docbook>
+	<header>Only Joking!</header>
+</docbook>
+----
+--
+
+[secondary]
+.Asciidoctor
+--
+Here we have a second tab.
+
+[source,java]
+----
+public void itAlsoLooksNice() {
+	System.out.println("yes it does!");
+}
+----
+--
+
+
+== Copy to Clipboard
+Hover over any code block and a copy-to-clipboard button is available:
+
+[source,java]
+----
+package com.example;
+
+public class MyApplication {
+
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+	}
+
+}
+----
+
+
+
+== Import Folding Folding
+Java code will automatically have imports folded away.
+Click the unfold button to view them:
+
+[source,java]
+----
+import java.net.InetAddress;
+import java.util.List;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConstructorBinding;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+@ConstructorBinding
+@ConfigurationProperties("acme")
+public class AcmeProperties {
+
+	public AcmeProperties() {
+	}
+
+}
+----
+
+
+
+== Code Folding
+You can also define additional folded sections:
+
+[source,java]
+----
+import java.net.InetAddress;
+import java.util.List;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConstructorBinding;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+@ConstructorBinding
+@ConfigurationProperties("acme")
+public class AcmeProperties {
+
+	// @fold:on
+	public AcmeProperties() {
+	}
+	// @fold:off
+
+}
+----
+
+Or replaced folded areas with something else:
+
+[source,java]
+----
+import java.net.InetAddress;
+import java.util.List;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConstructorBinding;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+@ConstructorBinding
+@ConfigurationProperties("acme")
+public class AcmeProperties {
+
+	// @fold:on // fields...
+	private final boolean enabled;
+
+	private final InetAddress remoteAddress;
+
+	private final Security security;
+	// @fold:off
+
+	public AcmeProperties(boolean enabled, InetAddress remoteAddress, Security security) {
+		this.enabled = enabled;
+		this.remoteAddress = remoteAddress;
+		this.security = security;
+	}
+
+	// @fold:on // getters...
+	public boolean isEnabled() {
+		return this.enabled;
+	}
+
+	public InetAddress getRemoteAddress() {
+		return this.remoteAddress;
+	}
+
+	public Security getSecurity() {
+		return this.security;
+	}
+	// @fold:off
+
+	public static class Security {
+
+		// @fold:on // fields...
+		private final String username;
+
+		private final String password;
+
+		private final List<String> roles;
+		// @fold:off
+
+		public Security(String username, String password, @DefaultValue("USER") List<String> roles) {
+			this.username = username;
+			this.password = password;
+			this.roles = roles;
+		}
+
+		// @fold:on // getters...
+		public String getUsername() {
+			return this.username;
+		}
+
+		public String getPassword() {
+			return this.password;
+		}
+
+		public List<String> getRoles() {
+			return this.roles;
+		}
+		// @fold:off
+
+	}
+
+}
+----
+

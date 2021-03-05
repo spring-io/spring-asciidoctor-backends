@@ -1,0 +1,27 @@
+plugins {
+	id 'org.asciidoctor.jvm.convert' version '3.1.0'
+}
+
+repositories {
+	mavenCentral()
+	maven {
+		url System.getenv("asciidoctor-spring-backends-repo")
+	}
+}
+
+configurations {
+	asciidoctorExtensions
+}
+
+dependencies {
+	asciidoctorExtensions "io.spring.asciidoctor.backends:asciidoctor-spring-backends:" + System.getenv("asciidoctor-spring-backends.version")
+}
+
+asciidoctor {
+	configurations "asciidoctorExtensions"
+	sourceDir "src/asciidoc"
+	baseDirFollowsSourceDir()
+	outputOptions {
+		backends "spring-html"
+	}
+}

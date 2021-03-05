@@ -1,0 +1,7 @@
+/*
+!src
+*.java
+highlight.js
+src/test/resources/**/*.html
+src/test/maven/target
+src/test/gradle/build

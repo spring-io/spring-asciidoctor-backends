@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content="Asciidoctor 2.0.10" />
+    <meta name="description" content="Asciidoctor using Spring extensions" />
+    <meta name="author" content="Andy Wilkinson, Phillip Webb" />
+    <title>Asciidoctor Spring Extensions Document</title>
+    <link rel="stylesheet" href="css/site.css" />
+    <script>
+      document.getElementsByTagName("html")[0].classList.add("js");
+    </script>
+    <script src="js/site.js" defer></script>
+  </head>
+  <body class="article toc2 toc-left">
+    <div id="banner-container" class="container" role="banner">
+      <div id="banner" class="contained" role="banner">
+        <div id="switch-theme">
+          <input type="checkbox" id="switch-theme-checkbox" />
+          <label for="switch-theme-checkbox">Dark Theme</label>
+        </div>
+      </div>
+    </div>
+    <div id="navbar-container" class="container" role="navigation">
+      <div id="navbar" class="contained" role="navigation"></div>
+    </div>
+    <div id="main-container" class="container">
+      <div id="main" class="contained">
+        <div id="doc" class="doc">
+          <div id="header">
+            <h1>Asciidoctor Spring Extensions Document</h1>
+            <div class="details">
+              <span id="author" class="author">Andy Wilkinson</span><br />
+              <span id="author2" class="author">Phillip Webb</span><br />
+            </div>
+            <div id="toc" class="toc2">
+              <div id="toctitle">Table of Contents</div>
+              <ul class="sectlevel1">
+                <li><a href="#_block_switch">1. Block Switch</a></li>
+              </ul>
+            </div>
+          </div>
+          <div id="content">
+            <div id="preamble">
+              <div class="sectionbody">
+                <div class="paragraph">
+                  <p>
+                    This is an example asciidoctor file uses Spring extensions.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="sect1">
+              <h2 id="_block_switch">
+                <a class="anchor" href="#_block_switch"></a>1. Block Switch
+              </h2>
+              <div class="sectionbody">
+                <div class="listingblock">
+                  <div class="content">
+                    <pre
+                      class="highlightjs highlight"
+                    ><code data-lang="java" class="language-java hljs"><span class="fold-block hide-when-folded">import java.net.InetAddress;
+import java.util.List;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConstructorBinding;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+</span><span class="fold-block">@ConstructorBinding
+@ConfigurationProperties("acme")
+public class AcmeProperties {
+
+	private final boolean enabled;
+
+	private final InetAddress remoteAddress;
+
+	private final Security security;
+
+	public AcmeProperties(boolean enabled, InetAddress remoteAddress, Security security) {
+		this.enabled = enabled;
+		this.remoteAddress = remoteAddress;
+		this.security = security;
+	}
+
+</span><span class="fold-block hide-when-unfolded">	// getters...
+
+</span><span class="fold-block hide-when-folded">	public boolean isEnabled() {
+		return this.enabled;
+	}
+
+	public InetAddress getRemoteAddress() {
+		return this.remoteAddress;
+	}
+
+	public Security getSecurity() {
+		return this.security;
+	}
+
+</span><span class="fold-block">	public static class Security {
+
+		private final String username;
+
+		private final String password;
+
+		private final List&lt;String&gt; roles;
+
+		public Security(String username, String password, @DefaultValue("USER") List&lt;String&gt; roles) {
+			this.username = username;
+			this.password = password;
+			this.roles = roles;
+		}
+
+</span><span class="fold-block hide-when-unfolded">		// getters...
+
+</span><span class="fold-block hide-when-folded">		public String getUsername() {
+			return this.username;
+		}
+
+		public String getPassword() {
+			return this.password;
+		}
+
+		public List&lt;String&gt; getRoles() {
+			return this.roles;
+		}
+
+</span><span class="fold-block">	}
+
+}</span></code></pre>
+                  </div>
+                </div>
+
+                <div class="paragraph">
+                  <p>Here&#8217;s a lovely block switch:</p>
+                </div>
+                <div class="listingblock primary">
+                  <div class="title">Maven</div>
+                  <div class="content">
+                    <pre
+                      class="highlight"
+                    ><code class="language-xml" data-lang="xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.example&lt;/groupId&gt;
+    &lt;artifactId&gt;some-library&lt;/artifactId&gt;
+    &lt;version&gt;1.2.3&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+                  </div>
+                </div>
+                <div class="listingblock secondary">
+                  <div class="title">Gradle</div>
+                  <div class="content">
+                    <pre
+                      class="highlight"
+                    ><code class="language-gradle" data-lang="gradle">compile 'com.example:some-library:1.2.3'</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="footer">
+            <div id="footer-text">Last updated 2021-02-25 23:41:24 -0800</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/highlight.min.js"></script>
+  </body>
+</html>

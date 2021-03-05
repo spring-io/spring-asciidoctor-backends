@@ -1,0 +1,22 @@
+= Gradle Example
+Phillip Webb
+:toc: left
+:toc-levels: 4
+:sectnums:
+
+This is an example used to test the `asciidoctor-gradle-plugin`.
+
+
+
+== Code
+Here's the `build.gradle` that was used:
+
+[source,gradle,indent=0]
+----
+include::../../build.gradle[]
+----
+
+
+
+== Summary
+That's all folks!

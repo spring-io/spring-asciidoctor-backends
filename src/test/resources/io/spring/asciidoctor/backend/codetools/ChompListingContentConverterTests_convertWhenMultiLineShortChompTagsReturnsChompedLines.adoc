@@ -1,0 +1,9 @@
+= Test Document
+
+[source,java]
+----
+Object chomp1 = /**/ new Object();
+Object nonChomp1 = new Object();
+Object chomp2 = /**/ new Object();
+Object nonChomp2 = new Object();
+----

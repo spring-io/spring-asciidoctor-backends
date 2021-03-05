@@ -1,0 +1,45 @@
+publishing {
+	publications.withType(MavenPublication) {
+		pom {
+			name = project.description
+			description = project.description
+			artifactId = "asciidoctor-spring-backends"
+			url = "https://github.com/spring-io/asciidoctor-spring-backends"
+			organization {
+				name = "Spring IO"
+				url = "https://spring.io"
+			}
+			licenses {
+				license {
+					name = 'The Apache Software License, Version 2.0'
+					url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+					distribution = 'repo'
+				}
+			}
+			scm {
+				url = "https://github.com/spring-io/asciidoctor-spring-backends"
+				connection = "scm:git:git://github.com/spring-io/asciidoctor-spring-backends"
+				developerConnection = "scm:git:git://github.com/spring-io/asciidoctor-spring-backends"
+			}
+			developers {
+				developer {
+					id = "spring"
+					name = "Spring Team"
+					email = "team@spring.io"
+				}
+			}
+			issueManagement {
+				system = "GitHub"
+				url = "https://github.com/spring-io/asciidoctor-spring-backends/issues"
+			}
+		}
+	}
+	if (project.hasProperty("distributionRepository")) {
+		repositories {
+			maven {
+				url = "${distributionRepository}"
+				name = "distribution"
+			}
+		}
+	}
+}

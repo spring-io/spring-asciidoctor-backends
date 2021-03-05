@@ -1,0 +1,328 @@
+[[standard]]
+= Asciidoctor Standard Document
+Carrie Bradshaw; Jessica Fletcher; Diane Nguyen; Paul Sheldon; Jack Torrance
+:description: Asciidoctor using only standard markup
+:toc: left
+:toc-levels: 4
+:sectnums:
+
+This is an example asciidoctor file that doesn't use any special extensions and should render well on any backend.
+
+////
+This is a comment, it won't appear
+////
+
+// This is also a comment that won't appear
+
+== Text
+
+
+
+=== Paragraph
+A paragraph is just some text.
+Paragraphs can have more than one line in them.
+
+Leave a gap to start a new paragraph.
+It's best to have one sentence per line in your source, it will still be wrapped when converted.
+
+
+
+=== Literal Paragraph
+ A literal paragraph is just some text.
+ Unlike a regular paragraph it has a space before it.
+
+ Text is rendered in a monospace font
+
+
+
+=== Formatted text
+*bold* & **bold**er**dash**
+
+_italic_ & __ital__ice__maker__
+
+*_bold italic_* & **__bold__**er**__dash__**
+
+`monospace words` & ``mono``space``ship``
+
+`*monospace bold words*` & ``**mono**``space``**ship**``
+
+`_monospace italic words_` & ``__mono__``space``__ship__``
+
+`*_monospace bold italic words_*` &
+``**__mono__**``space``**__ship__**``
+
+Use a highlighter pen to #highlight#.
+
+Use a ##highlight##er pen to highlight.
+
+Use a [.line-through]#underliner# pen to underline.
+
+We need [.line-through]#striker# pen to strike out.
+
+We can do ^super^script.
+
+We can do ~sub~script.
+
+We "`can`" also '`do`' smart things with quotes.
+
+
+
+=== Admonitions
+You can use note, tip, important, warning and caution to bring attention to something:
+
+NOTE: Don't eat yellow snow.
+
+TIP: Don't eat yellow snow.
+
+IMPORTANT: Don't eat yellow snow.
+
+WARNING: Don't eat yellow snow.
+
+CAUTION: Don't eat yellow snow.
+
+NOTE: You can also have more than one sentence.
+They all appear in the admon box.
+
+[TIP]
+====
+You can also have complex paragraphs.
+With things that include `formatted` text.
+
+[source,java]
+----
+System.out.println("And even code");
+----
+====
+
+
+
+=== Headings
+Headings have different levels.
+
+
+
+==== Deeper
+They can go down.
+
+
+
+===== Underground
+And down.
+
+
+
+====== This is Your Stop
+And so on.
+
+
+
+== Links
+
+https://spring.io - URLs get converted!
+
+https://spring.io[Go to spring.io] to learn about Spring.
+
+https://github.com/asciidoctor[Asciidoctor is great!]
+
+
+== Lists
+
+
+
+=== Unordered
+This document lists the authors as:
+
+* Carrie Bradshaw
+* Jessica Fletcher
+* Diane Nguyen
+* Paul Sheldon
+* Jack Torrance
+
+
+
+=== Nested
+This document lists the authors as:
+
+* Carrie Bradshaw
+** Jessica Fletcher
+*** Diane Nguyen
+** Paul Sheldon
+* Jack Torrance
+
+
+
+=== Ordered
+You can also use ordered lists:
+
+. TV
+.. Carrie Bradshaw
+.. Jessica Fletcher
+.. Diane Nguyen
+. Film
+.. Paul Sheldon
+.. Jack Torrance
+
+
+=== Checklist
+
+* [*] Carrie Bradshaw
+* [*] Jessica Fletcher
+* [*] Diane Nguyen
+* [ ] Paul Sheldon
+*     Jack Torrance
+
+
+
+=== Q&A
+[qanda]
+Ask on one line?:: For sure
+You can ask a question?::
+  And provide a nice answer.
+  That's a bit more involved.
+
+
+
+== Links
+https://asciidoctor.org - automatic!
+
+https://asciidoctor.org[Asciidoctor]
+
+https://github.com/asciidoctor[Asciidoctor is on *GitHub*]
+
+
+
+== Source code
+You can use `backticks` to make a bit of text monospaced.
+
+Source blocks are very nice and they work with callouts:
+
+[source,xml]
+----
+<section>
+  <title>Section Title</title> <!--1-->
+</section>
+----
+<1> The section title is required.
+
+
+Here's some java with callouts:
+
+[source,java,indent=0]
+----
+	@Component
+	public class ReadinessStateExporter {
+
+		@EventListener
+		public void onStateChange(AvailabilityChangeEvent<ReadinessState> event) {
+			switch (event.getState()) {
+			case ACCEPTING_TRAFFIC: // <1>
+				// create file /tmp/healthy
+			break;
+			case REFUSING_TRAFFIC: // <2>
+				// remove file /tmp/healthy
+			break;
+			}
+		}
+
+	}
+----
+<1> A sample comment.
+<2> A multiline comment with a lot of text. The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+
+
+Why not have some YAML:
+
+[source,yaml,indent=0]
+----
+	spring:
+	  application:
+	    name: "myapp"
+	  config:
+	    import: "optional:file:./dev.properties"
+----
+
+
+
+== Tables
+
+.Spring Projects
+[cols="1,1,2", options="header,footer", stripes=hover]
+|===
+|Name
+|Category
+|Description
+
+|Spring Framework
+|Core
+|The classic Java framework.
+
+|Spring Boot
+|Core
+|A developer focused application developer kit.
+Convention over configuration.
+
+|Spring Data
+|Data
+|Data access and DDD.
+
+|
+|
+|All OSS
+|===
+
+
+
+== Blockquotes
+[quote, Jessica Fletcher, From the Murder She Wrote TV show]
+____
+
+I could be wrong, but, I doubt it.
+____
+
+
+
+== Edge cases
+There are a few things that can trip our stylesheet up if we're not careful:
+
+
+
+=== Long Tables
+A table with long entries and no breakable space.
+
+[cols="1,2", options="header"]
+.Issues
+|===
+|Name
+|Description
+
+|VeryLongNameWithoutBreakableSpaceVeryLongNameWithoutBreakableSpaceVeryLongNameWithoutBreakableSpaceVeryLongNameWithoutBreakableSpace
+|This is an edge case
+
+|Name
+|Another entry
+|===
+
+That's the end of that.
+
+
+=== Long Shell Blocks
+A shell code block can also break things:
+
+[indent=0,subs="attributes"]
+----
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::   v{spring-boot-version}
+
+2019-04-31 13:09:54.117  INFO 56603 --- [           main] o.s.b.s.app.SampleApplication            : Starting SampleApplication v0.1.0 on mycomputer with PID 56603 (/apps/myapp.jar started by pwebb)
+2019-04-31 13:09:54.166  INFO 56603 --- [           main] ationConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@6e5a8246: startup date [Wed Jul 31 00:08:16 PDT 2013]; root of context hierarchy
+2019-04-01 13:09:56.912  INFO 41370 --- [           main] .t.TomcatServletWebServerFactory : Server initialized with port: 8080
+2019-04-01 13:09:57.501  INFO 41370 --- [           main] o.s.b.s.app.SampleApplication            : Started SampleApplication in 2.992 seconds (JVM running for 3.658)
+----
+
+

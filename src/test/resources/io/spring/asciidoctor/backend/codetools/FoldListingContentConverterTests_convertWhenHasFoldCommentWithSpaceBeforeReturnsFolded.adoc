@@ -1,0 +1,26 @@
+= Test Document
+
+[source,java]
+----
+import java.net.InetAddress;
+import java.util.List;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConstructorBinding;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+public class Example {
+	// @fold:on // getters...
+
+	private final String first;
+
+	private final String second;
+	// @fold:off
+
+	public Example(String first, String second) {
+		this.first = first;
+		this.second = second;
+	}
+
+}
+----

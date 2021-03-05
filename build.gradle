@@ -1,0 +1,154 @@
+plugins {
+	id "checkstyle"
+	id 'com.github.node-gradle.node' version '3.0.1'
+	id "eclipse"
+	id "io.spring.nohttp" version "0.0.5.RELEASE"
+	id "io.spring.javaformat"
+	id "java"
+	id "maven-publish"
+}
+
+group = 'io.spring.asciidoctor.backends'
+
+apply from: "$rootDir/gradle/publish-maven.gradle"
+
+def generatedGem = "$buildDir/generated-resources/gem"
+def generatedAssets = "$buildDir/generated-resources/assets"
+def mavenProjectRepository = "$buildDir/maven-repository"
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+sourceSets {
+	main {
+		output.dir(generatedAssets, builtBy: "gulp")
+		output.dir(generatedGem, builtBy: "gem")
+	}
+	test {
+		output.dir(mavenProjectRepository, builtBy: ["publishMavenPublicationToProjectRepository", "unzipMavenBinary"])
+	}
+}
+
+configurations {
+	mavenBinary
+}
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/release" }
+}
+
+dependencies {
+	checkstyle("io.spring.javaformat:spring-javaformat-checkstyle:$springJavaFormatVersion")
+	compileOnly("org.asciidoctor:asciidoctorj:$asciidoctorjVersion")
+	testImplementation("com.google.guava:guava:30.1-jre")
+	testImplementation("org.asciidoctor:asciidoctorj:$asciidoctorjVersion")
+	testImplementation("org.assertj:assertj-core:3.11.1")
+	testImplementation("org.jsoup:jsoup:1.13.1")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
+	testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:3.141.59")
+	testImplementation("org.seleniumhq.selenium:selenium-remote-driver:3.141.59")
+	testImplementation("org.slf4j:slf4j-simple:1.7.30")
+	testImplementation("org.testcontainers:junit-jupiter:1.15.2")
+	testImplementation("org.testcontainers:selenium:1.15.2")
+	testImplementation("org.apache.maven:maven-embedder:3.6.2");
+	testImplementation("org.apache.maven.shared:maven-invoker:3.1.0")
+	testImplementation("org.testcontainers:junit-jupiter:1.15.2")
+	testImplementation gradleTestKit()
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	mavenBinary("org.apache.maven:apache-maven:3.6.2:bin@zip")
+}
+
+node {
+	version = '15.11.0'
+	download = true
+}
+
+tasks.withType(JavaCompile) {
+	options.compilerArgs << '-parameters'
+}
+
+nohttp {
+	source.exclude "node_modules/**"
+	source.exclude "src/test/maven/target/**"
+	source.exclude "src/test/gradle/build/**"
+}
+
+test {
+	useJUnitPlatform()
+}
+
+task convertTestAsciidoc(type: JavaExec) {
+	classpath = sourceSets.test.runtimeClasspath
+	main = 'io.spring.asciidoctor.backend.testsupport.TestSpringHtmlConverter'
+}
+
+task gulp(type: NpmTask) {
+	dependsOn("npm_install")
+	inputs.dir("src/main/css")
+	inputs.dir("src/main/img")
+	inputs.dir("src/main/js")
+	outputs.dir(generatedAssets)
+	args = ["run", "build", "--output=${generatedAssets}"]
+}
+
+task dev(type: NpmTask) {
+	dependsOn("convertTestAsciidoc")
+	args = ["run", "dev"]
+}
+
+task gem(type: Sync) {
+	dependsOn("gulp")
+	inputs.dir("src/main/ruby")
+	inputs.dir("src/main/gemspec")
+	outputs.dir(generatedGem)
+	destinationDir = file(generatedGem)
+	from("src/main/ruby/") {
+		into("gems/asciidoctor-spring-backends-0.0.0/")
+	}
+	from("src/main/gemspec/") {
+		into("specifications/")
+	}
+	from(generatedAssets) {
+		into("gems/asciidoctor-spring-backends-0.0.0/data/assets")
+	}
+}
+
+task prettierFormat(type: NpmTask) {
+	inputs.dir("src")
+	outputs.dir("src")
+	args = ["run", "format"]
+}
+
+task prettierCheckFormat(type: NpmTask) {
+	inputs.dir("src")
+	args = ["run", "checkFormat"]
+}
+
+task unzipMavenBinary(type: Copy) {
+	configurations.mavenBinary.asFileTree.each { mavenZip ->
+		from(zipTree(mavenZip))
+	}
+	into "$buildDir/maven-binary"
+}
+
+tasks.withType(GenerateModuleMetadata) {
+	enabled = false
+}
+
+checkFormat.dependsOn prettierCheckFormat
+format.dependsOn prettierFormat
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			from components.java
+		}
+	}
+	repositories {
+		maven {
+			name "project"
+			url file(mavenProjectRepository).toURI()
+		}
+	}
+}

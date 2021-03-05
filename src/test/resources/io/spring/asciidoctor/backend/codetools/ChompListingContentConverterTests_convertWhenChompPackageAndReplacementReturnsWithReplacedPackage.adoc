@@ -1,0 +1,9 @@
+= Test Document
+:chomp: packages
+
+[source,java,chomp_package_replacement=com.example]
+----
+package com.example.somepackage;
+
+public class Example {}
+----

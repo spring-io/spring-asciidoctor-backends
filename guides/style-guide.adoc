@@ -1,0 +1,480 @@
+[[spring-style-guide]]
+= Spring Style Guide
+Jay Bryant
+:icons: font
+:toc: left
+:toc-levels: 4
+:docinfo: shared
+:sectanchors:
+
+This document is for authors of Spring documentation.
+It describes when and how to use the various document elements (headings, tables, lists, and so on) and describes best practices.
+
+NOTE: A style guide is not a stylesheet.
+This document does not cover font faces and point sizes and other layout details.
+Rather, it offers advice about how to write well for Spring.
+
+NOTE: This guide is not meant to be an explanation of how Asciidoc works.
+For the syntax of how to create any particular construct in Asciidoc, see the https://asciidoctor.org/docs/user-manual/[Asciidoc User Manual].
+
+This style guide covers the following topics:
+
+* <<spring-style-guide-goal-audience>>
+* <<spring-style-guide-titles>>
+* <<spring-style-guide-headings>>
+* <<spring-style-guide-lists>>
+* <<spring-style-guide-tables>>
+* <<spring-style-guide-source-code-listings>>
+* <<spring-style-guide-links>>
+* <<spring-style-guide-images>>
+* <<spring-style-guide-admonitions>>
+* <<spring-style-guide-maintaining-flow>>
+* <<spring-style-guide-writing-sentences>>
+* <<spring-style-guide-wording>>
+* <<spring-style-guide-content-toggling>>
+
+
+
+[[spring-style-guide-goal-audience]]
+== The Goal and the Audience
+When writing about Spring, remember that the goal is to get information from the document into the reader's head.
+Few people read technical documentation for fun or are going to admire the quality of your prose, no matter how good it is.
+However, if you can quickly teach them useful things, they are likely to think the documentation is wonderful.
+
+Also, remember that people with a wide range of backgrounds and abilities use Spring.
+People with doctoral degrees in Computer Science and high school kids who want to join the profession both use Spring, and we need to think of them and everyone in between when we write about Spring.
+We also have readers from all over the world, and English is not the first language for many of them.
+They may be good with English, but it is never quite the same as one's native language.
+
+To serve all those different people well, one crucial bit of advice is to keep things simple.
+Prefer shorter sentences to longer sentences and shorter words to longer words.
+Prefer multiple short sentences to one long sentence. This document returns to each of these points in detail.
+
+Above all, remember that the goal is to help people from all kinds of backgrounds learn to use Spring.
+
+TIP: Remember that not everyone who reads our documentation knows Spring.
+Some readers are new to all of Spring.
+Consequently, if you find yourself writing phrases such as "as Spring usually works" or "as customary" or anything else that implies the user is familiar with Spring, rewrite that content such that the reader need not know anything about any part of Spring.
+Doing so often forces the inclusion of more detail and links to other content, both of which suit our purpose.
+
+
+
+[[spring-style-guide-titles]]
+== Titles and Subtitles
+A title tells its reader what a document is about.
+Ideally, it should be followed by a paragraph that identifies both the audience and the purpose of the document, so that readers can be sure they want to spend their time reading the document.
+The first paragraph of this document offers an example.
+
+You should generally use title case, which means capitalizing the first letter of all significant words (all words that are not articles, conjunctions, or prepositions).
+
+You can put code in a title but don't use backticks.
+When you use code in a title, capitalize the code element as you would in the actual code.
+(See <<spring-style-guide-source-code-listings>>.)
+
+Spring technical documents do not use subtitles.
+
+NOTE: The Spring standard for multi-chapter documents is to put each chapter in its own file.
+In other words, each chapter is its own document.
+
+
+
+[[spring-style-guide-headings]]
+== Headings
+Headings break up documents into meaningful chunks.
+Small documents may not have any headings. When the entire document deals with a single concept, the title may be all the heading it needs.
+However, most technical documents benefit from being broken into meaningful chunks.
+
+The Spring documentation uses the various heading levels as follows:
+
+* Heading level 1: Indicates a major chunk within a document.
+Each one should be an important topic in its own right.
+* Heading level 2: Deals with something significant within a broader concept (which should be the level-1 heading above the level-2 heading).
+* Heading level 3: In larger documents, deals with something significant within a broader concept (which should be the level-2 heading above the level-3 heading).
+In a smaller document, this level deals with a meaningful detail.
+* Heading level 4: Deals with a meaningful detail in a larger document.
+This level should be avoided in small documents.
+* Heading level 5: Should be avoided.
+May deal with a minor detail in a large document.
+
+Level-1 headings often contain content that could reasonably be a document in its own right.
+The same is sometimes true of level-2 headings.
+Level-3 and level-4 headings should not contain content so significant that it could be its own document.
+If you find that your level-3 (or, worse, level-4) headings can reasonably be documents on their own, you should consider restructuring the document.
+It may benefit from being split into multiple chapters or other documents.
+
+Level-2 and Level-3 (and, rarely, level-4) headings sometimes serve as containers for collections of lesser headings.
+That is, the point of the heading may be to have a single heading for a number of parallel blocks of content.
+
+IMPORTANT: A heading of any level should always have a lead paragraph (and often other content) before any child headings.
+In other words, you should never have a heading and then a child heading without intervening content, even if that content is a one-sentence paragraph.
+(A one-sentence leader paragraph often occurs when a heading is a container for a number of child headings of the same level.)
+
+TIP: Content within level-5 headings can often be blended into the parent topic, sometimes as a list or a table and other times as an admonition or a series of admonitions.
+
+TIP: Ideally, a level-1 heading (and sometimes a level-2 heading) and its content can be reused either as a stand-alone document or in another document.
+Consequently, you should try to make the content of each of these sections make sense by itself, without the reader needing to know what comes before or after it.
+People often jump into a document in the middle, by searching for keywords or following links from elsewhere.
+Also, self-contained writing is often better writing (because it usually requires more consideration of the reader's needs).
+
+
+
+[[spring-style-guide-lists]]
+== Lists
+Lists are a handy way to group items that share a relation.
+In other words, every item in the list must have something in common with the other members.
+You should use a list when describing the items in a single sentence becomes awkward, either because the sentence becomes overly long or because each item has its own internal punctuation.
+
+IMPORTANT: Each list should have a lead paragraph (a paragraph that introduces the list, often by describing the connection between its items).
+
+For example, this sentence does not need to be restructured, because it contains a simple list of red, blue, and green.
+However, this sentence should be restructured, because it contains a complex list of green, blue and yellow, purple, red and blue, and orange, red and yellow.
+The list in the preceding sentence should be written as the following bulleted list:
+
+* Green: Blue and yellow.
+* Purple: Red and blue.
+* Orange: Red and yellow.
+
+In a list, you should capitalize the first letter of the first word in each list item.
+If you use a separator (such as the colons in the preceding example), you should generally capitalize the first letter of the first word after the separator.
+However, if the word in question must be a literal of some sort, capitalize the literal as you would in its natural context.
+For example, if your list item starts with a snippet of code, you should not change the code's capitalization.
+(See <<spring-style-guide-source-code-listings>>.)
+
+TIP: One good reason to use a list is to reduce extra wording around the list items (by removing any introductory bits within each list item).
+A well written list can help readers get content from a document more quickly.
+
+When the order of a list matters, use a numbered list.
+Usually, in documentation for software development, a numbered list is either a set of instructions or an algorithm.
+
+TIP: You should avoid numbered lists when the order does not matter, because you may needlessly force the reader to consider a detail (the order) that does not matter.
+
+For bulleted lists and numbered lists that are not instructions, you can embed lists within lists.
+Instructions follow different rules. Instructions with more than one step should always be numbered and should always be presented as a list.
+Also, instructions should never contain embedded lists (lists within lists).
+If you need to have a second set of instructions within a set of instructions, create three sets of instructions: one for the instructions down to the embedded instructions, one for the embedded instructions, and one for the remainder of the "outer" instructions.
+Also, each list should have its own lead paragraph. (That may seem like a lot of extra work, but it pays for itself in reduced error rates for the readers and fewer support tickets for the developers.)
+
+Ordinary lists rarely get titles or their own headings. However, instructions often get headings.
+
+As a rule, you should avoid using bold or italics in lists.
+See <<spring-style-guide-highlighting>>.
+
+
+
+[[spring-style-guide-tables]]
+== Tables
+Like lists, tables group items so that similarities and differences and key information about each item can be presented with a minimum of extra wording.
+Also like lists, each item in a table should share some relation with the other items.
+Also, a leader paragraph should introduce the table by defining the connection between the items.
+
+You should use a table rather than a list when each item has multiple relevant attributes.
+If the table shows an item and one detail about each item, reformat the table into a list with a separator.
+(That simpler structure is faster for readers.)
+However, when you have two or more attributes to present for each item, use a table.
+
+TIP: Tables are especially good for presenting sparse information (when not every item in the collection has all the attributes).
+The empty cells make it immediately apparent which items do and do not have the various attributes.
+
+As a rule, the items are the rows, and the attributes are the columns.
+If that is not the case, you should probably add a note to explain to the reader how to read the table.
+
+Tables often have titles.
+Adding a title helps to clarify the purpose of the table and enables letting the list be stand-alone content when readers are quickly skimming a document.
+
+The following example shows a sparse table that defines complementary colors (the items) in terms of primary colors (the attributes):
+
+.Colors
+[options="header"]
+|=====
+|Color|Red|Blue|Yellow
+|Green||*|*
+|Purple|*|*|
+|Orange|*||*
+|=====
+
+In Spring's documentation, we do not number tables.
+
+
+
+[[spring-style-guide-source-code-listings]]
+== Source Code Listings
+Source code listings come in two varieties: inline and block.
+Inline listings are handy when you want to mention a bit of code in a sentence or a title (either the document title or a heading).
+Block listings let you show larger sections of code so that the reader can see the code in context and more readily understand it.
+
+Usually, we do not remove lines from code to shorten listings.
+If you need to do so, you should probably have two listings, each with its own descriptive leader paragraph.
+If you need to highlight certain lines within a listing, you can do so by making one or more lines bold or by using callouts.
+When you do need to use multiple listings to show something, each listing has to have its own explanation.
+Do not try to use part of a sentence before a listing and continue the rest of the sentence after the listing.
+That creates one or more sentence fragments, which violates Spring's documentation standard.
+Also, providing more detail can help to answer the reader's questions.
+
+IMPORTANT: When you use code inline, the code's formatting overrides any other formatting rules, such as capitalizing words in titles and headings.
+Also, you should never change code to make a word be plural.
+For example, if you were describing a set of `Item` objects, it would be an error to write " `Items` " or " `Item` s ".
+Instead, you should write " `Item` objects ".
+(Sometimes, the correct word is "implementations" or "instances" rather than "objects".)
+In short, you should never indicate that something is source code unless it can be found in the code base exactly as it appears in the document.
+
+
+
+[[spring-style-guide-links]]
+== Links and Anchors
+As a rule, you should be aggressive about making links to other documents, both other documents within Spring and other documents outside of Spring.
+If you do so, readers can more readily discover related content.
+Also, you should link to different kinds of content whenever appropriate.
+Feel free to link from a reference guide to a getting start guide, API documentation, or a tutorial and to link from any of those to the other types.
+If in doubt, make a link.
+
+Similarly, you should arrange your content to be easy to use as the target of links.
+To that end, every level-1 and level-2 heading should have an anchor, so that other documents can include a link to that point in your document.
+Many other headings (level-3 and level-4 headings) should also have anchors.
+When you add an anchor, make sure that the content of the section makes sense without the reader having read the preceding and following content. In other words, make your sections each be complete, so that linking to
+them provides a good experience for readers. If in doubt, make an anchor and make the topic be able to stand alone.
+
+TIP: One technique that helps readers find the content they want is to have links to the child headings within the introduction of a section, especially when the section contains multiple headings at the same level.
+The list of sections at the beginning of this document is one example. See <<spring-style-guide-wording>> for another example.
+
+
+
+[[spring-style-guide-images]]
+== Images
+Images offer a way to show relationships that are either difficult to make apparent with words or that would take a lot of work for the writer to explain and for the reader to understand.
+Images may also be used to add visual appeal, though the content of an image should always be relevant to the content of the paragraphs around it.
+
+As with lists and tables and the content under headings, every image should have a lead paragraph to summarize its meaning.
+Also, images should often have titles.
+For readers who may be quickly skimming the document, a title offers immediate context that helps them to understand the image's content and may encourage them to read more of the document.
+Consequently, the more significant the image is to your content, the more you should consider adding a title to your image.
+If an image explains a core concept, you might consider giving it its own heading.
+In that case, it should still have an introductory paragraph and a title.
+
+In Spring's documentation, we do not number images.
+
+
+
+[[spring-style-guide-admonitions]]
+== Admonitions
+Admonitions offer a way to provide special knowledge to the reader.
+Admonitions come in five varieties:
+
+* Note admonitions: Offer additional information that the reader may find helpful but that is not crucial to the content.
+* Important admonitions: Call out things that the reader really should know when working with the content.
+* Tip admonitions: Offer shortcuts or other details that make things easier or faster for the reader.
+* Caution admonitions: Let readers know of common errors or other issues that may slow their work or send them down an unproductive path.
+* Warning admonitions: Let readers know of risks or other issues that may cause severe problems, most notably data loss (including loss of information from databases, file systems, and version control systems).
+
+The rest of this section contains sample admonitions, to show the admonition icons.
+
+NOTE: Sample note admonition
+
+TIP: Sample tip admonition
+
+IMPORTANT: Sample important admonition
+
+CAUTION: Sample caution admonition
+
+WARNING: Sample warning admonition
+
+
+
+[[spring-style-guide-maintaining-flow]]
+== Maintaining the Flow
+One goal of technical documentation is to make the content engaging.
+One way to do that is to create structures that draw the reader into reading the next part of the documentation.
+
+To that end, the Spring documentation standard requires leader paragraphs for every list, table, code listing, and image (as well as every heading whose purpose is to be a group name for a set of child headings at the same level).
+Usually, the leader paragraph should be a single sentence that describes the content to come and includes the word, "following."
+
+Similarly, using short phrases (such as "As shown earlier") or sentence adverbs (such as "Also" and "However") links one paragraph to another and both shows the relationship between the content of the paragraphs and encourages the reader to continue.
+
+In short, you should try to show the relationships between pieces of content, even at the paragraph level.
+Often, it is easy to overuse the technique, but it is a worthwhile technique to keep in your writing toolbox.
+
+
+
+[[spring-style-guide-writing-sentences]]
+== Writing Sentences
+Do not write sentence fragments.
+For example, do not write, "For example.", as a sentence by itself and then follow it with the example.
+Work "for example" into a complete sentence.
+
+Use short sentences.
+People parse shorter sentences more quickly than they do longer sentences.
+You can literally get readers through your content more quickly if you use shorter sentences.
+You should link sentences with connected ideas by using short introductory phrases or sentence adverbs.
+"Also" and "however" let you continue a complex thought across two short sentences or add a contradictory detail to a preceding detail, respectively.
+Also, do not write whole sentences as parenthetical phrases, whether in parentheses or otherwise.
+Put the parenthetical content in its own sentence.
+Note that parenthetical phrases are often set apart with commas.
+
+Avoid semi-colons.
+Used properly, a semi-colon links two independent clauses.
+That is, the words on each side of a semi-colon can themselves be a sentence.
+In those cases, you should use two shorter sentences, perhaps with an introductory phrase or sentence adverb at the start of the second sentence.
+
+Avoid dashes.
+In almost every case where you can use a dash, there is another punctuation mark you should use instead.
+Creating a parenthetical phrase?
+Use commas (if the sentence does not already have commas) or parentheses.
+Creating a parenthetical phrase within other parenthetical content?
+Stop doing that and restructure the sentence into multiple simple sentences.
+Making separators in a bulleted or numbered list?
+Use colons.
+Making separators in a bulleted or numbered list whose items already have colons?
+That is the only use case for dashes.
+
+Except when serving as a separator in lists, a colon must be preceded by an independent clause.
+In other words, the part before the colon must be able to be a sentence if you replace the colon with a period.
+Specifically, do not write, "For example:".
+
+Put conditional phrases first.
+Consider the following sentence: "You can use the `new` keyword if you want to make a new instance of a class."
+The trouble with it is that someone has to read all of it to determine whether its content is relevant to their situation.
+By putting the conditional part of the sentence first, you can help readers through the document more quickly by letting them identify whether they care about the second half of the sentence.
+To that end, the sentence should be re-written as follows: "To make a new instance of a class, use the `new` keyword."
+
+Also, note that the second sentence is shorter. "If you want" and "You can" were unnecessary (in either version).
+Trimming out unnecessary words offers another good way to improve the reader's experience with the document.
+
+In short, keep the writing simple.
+By doing so, you make things better for Spring's readers.
+
+
+
+[[spring-style-guide-wording]]
+== Wording
+Prefer simple words to more complex words and shorter words to longer words.
+To that end, avoiding words that English has borrowed from other languages (notably Latin) is often a good idea.
+English often has native words that mean the same thing and that are shorter and simpler and are more friendly to people whose first language is not English.
+See <<spring-style-guide-words-avoid>> for a few specific examples.
+
+In addition to the fundamental advice to keep things short and simple, this section also covers the following topics:
+
+* <<spring-style-guide-spelling>>
+* <<spring-style-guide-highlighting>>
+* <<spring-style-guide-words-avoid>>
+* <<spring-style-guide-writing-numbers>>
+
+
+
+[[spring-style-guide-spelling]]
+=== Spelling
+Spring's documentation standard uses American spelling, including the following details:
+
+* Words ending in "or" (such as "behavior") do not have a "u" between the "o" and the "r".
+* "Magic" does not have a "k".
+* Words ending in "ise" and "isation" (such as "specialise" and "specialisation") end in "ize" and "ization", respectively ("specialize" and "specialization").
+* And so on.
+
+
+
+[[spring-style-guide-highlighting]]
+=== Highlighting
+It can be tempting to highlight important words, often by capitalizing, underlining, or using bold.
+However, the Spring documentation standard calls for not doing so.
+Highlighting with any of those techniques makes the reader's eye jump to the highlighted content, breaking the flow of their reading and forcing them to re-read sentences.
+In other words, highlighting slows down reading and makes the document less friendly to our readers.
+If you must highlight something, do so sparingly.
+
+Most lists should also not have highlighting, other than to capitalize the first word of each list item and the first word after a separator within a list item.
+However, definition lists may have the word (or short phrase) being defined in bold, especially if the definition is on a different line than the word being defined.
+
+NOTE: Code within sentences should be highlighted by using the code font.
+See <<spring-style-guide-source-code-listings>>.
+
+
+
+[[spring-style-guide-words-avoid]]
+=== Words to Avoid or Avoid Misusuing
+"foo" and "bar":: "foo" and "bar" are often used in sample code.
+Doing so is a mistake for two reasons.
+First, more meaningful examples are more helpful.
+For example, a line of code showing how to define two caches would be better written as `cache1,cache2` than as `foo,bar`.
+When referring to the same example later in the document, the reader is more likely to remember that the section is about caches and not have to go look at the example again.
+Second, "foo" and "bar" are based on a phrase that contains a curse word.
+While they have been used for decades, they are based on a crass joke (and often an inside joke at that, with the people using them often not knowing their history).
+That kind of juvenile behavior is inappropriate in good technical documentation.
+
+"terminate":: Write, "end," instead.
+"End" is shorter and simpler.
+Also, "terminate" has violent connotations, and good technical documentation avoids that.
+Remember that people from many cultures read Spring's documentation and that some people are more disturbed by violence than others.
+
+"execute":: Write, "run," instead.
+"Run" is shorter and simpler.
+Also, "execute" has violent connotations and is politically charged in some cultures.
+Good technical documentation avoids both problems.
+Remember that people from many cultures read Spring's documentation and that some people are more disturbed by violence than others.
+
+"abort":: Write, "stop," instead.
+"Stop" is shorter and simpler.
+Also, "abort" has violent connotations and is politically charged in some cultures.
+Good technical documentation avoids both problems.
+Remember that people from many cultures read Spring's documentation and that some people are more disturbed by violence than others.
+
+NOTE: Using "end," "run,", and "stop" is good for two other reasons: Doing so reduces the number of Latin cognates in the document, relying on plain English words.
+Relying on words that have not been borrowed from other languages simplifies the document and improves understanding, especially for readers whose first language is not English.
+Second, if someone translates the documentation, the plain English words are easier to correctly translate.
+Translators often do not have programming backgrounds and are more likely to mis-translate more complicated terms.
+
+"then":: "Then" is not a conjunction.
+The following sentence is incorrect: "Put on your socks then your shoes."
+In that sentence, "then" is an adverb, not a conjunction that can link the two parts of the process.
+The correct sentence is: "Put on your socks and then your shoes."
+Note the addition of a conjunction: "and."
+
+"if...then...":: You can nearly always drop "then" in a sentence that contains an "if...then..." clause.
+In English, as in Java, "then" is implied, and the meaning usually remains clear without it.
+Consider the following sentence: "If you are going to the store, then pick up some milk."
+Without losing meaning, it can be rewritten as "If you are going to the store, pick up some milk."
+
+"will" and the future tense:: Avoid the future tense (often created by the insertion of "will").
+Usually, the rest of the document is in the present tense.
+For consistency's sake, keep it that way.
+Also, in some documents, it is easy to accidentally promise something, which can put the team in an awkward spot.
+(The latter is especially true in documents such as release notes.)
+Finally, sentences can often be shorter when kept in the present tense.
+
+"above" and "below":: The trouble with referring to the earlier part of the document as "above" and the later part of the document as "below" is that we have no idea where the page breaks may land when someone prints the document or renders it into a paged format (such as PDF).
+It is entirely possible for the "below" part referenced in the sentence to be above the current location but on the next page.
+Rather, write, "earlier" and "later."
+Also, when referring to an example that immediately precedes the paragraph, write, "preceding example."
+
+"just":: In many cases, you can remove "just" from a sentence without changing its meaning.
+In those cases, you should remove it.
+
+"very":: "Very" can nearly always be removed without changing the meaning of the sentence.
+In those cases, you should remove it.
+
+"simply", "easily", "obviously", and so on:: Avoid these words and any other words that imply something is simple, easy, or obvious.
+For someone new to Spring, the task or issue at hand may not be simple, easy, or obvious.
+Remember to put yourself in the reader's place when writing.
+Something that is simple, easy, or obvious to someone who works on Spring all the time is probably not any of those things to a new Spring developer.
+If it were simple, easy, or obvious, would they be reading the documentation?
+
+
+
+[[spring-style-guide-writing-numbers]]
+=== Writing Numbers
+If a number is ten or less and is a positive integer, write it as a word.
+Otherwise, write it as a number.
+Specifically, you should write it as a number, rather than as a word, when its value is less than zero or greater than ten, it contains a mathematical constant, or it is anything other than an integer.
+The following examples are all correct: `zero`, `one`, `two`, `ten`, `11`, `12`, `20`, `30`, `-0`, `-1`, `-2`, `-10`, `-20`, `0.0`, `0.1`, `1.0`, `-1.0`, `2.3`, `-2.3`, `i`, `-i`, `-2i`, `e`, `-e`, and `-2e`.
+
+TIP: Avoid using symbols that are more complex than a single letter in the English alphabet (such as `i` and `e`).
+Some rendering engines may not correctly render the symbol, leaving the reader wondering what the symbol was meant to be (or, worse, thinking it is some other symbol).
+In those cases, write Java code that means the same thing.
+For example, to express the square root of three, write, `MATH.sqrt(3)`, because `√3` may not render correctly.
+
+
+
+[[spring-style-guide-content-toggling]]
+== Content Toggling
+Some Spring documents include competing sets of content.
+The primary example of this kind of content is XML configuration versus Java-based (annotation-driven) configuration.
+In those cases, you can add a set of toggles to the top of the document.
+
+When you use content toggling, remember to make each content set make sense both on its own and in the presence of the rest of the document.
+Also, if you include the option to have all the content sets available at once, remember to write all the content so that it makes sense both together and when a particular set of content has been chosen.
