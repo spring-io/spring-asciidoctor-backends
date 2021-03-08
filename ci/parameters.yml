@@ -1,0 +1,9 @@
+github-repo: "https://github.com/spring-io/asciidoctor-spring-backends.git"
+github-repo-name: "spring-io/asciidoctor-spring-backends"
+github-project-name: "asciidoctor-spring-backends"
+docker-hub-organization: "springci"
+artifactory-server: "https://repo.spring.io"
+branch: "main"
+build-name: "asciidoctor-spring-backends"
+ci-image-name: "asciidoctor-spring-backends-ci"
+task-timeout: 1h00m

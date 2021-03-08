@@ -1,0 +1,280 @@
+anchors:
+  gradle-enterprise-task-params: &gradle-enterprise-task-params
+    GRADLE_ENTERPRISE_ACCESS_KEY: ((gradle_enterprise_secret_access_key))
+    GRADLE_ENTERPRISE_CACHE_USERNAME: ((gradle_enterprise_cache_user.username))
+    GRADLE_ENTERPRISE_CACHE_PASSWORD: ((gradle_enterprise_cache_user.password))
+  docker-hub-task-params: &docker-hub-task-params
+    DOCKER_HUB_USERNAME: ((docker-hub-username))
+    DOCKER_HUB_PASSWORD: ((docker-hub-password))
+  build-project-task-params: &build-project-task-params
+    privileged: true
+    timeout: ((task-timeout))
+    file: git-repo/ci/tasks/build-project.yml
+    params:
+      BRANCH: ((branch))
+      <<: *gradle-enterprise-task-params
+      <<: *docker-hub-task-params
+  artifactory-task-params: &artifactory-task-params
+    ARTIFACTORY_SERVER: ((artifactory-server))
+    ARTIFACTORY_USERNAME: ((artifactory-username))
+    ARTIFACTORY_PASSWORD: ((artifactory-password))
+  artifactory-repo-put-params: &artifactory-repo-put-params
+    repo: libs-snapshot-local
+    folder: distribution-repository
+    build_uri: "https://ci.spring.io/teams/${BUILD_TEAM_NAME}/pipelines/${BUILD_PIPELINE_NAME}/jobs/${BUILD_JOB_NAME}/builds/${BUILD_NAME}"
+    build_number: "${BUILD_PIPELINE_NAME}-${BUILD_JOB_NAME}-${BUILD_NAME}"
+    disable_checksum_uploads: true
+    threads: 8
+resource_types:
+- name: artifactory-resource
+  type: registry-image
+  source:
+    repository: springio/artifactory-resource
+    tag: 0.0.13
+resources:
+- name: git-repo
+  type: git
+  icon: github
+  source:
+    uri: ((github-repo))
+    username: ((github-username))
+    password: ((github-password))
+    branch: ((branch))
+    ignore_paths: ["ci/images/*"]
+- name: github-pre-release
+  type: github-release
+  icon: briefcase-download-outline
+  source:
+    owner: spring-io
+    repository: ((github-project-name))
+    access_token: ((github-ci-release-token))
+    pre_release: true
+- name: github-release
+  type: github-release
+  icon: briefcase-download
+  source:
+    owner: spring-io
+    repository: ((github-project-name))
+    access_token: ((github-ci-release-token))
+    pre_release: false
+- name: ci-images-git-repo
+  type: git
+  icon: github
+  source:
+    uri: ((github-repo))
+    branch: ((branch))
+    paths: ["ci/images/*"]
+- name: ci-image
+  type: registry-image
+  icon: docker
+  source:
+    repository: ((docker-hub-organization))/((ci-image-name))
+    username: ((docker-hub-username))
+    password: ((docker-hub-password))
+    tag: ((branch))
+- name: artifactory-repo
+  type: artifactory-resource
+  icon: package-variant
+  source:
+    uri: ((artifactory-server))
+    username: ((artifactory-username))
+    password: ((artifactory-password))
+    build_name: ((build-name))
+jobs:
+- name: build-ci-image
+  plan:
+  - get: ci-images-git-repo
+    trigger: true
+  - get: git-repo
+  - task: build-ci-image
+    privileged: true
+    file: git-repo/ci/tasks/build-ci-image.yml
+    output_mapping:
+      image: ci-image
+    vars:
+      ci-image-name: ci-image
+  - put: ci-image
+    params:
+      image: ci-image/image.tar
+- name: build
+  serial: true
+  public: true
+  plan:
+  - get: ci-image
+  - get: git-repo
+    trigger: true
+  - do:
+    - task: build-project
+      privileged: true
+      image: ci-image
+      <<: *build-project-task-params
+  - put: artifactory-repo
+    params: 
+      <<: *artifactory-repo-put-params
+    get_params:
+      threads: 8
+- name: stage-milestone
+  serial: true
+  plan:
+  - get: ci-image
+  - get: git-repo
+    trigger: false
+  - task: stage
+    image: ci-image
+    file: git-repo/ci/tasks/stage.yml
+    params:
+      <<: *gradle-enterprise-task-params
+      <<: *docker-hub-task-params
+      RELEASE_TYPE: M
+  - put: artifactory-repo
+    params:
+      <<: *artifactory-repo-put-params
+      repo: libs-staging-local
+  - put: git-repo
+    params:
+      repository: stage-git-repo
+- name: stage-rc
+  serial: true
+  plan:
+  - get: ci-image
+  - get: git-repo
+    trigger: false
+  - task: stage
+    image: ci-image
+    file: git-repo/ci/tasks/stage.yml
+    params:
+      RELEASE_TYPE: RC
+      <<: *gradle-enterprise-task-params
+      <<: *docker-hub-task-params
+  - put: artifactory-repo
+    params:
+      <<: *artifactory-repo-put-params
+      repo: libs-staging-local
+  - put: git-repo
+    params:
+      repository: stage-git-repo
+- name: stage-release
+  serial: true
+  plan:
+  - get: ci-image
+  - get: git-repo
+    trigger: false
+  - task: stage
+    image: ci-image
+    file: git-repo/ci/tasks/stage.yml
+    params:
+      RELEASE_TYPE: RELEASE
+      <<: *gradle-enterprise-task-params
+      <<: *docker-hub-task-params
+  - put: artifactory-repo
+    params:
+      <<: *artifactory-repo-put-params
+      repo: libs-staging-local
+  - put: git-repo
+    params:
+      repository: stage-git-repo
+- name: promote-milestone
+  serial: true
+  plan:
+  - get: ci-image
+  - get: git-repo
+    trigger: false
+  - get: artifactory-repo
+    trigger: false
+    passed: [stage-milestone]
+    params:
+      save_build_info: true
+  - task: promote
+    image: ci-image
+    file: git-repo/ci/tasks/promote.yml
+    params:
+      RELEASE_TYPE: M
+      <<: *artifactory-task-params
+  - task: generate-changelog
+    file: git-repo/ci/tasks/generate-changelog.yml
+    params:
+      RELEASE_TYPE: M
+      GITHUB_USERNAME: ((github-username))
+      GITHUB_TOKEN: ((github-ci-release-token))
+  - put: github-pre-release
+    params:
+      name: generated-changelog/tag
+      tag: generated-changelog/tag
+      body: generated-changelog/changelog.md
+- name: promote-rc
+  serial: true
+  plan:
+  - get: ci-image
+  - get: git-repo
+    trigger: false
+  - get: artifactory-repo
+    trigger: false
+    passed: [stage-rc]
+    params:
+      download_artifacts: false
+      save_build_info: true
+  - task: promote
+    image: ci-image
+    file: git-repo/ci/tasks/promote.yml
+    params:
+      RELEASE_TYPE: RC
+      <<: *artifactory-task-params
+  - task: generate-release-notes
+    file: git-repo/ci/tasks/generate-release-notes.yml
+    params:
+      RELEASE_TYPE: RC
+      GITHUB_USERNAME: ((github-username))
+      GITHUB_TOKEN: ((github-ci-release-token))
+  - put: github-pre-release
+    params:
+      name: generated-changelog/tag
+      tag: generated-changelog/tag
+      body: generated-changelog/changelog.md
+- name: promote-release
+  serial: true
+  plan:
+  - get: ci-image
+  - get: git-repo
+    trigger: false
+  - get: artifactory-repo
+    trigger: false
+    passed: [stage-release]
+    params:
+      download_artifacts: true
+      save_build_info: true
+  - task: promote
+    image: ci-image
+    file: git-repo/ci/tasks/promote.yml
+    params:
+      RELEASE_TYPE: RELEASE
+      <<: *artifactory-task-params
+- name: create-github-release
+  serial: true
+  plan:
+  - get: ci-image
+  - get: git-repo
+  - get: artifactory-repo
+    trigger: true
+    passed: [promote-release]
+    params:
+      download_artifacts: false
+      save_build_info: true
+  - task: generate-changelog
+    file: git-repo/ci/tasks/generate-changelog.yml
+    params:
+      RELEASE_TYPE: RELEASE
+      GITHUB_USERNAME: ((github-username))
+      GITHUB_TOKEN: ((github-ci-release-token))
+  - put: github-release
+    params:
+      name: generated-changelog/tag
+      tag: generated-changelog/tag
+      body: generated-changelog/changelog.md
+groups:
+- name: "builds"
+  jobs: ["build"]
+- name: "releases"
+  jobs: ["stage-milestone", "stage-rc", "stage-release", "promote-milestone", "promote-rc", "promote-release", "create-github-release"]
+- name: "ci-image"
+  jobs: ["build-ci-image"]
+      
