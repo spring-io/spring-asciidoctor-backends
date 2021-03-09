@@ -51,9 +51,10 @@ public final class ListingContentConverters {
 		Block listingBlock = (Block) NodeConverter.createASTNode(node);
 		String content = (String) listingBlock.getContent();
 		for (ListingContentConverter converter : converters) {
+			content = (content != null) ? content : "";
 			content = converter.convert(listingBlock, content);
 		}
-		return node.getRuntime().newString(content);
+		return node.getRuntime().newString(content != null ? content : "");
 	}
 
 }
