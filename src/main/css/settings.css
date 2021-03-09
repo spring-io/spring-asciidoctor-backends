@@ -23,7 +23,7 @@
     "Segoe UI Symbol";
   --font-weight: 400;
   --monospace-font-family: "SFMono-Regular", "Consolas", "Liberation Mono",
-    "Menlo", "monospace";
+    "Menlo", monospace;
   --body-background-color: white;
   --panel-background-color: #f6f8fa;
   --panel-group-background-color: #e1e8e8;
