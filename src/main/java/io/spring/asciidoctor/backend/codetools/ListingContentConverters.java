@@ -54,7 +54,7 @@ public final class ListingContentConverters {
 			content = (content != null) ? content : "";
 			content = converter.convert(listingBlock, content);
 		}
-		return node.getRuntime().newString(content != null ? content : "");
+		return node.getRuntime().newString((content != null) ? content : "");
 	}
 
 }
