@@ -287,6 +287,16 @@
 /* Tables */
 
 .doc table.tableblock {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.doc table.tableblock td {
+  min-width: 6rem;
+}
+
+.doc table.tableblock {
   font-size: calc(15 / var(--pixel-to-rem));
   margin: 1.5rem 0 0;
 }
@@ -330,7 +340,6 @@
 .doc .tableblock p,
 .doc .listingblock.wrap pre {
   white-space: pre-wrap;
-  overflow-wrap: anywhere;
 }
 
 /* Admonition blocks */
