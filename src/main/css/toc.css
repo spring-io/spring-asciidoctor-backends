@@ -66,6 +66,8 @@ body.toc-left #doc {
 #toc.fixed-toc {
   position: fixed;
   top: 0;
+  overflow-x: scroll;
+  height: 100%
 }
 
 #toc li.active > a {
