@@ -123,7 +123,7 @@ span.fold-block {
   float: left;
   clear: left;
   padding-right: 0.75rem;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 code.unfolded span.fold-block.hide-when-folded,
