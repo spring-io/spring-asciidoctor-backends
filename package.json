@@ -5,6 +5,7 @@
   "repository": "https://github.com/spring-io/spring-doc-resources",
   "license": "Apache-2.0",
   "devDependencies": {
+    "autoprefixer": "^9.8.6",
     "browser-pack-flat": "^3.4.2",
     "browserify": "^17.0.0",
     "cssnano": "^4.1.10",
