@@ -21,4 +21,4 @@ plugins {
 	id "io.spring.gradle-enterprise-conventions" version "0.0.4"
 }
 
-rootProject.name = "asciidoctor-spring-backends"
+rootProject.name = "spring-asciidoctor-backends"

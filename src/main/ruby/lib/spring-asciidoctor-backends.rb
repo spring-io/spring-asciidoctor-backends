@@ -15,5 +15,5 @@
 
 # coding: utf-8
 
-require_relative "asciidoctor-spring-backends/spring-docinfo-processor"
-require_relative "asciidoctor-spring-backends/spring-html5-converter"
+require_relative "spring-asciidoctor-backends/spring-docinfo-processor"
+require_relative "spring-asciidoctor-backends/spring-html5-converter"

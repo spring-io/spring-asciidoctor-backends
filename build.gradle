@@ -104,13 +104,13 @@ task gem(type: Sync) {
 	outputs.dir(generatedGem)
 	destinationDir = file(generatedGem)
 	from("src/main/ruby/") {
-		into("gems/asciidoctor-spring-backends-0.0.0/")
+		into("gems/spring-asciidoctor-backends-0.0.0/")
 	}
 	from("src/main/gemspec/") {
 		into("specifications/")
 	}
 	from(generatedAssets) {
-		into("gems/asciidoctor-spring-backends-0.0.0/data/assets")
+		into("gems/spring-asciidoctor-backends-0.0.0/data/assets")
 	}
 }
 

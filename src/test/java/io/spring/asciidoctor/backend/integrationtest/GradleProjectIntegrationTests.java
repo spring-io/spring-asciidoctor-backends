@@ -40,8 +40,8 @@ public class GradleProjectIntegrationTests {
 	void gradleBuild() throws Exception {
 		File projectDir = new File("src/test/gradle");
 		Map<String, String> environment = new LinkedHashMap<>();
-		environment.put("asciidoctor-spring-backends.version", ProjectVersion.get());
-		environment.put("asciidoctor-spring-backends-repo",
+		environment.put("spring-asciidoctor-backends.version", ProjectVersion.get());
+		environment.put("spring-asciidoctor-backends-repo",
 				new File("build/maven-repository").getAbsoluteFile().toURI().toString());
 
 		BuildResult result = GradleRunner.create().withProjectDir(projectDir).withEnvironment(environment)

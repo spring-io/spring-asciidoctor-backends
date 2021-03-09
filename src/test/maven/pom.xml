@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.spring.asciidoctor.backend.integrationtest</groupId>
-	<artifactId>asciidoctor-spring-backends-maven</artifactId>
+	<artifactId>spring-asciidoctor-backends-maven</artifactId>
 	<version>0.0.1.BUILD-SNAPSHOT</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,8 +43,8 @@
 				<dependencies>
 					<dependency>
 						<groupId>io.spring.asciidoctor.backends</groupId>
-						<artifactId>asciidoctor-spring-backends</artifactId>
-						<version>${asciidoctor-spring-backends.version}</version>
+						<artifactId>spring-asciidoctor-backends</artifactId>
+						<version>${spring-asciidoctor-backends.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>

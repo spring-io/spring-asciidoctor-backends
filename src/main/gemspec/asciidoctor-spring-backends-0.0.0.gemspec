@@ -14,9 +14,9 @@
 # limitations under the License.
 
 Gem::Specification.new do |s|
-  s.name = "asciidoctor-spring-backends"
+  s.name = "spring-asciidoctor-backends"
   s.version = "0.0.0"
   s.summary = "Asciidoctor Spring Backends"
   s.authors = ["Spring Team"]
-  s.files = ["lib/asciidoctor-spring-backends.rb"]
+  s.files = ["lib/spring-asciidoctor-backends.rb"]
 end

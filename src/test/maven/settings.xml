@@ -5,14 +5,14 @@
 	<localRepository>${maven.localrepo}</localRepository>
 	<profiles>
 		<profile>
-			<id>asciidoctor-spring-backends-repo</id>
+			<id>spring-asciidoctor-backends-repo</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<pluginRepositories>
 				<pluginRepository>
-					<id>asciidoctor-spring-backends-repo</id>
-					<url>${asciidoctor-spring-backends-repo}</url>
+					<id>spring-asciidoctor-backends-repo</id>
+					<url>${spring-asciidoctor-backends-repo}</url>
 					<snapshots>
 						<enabled>true</enabled>
 					</snapshots>

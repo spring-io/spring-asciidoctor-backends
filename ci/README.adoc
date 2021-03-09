@@ -1,17 +1,17 @@
 == Concourse pipeline
 
-Ensure that you've setup the asciidoctor-spring-backends target and can login
+Ensure that you've setup the spring-asciidoctor-backends target and can login
 
 [source]
 ----
-$ fly -t asciidoctor-spring-backends login -n asciidoctor-spring-backends -c https://ci.spring.io
+$ fly -t spring-asciidoctor-backends login -n spring-asciidoctor-backends -c https://ci.spring.io
 ----
 
 The pipeline can be deployed using the following command:
 
 [source]
 ----
-$ fly -t asciidoctor-spring-backends set-pipeline -p asciidoctor-spring-backends -c ci/pipeline.yml -l ci/parameters.yml
+$ fly -t spring-asciidoctor-backends set-pipeline -p spring-asciidoctor-backends -c ci/pipeline.yml -l ci/parameters.yml
 ----
 
 NOTE: This assumes that you have credhub integration configured with the appropriate secrets.

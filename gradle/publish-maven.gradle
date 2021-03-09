@@ -3,8 +3,8 @@ publishing {
 		pom {
 			name = project.description
 			description = project.description
-			artifactId = "asciidoctor-spring-backends"
-			url = "https://github.com/spring-io/asciidoctor-spring-backends"
+			artifactId = "spring-asciidoctor-backends"
+			url = "https://github.com/spring-io/spring-asciidoctor-backends"
 			organization {
 				name = "Spring IO"
 				url = "https://spring.io"
@@ -17,9 +17,9 @@ publishing {
 				}
 			}
 			scm {
-				url = "https://github.com/spring-io/asciidoctor-spring-backends"
-				connection = "scm:git:git://github.com/spring-io/asciidoctor-spring-backends"
-				developerConnection = "scm:git:git://github.com/spring-io/asciidoctor-spring-backends"
+				url = "https://github.com/spring-io/spring-asciidoctor-backends"
+				connection = "scm:git:git://github.com/spring-io/spring-asciidoctor-backends"
+				developerConnection = "scm:git:git://github.com/spring-io/spring-asciidoctor-backends"
 			}
 			developers {
 				developer {
@@ -30,7 +30,7 @@ publishing {
 			}
 			issueManagement {
 				system = "GitHub"
-				url = "https://github.com/spring-io/asciidoctor-spring-backends/issues"
+				url = "https://github.com/spring-io/spring-asciidoctor-backends/issues"
 			}
 		}
 	}

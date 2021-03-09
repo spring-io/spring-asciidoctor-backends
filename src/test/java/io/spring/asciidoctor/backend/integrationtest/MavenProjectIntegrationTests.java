@@ -61,8 +61,8 @@ public class MavenProjectIntegrationTests {
 		InvocationRequest request = new DefaultInvocationRequest();
 		Properties systemProperties = new Properties();
 		systemProperties.setProperty("maven.localrepo", new File("build/maven-local-repository").getAbsolutePath());
-		systemProperties.setProperty("asciidoctor-spring-backends.version", ProjectVersion.get());
-		systemProperties.setProperty("asciidoctor-spring-backends-repo",
+		systemProperties.setProperty("spring-asciidoctor-backends.version", ProjectVersion.get());
+		systemProperties.setProperty("spring-asciidoctor-backends-repo",
 				new File("build/maven-repository").getAbsoluteFile().toURI().toString());
 		request.setProperties(systemProperties);
 		request.setBaseDirectory(this.baseDirectory);

@@ -28,7 +28,7 @@ public class SpringBackendsExtensionRegistry implements ExtensionRegistry {
 
 	@Override
 	public void register(Asciidoctor asciidoctor) {
-		asciidoctor.requireLibrary("asciidoctor-spring-backends");
+		asciidoctor.requireLibrary("spring-asciidoctor-backends");
 	}
 
 }

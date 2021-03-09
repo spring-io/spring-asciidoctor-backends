@@ -27,8 +27,8 @@ You can use the https://github.com/asciidoctor/asciidoctor-maven-plugin[Asciidoc
 	<dependencies>
 		<dependency>
 			<groupId>io.spring.asciidoctor.backends</groupId>
-			<artifactId>asciidoctor-spring-backends</artifactId>
-			<version>${asciidoctor-spring-backends.version}</version>
+			<artifactId>spring-asciidoctor-backends</artifactId>
+			<version>${spring-asciidoctor-backends.version}</version>
 		</dependency>
 	</dependencies>
 </plugin>
@@ -57,7 +57,7 @@ configurations {
 }
 
 dependencies {
-	asciidoctorExtensions "io.spring.asciidoctor.backends:asciidoctor-spring-backends:${asciidoctor-spring-backends.version}"
+	asciidoctorExtensions "io.spring.asciidoctor.backends:spring-asciidoctor-backends:${spring-asciidoctor-backends.version}"
 }
 
 asciidoctor {

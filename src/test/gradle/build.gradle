@@ -5,7 +5,7 @@ plugins {
 repositories {
 	mavenCentral()
 	maven {
-		url System.getenv("asciidoctor-spring-backends-repo")
+		url System.getenv("spring-asciidoctor-backends-repo")
 	}
 }
 
@@ -14,7 +14,7 @@ configurations {
 }
 
 dependencies {
-	asciidoctorExtensions "io.spring.asciidoctor.backends:asciidoctor-spring-backends:" + System.getenv("asciidoctor-spring-backends.version")
+	asciidoctorExtensions "io.spring.asciidoctor.backends:spring-asciidoctor-backends:" + System.getenv("spring-asciidoctor-backends.version")
 }
 
 asciidoctor {
