@@ -408,23 +408,23 @@ i.fa {
 }
 
 i.fa.icon-caution {
-  background-image: url(../img/octicons-16.svg#view-flame);
+  background-image: url("../img/octicons-16.svg#view-flame");
 }
 
 i.fa.icon-important {
-  background-image: url(../img/octicons-16.svg#view-stop);
+  background-image: url("../img/octicons-16.svg#view-stop");
 }
 
 i.fa.icon-note {
-  background-image: url(../img/octicons-16.svg#view-info);
+  background-image: url("../img/octicons-16.svg#view-info");
 }
 
 i.fa.icon-tip {
-  background-image: url(../img/octicons-16.svg#view-light-bulb);
+  background-image: url("../img/octicons-16.svg#view-light-bulb");
 }
 
 i.fa.icon-warning {
-  background-image: url(../img/octicons-16.svg#view-alert);
+  background-image: url("../img/octicons-16.svg#view-alert");
 }
 
 .doc .admonitionblock.caution td.icon {

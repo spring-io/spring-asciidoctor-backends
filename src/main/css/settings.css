@@ -41,7 +41,7 @@
   --selected-background-color: #191e1e;
 
   /* Layout */
-  --layout-banner-logo: url(../img/banner-logo.svg);
+  --layout-banner-logo: url("../img/banner-logo.svg");
   --layout-max-width: 1400px;
   --layout-banner-height: 80px;
   --layout-border-color: var(--color-accent-1);
@@ -51,7 +51,7 @@
   --layout-switchtheme-button-hover-color: var(--color-accent-1);
 
   /* Asciidoctor */
-  --asciidoctor-doc-embellishment-background: url(../img/doc-background.svg)
+  --asciidoctor-doc-embellishment-background: url("../img/doc-background.svg")
     no-repeat top right / 305px 147px;
   --asciidoctor-doc-embellishment-margin-width: 250px;
   --asciidoctor-doc-background-embellishment-height: 147px;
@@ -156,7 +156,7 @@
 @media screen and (max-width: 1024px) {
   :root {
     --toc-width: 16rem;
-    --asciidoctor-doc-embellishment-background: url(../img/doc-background.svg)
+    --asciidoctor-doc-embellishment-background: url("../img/doc-background.svg")
       no-repeat top right / 203px 95px;
     --asciidoctor-doc-embellishment-margin-width: 140px;
   }
