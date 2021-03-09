@@ -20,8 +20,8 @@ div.codetools {
   --arrow-size: 5px;
   display: flex;
   position: absolute;
-  bottom: 14px;
-  right: 10px;
+  bottom: 9px;
+  right: 8px;
   background: var(--codetools-background-color);
   padding: 0;
   border-radius: 2px;
