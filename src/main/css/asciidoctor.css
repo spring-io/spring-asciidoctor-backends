@@ -120,11 +120,7 @@
   font-weight: var(--asciidoctor-heading-font-weight);
   hyphens: none;
   line-height: 1.3;
-  margin: 1rem 0 0;
-}
-
-.doc h3 {
-  margin: 2rem 0 0;
+  margin: 2.5rem 0 0;
 }
 
 .doc h1.sect0 {
@@ -209,7 +205,8 @@
 /* Code and Pre */
 
 .doc p code,
-.doc thead code {
+.doc thead code,
+.doc .admonitionblock code {
   color: var(--asciidoctor-code-font-color);
   background: var(--asciidoctor-code-background);
   border-radius: 0.25em;
@@ -284,7 +281,7 @@
 .doc .partintro,
 .doc details,
 .doc hr {
-  margin: 0.8rem 0 0;
+  margin: 1rem 0 0;
 }
 
 /* Tables */
@@ -295,7 +292,7 @@
 }
 
 .doc table.tableblock + * {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .doc td.tableblock > .content > :first-child {
@@ -339,7 +336,7 @@
 /* Admonition blocks */
 
 .doc .admonitionblock {
-  margin: 1.6rem 0 0;
+  margin: 2.5rem 0;
 }
 
 .doc .admonitionblock p,
