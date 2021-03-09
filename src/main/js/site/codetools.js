@@ -111,7 +111,6 @@
   function onFoldUnfoldButtonClick(preElement) {
     const codeElement = preElement.querySelector("code");
     const unfolding = !codeElement.classList.contains("unfolded");
-    console.log("I am " + unfolding);
     codeElement.classList.remove(unfolding ? "folding" : "unfolding");
     codeElement.classList.add(unfolding ? "unfolding" : "folding");
     delay(function () {
