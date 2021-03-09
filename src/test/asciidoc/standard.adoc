@@ -306,6 +306,64 @@ A table with long entries and no breakable space.
 That's the end of that.
 
 
+
+=== Another Long Table
+
+
+When a Spring Boot application starts:
+
+[cols="2,2,2,3,5"]
+|===
+|Startup phase |LivenessState |ReadinessState |HTTP server |Notes
+
+|Starting
+|`BROKEN`
+|`REFUSING_TRAFFIC`
+|Not started
+|Kubernetes checks the "liveness" Probe and restarts the application if it takes too long.
+
+|Started
+|`CORRECT`
+|`REFUSING_TRAFFIC`
+|Refuses requests
+|The application context is refreshed. The application performs startup tasks and does not receive traffic yet.
+
+|Ready
+|`CORRECT`
+|`ACCEPTING_TRAFFIC`
+|Accepts requests
+|Startup tasks are finished. The application is receiving traffic.
+|===
+
+When a Spring Boot application shuts down:
+
+[cols="2,2,2,3,5"]
+|===
+|Shutdown phase |Liveness State |Readiness State |HTTP server |Notes
+
+|Running
+|`CORRECT`
+|`ACCEPTING_TRAFFIC`
+|Accepts requests
+|Shutdown has been requested.
+
+|Graceful shutdown
+|`CORRECT`
+|`REFUSING_TRAFFIC`
+|New requests are rejected
+|If enabled, <<spring-boot-features#boot-features-graceful-shutdown,graceful shutdown processes in-flight requests>>.
+
+|Shutdown complete
+|N/A
+|N/A
+|Server is shut down
+|The application context is closed and the application is shut down.
+|===
+
+TIP: Check out the Kubernetes container lifecycle section for more information about Kubernetes deployment.
+
+
+
 === Long Shell Blocks
 A shell code block can also break things:
 
