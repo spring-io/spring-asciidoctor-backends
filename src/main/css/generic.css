@@ -23,3 +23,7 @@ html {
 *:after {
   box-sizing: inherit;
 }
+
+body {
+  text-size-adjust: none;
+}
