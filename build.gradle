@@ -88,6 +88,7 @@ task gulp(type: NpmTask) {
 	inputs.dir("src/main/css")
 	inputs.dir("src/main/img")
 	inputs.dir("src/main/js")
+	inputs.file("postcss.config.js")
 	outputs.dir(generatedAssets)
 	args = ["run", "build", "--output=${generatedAssets}"]
 }
