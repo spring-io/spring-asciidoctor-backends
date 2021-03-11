@@ -224,6 +224,9 @@
   }
 
   function isInViewport(element) {
+    if(!element) {
+      return false;
+    }
     const rect = element.getBoundingClientRect();
     return (
       rect.top >= 0 &&
