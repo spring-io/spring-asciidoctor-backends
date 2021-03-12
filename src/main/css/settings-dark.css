@@ -54,6 +54,7 @@ html.dark-theme {
 
   /* TOC */
   --toc-back-to-index-filter: invert();
+  --toc-bar-button-filter: invert();
 
   /* Code Tools */
   --codetools-button-filter: invert();

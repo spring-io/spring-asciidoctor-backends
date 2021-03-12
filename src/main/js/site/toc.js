@@ -23,6 +23,7 @@
   const debugMode = false;
 
   const tocElement = document.querySelector("#toc");
+  const toggleTocElement = document.querySelector("#toggle-toc");
   const contentElement = document.querySelector("#content");
 
   if (!tocElement || !contentElement) {
@@ -33,11 +34,11 @@
   const hrefToTocAnchorElement = buildHrefToTocAnchorElement();
   const headingElementToTocElement = buildHeadingElementToTocElement();
 
-  let fixedPositionTop = null;
   let lastActiveTocElement = null;
   let disableOnScroll = false;
 
   tocElement.addEventListener("click", onTocElementClick);
+  toggleTocElement.addEventListener("click", onToggleTocClick);
   window.addEventListener("load", onLoad);
 
   function findHeadingElements() {
@@ -105,6 +106,7 @@
     window.addEventListener("hashchange", onLocationHashChange);
     window.addEventListener("scroll", onScroll);
     window.addEventListener("scroll", onEndScroll);
+    window.addEventListener("resize", onResize);
   }
 
   function onLocationHashChange() {
@@ -119,12 +121,16 @@
     onEndScroll();
   }
 
-  const onScroll = throttle(function () {
-    updateFixedPositionClass();
-    if (!disableOnScroll) {
-      activateTopHeadingTocElement();
-    }
-  }, 50);
+  const onScroll = throttle(
+    function () {
+      updateFixedPositionClass();
+      if (!disableOnScroll) {
+        activateTopHeadingTocElement();
+      }
+    },
+    50,
+    { leading: true }
+  );
 
   const onEndScroll = debounce(function () {
     debug("scrolling ended");
@@ -141,6 +147,14 @@
     }
   }, 50);
 
+  const onResize = throttle(
+    function () {
+      updateFixedPositionClass();
+    },
+    50,
+    { leading: true }
+  );
+
   function onTocElementClick(event) {
     if (event.target.nodeName === "A") {
       const parentElement = event.target.parentElement;
@@ -153,15 +167,26 @@
     }
   }
 
-  function updateFixedPositionClass() {
-    const top = getTop();
-    if (fixedPositionTop === null) {
-      fixedPositionTop = tocElement.offsetTop;
-    }
-    if (top > fixedPositionTop) {
-      tocElement.classList.add("fixed-toc");
+  function onToggleTocClick(event) {
+    event.stopPropagation();
+    const showing = document.body.classList.toggle("show-toc");
+    if (showing) {
+      document.documentElement.addEventListener("click", onToggleTocClick);
     } else {
-      tocElement.classList.remove("fixed-toc");
+      document.documentElement.removeEventListener("click", onToggleTocClick);
+    }
+  }
+
+  function updateFixedPositionClass() {
+    const computedStyle = window.getComputedStyle(document.documentElement);
+    const bannerHeight = parseInt(
+      computedStyle.getPropertyValue("--layout-banner-height"),
+      10
+    );
+    if (getTop() >= bannerHeight) {
+      document.body.classList.add("fixed-toc");
+    } else {
+      document.body.classList.remove("fixed-toc");
     }
   }
 
@@ -224,7 +249,7 @@
   }
 
   function isInViewport(element) {
-    if(!element) {
+    if (!element) {
       return false;
     }
     const rect = element.getBoundingClientRect();

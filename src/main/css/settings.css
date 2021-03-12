@@ -42,6 +42,8 @@
 
   /* Layout */
   --layout-banner-logo: url("../img/banner-logo.svg");
+  --layout-banner-logo-offset: 18px;
+  --layout-banner-logo-height: 50px;
   --layout-max-width: 1400px;
   --layout-banner-height: 80px;
   --layout-border-color: var(--color-accent-1);
@@ -139,6 +141,9 @@
   --toc-active-background-color: var(--selected-background-color);
   --toc-active-font-color: var(--body-background-color);
   --toc-back-to-index-filter: none;
+  --toc-bar-display: none;
+  --toc-bar-height: 0;
+  --toc-bar-button-filter: none;
 
   /* Code Tools */
   --codetools-button-filter: none;
@@ -164,6 +169,12 @@
 
 @media screen and (max-width: 800px) {
   :root {
+    --layout-banner-height: 51px;
+    --layout-banner-logo-height: 30px;
+    --layout-banner-logo-offset: 10px;
+    --layout-border-color: var(--body-background-color);
+    --toc-bar-display: block;
+    --toc-bar-height: 24px;
     --toc-width: 0;
     --toc-display: none;
     --asciidoctor-doc-embellishment-background: none;

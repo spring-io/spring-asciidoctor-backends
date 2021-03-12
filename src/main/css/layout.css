@@ -22,8 +22,9 @@
 
 #banner {
   height: 100%;
-  background: var(--layout-banner-logo) no-repeat top 18px left 18px / auto
-    calc(var(--layout-banner-height) - 30px);
+  background: var(--layout-banner-logo) no-repeat top
+    var(--layout-banner-logo-offset) left var(--layout-banner-logo-offset) /
+    auto var(--layout-banner-logo-height);
 }
 
 #doc {
@@ -33,10 +34,6 @@
 .contained {
   max-width: var(--layout-max-width);
   margin: 0 auto;
-}
-
-#navbar-container {
-  display: none;
 }
 
 div#switch-theme,
