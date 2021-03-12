@@ -22,24 +22,37 @@
 
   const debugMode = false;
 
-  const tocElement = document.querySelector("#toc");
-  const toggleTocElement = document.querySelector("#toggle-toc");
-  const contentElement = document.querySelector("#content");
+  let tocElement;
+  let toggleTocElement;
+  let contentElement;
 
-  if (!tocElement || !contentElement) {
-    return;
-  }
-
-  const headingElements = findHeadingElements();
-  const hrefToTocAnchorElement = buildHrefToTocAnchorElement();
-  const headingElementToTocElement = buildHeadingElementToTocElement();
+  let headingElements;
+  let hrefToTocAnchorElement;
+  let headingElementToTocElement;
 
   let lastActiveTocElement = null;
   let disableOnScroll = false;
 
-  tocElement.addEventListener("click", onTocElementClick);
-  toggleTocElement.addEventListener("click", onToggleTocClick);
   window.addEventListener("load", onLoad);
+
+  function onLoad() {
+    tocElement = document.querySelector("#toc");
+    toggleTocElement = document.querySelector("#toggle-toc");
+    contentElement = document.querySelector("#content");
+    if (!tocElement || !contentElement) {
+      return;
+    }
+    headingElements = findHeadingElements();
+    hrefToTocAnchorElement = buildHrefToTocAnchorElement();
+    headingElementToTocElement = buildHeadingElementToTocElement();
+    onLocationHashChange();
+    window.addEventListener("hashchange", onLocationHashChange);
+    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onEndScroll);
+    window.addEventListener("resize", onResize);
+    tocElement.addEventListener("click", onTocElementClick);
+    toggleTocElement.addEventListener("click", onToggleTocClick);
+  }
 
   function findHeadingElements() {
     const maxHeadingLevel = getMaxHeadingLevel();
@@ -101,13 +114,7 @@
     return result;
   }
 
-  function onLoad() {
-    onLocationHashChange();
-    window.addEventListener("hashchange", onLocationHashChange);
-    window.addEventListener("scroll", onScroll);
-    window.addEventListener("scroll", onEndScroll);
-    window.addEventListener("resize", onResize);
-  }
+
 
   function onLocationHashChange() {
     updateFixedPositionClass();
