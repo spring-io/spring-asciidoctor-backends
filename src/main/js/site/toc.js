@@ -114,8 +114,6 @@
     return result;
   }
 
-
-
   function onLocationHashChange() {
     updateFixedPositionClass();
     const tocAnchorElement = hrefToTocAnchorElement.get(window.location.hash);
