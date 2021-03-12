@@ -58,7 +58,7 @@ function jsSite() {
 }
 
 function jsFolder(name) {
-  return src("src/main/js/" + name + "/*.js")
+  return src("src/main/js/" + name + "/*.js", { base: 'src/main/js' })
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
