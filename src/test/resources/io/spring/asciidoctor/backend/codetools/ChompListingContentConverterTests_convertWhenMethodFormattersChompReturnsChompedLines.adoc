@@ -1,0 +1,15 @@
+= Test Document
+:chomp: formatters
+
+[source,java]
+----
+public class Example {
+
+	public void method() {
+		// @formatter:off
+		new StringBuilder();
+		// @formatter:on
+	}
+
+}
+----

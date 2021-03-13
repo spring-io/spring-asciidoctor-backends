@@ -88,6 +88,11 @@ class ChompListingContentConverterTests {
 	}
 
 	@Test
+	void convertWhenMethodFormattersChompReturnsChompedLines(ConvertedHtml html, ExpectedHtml expected) {
+		assertThat(html.getElementHtml("code")).satisfies(expected);
+	}
+
+	@Test
 	void convertWhenMultipleChompsReturnsChompedLines(ConvertedHtml html, ExpectedHtml expected) {
 		assertThat(html.getElementHtml("code")).satisfies(expected);
 	}

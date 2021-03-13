@@ -167,7 +167,7 @@ public class ChompListingContentConverter implements ListingContentConverter {
 
 	private static class FormatterChomper implements Chomper {
 
-		private static final Pattern PATTERN = Pattern.compile("^\\s*\\/\\/\\s*@formatter:(on|off).*\n?$",
+		private static final Pattern PATTERN = Pattern.compile("^[\\ \\t]*\\/\\/\\s*@formatter:(on|off).*$\n?",
 				Pattern.MULTILINE);
 
 		@Override
