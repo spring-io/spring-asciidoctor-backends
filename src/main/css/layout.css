@@ -22,7 +22,7 @@
 
 #banner {
   height: 100%;
-  background: var(--layout-banner-logo) no-repeat top
+  background: url("../img/banner-logo.svg") no-repeat top
     var(--layout-banner-logo-offset) left var(--layout-banner-logo-offset) /
     auto var(--layout-banner-logo-height);
 }

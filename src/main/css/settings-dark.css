@@ -23,8 +23,6 @@ html.dark-theme {
   --layout-switchtheme-background-color: var(--selected-background-color);
 
   /* Asciidoctor */
-  --asciidoctor-doc-embellishment-background: url("../img/doc-background-dark.svg")
-    no-repeat top right / 305px 147px;
   --asciidoctor-code-background: rgba(177, 209, 241, 0.15);
   --asciidoctor-code-data-lang-color: #6e6e6e;
   --asciidoctor-admonition-font-color: #f0f0f0;
@@ -64,17 +62,3 @@ html.dark-theme {
   --codetools-divider-color: rgba(44, 44, 44, 0.274);
 }
 
-/* Responsive Overrides */
-
-@media screen and (max-width: 1024px) {
-  html.dark-theme {
-    --asciidoctor-doc-embellishment-background: url("../img/doc-background-dark.svg")
-      no-repeat top right / 203px 95px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  html.dark-theme {
-    --asciidoctor-doc-embellishment-background: none;
-  }
-}

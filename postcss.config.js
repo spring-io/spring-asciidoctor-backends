@@ -4,9 +4,7 @@ module.exports = {
   plugins: {
     "postcss-import": {},
     cssnano: {
-      preset: ["default", {
-        normalizeUrl: false,
-      }]
+      preset: ["default"]
     },
     "autoprefixer": {}
   },

@@ -15,6 +15,8 @@
  */
 
 :root {
+  /* NOTE: Don't use relative `url()` values in here. Safari load them properly */
+
   /* General */
   --html-font-size: 1em;
   --pixel-to-rem: 16 * 1rem;
@@ -41,7 +43,6 @@
   --selected-background-color: #191e1e;
 
   /* Layout */
-  --layout-banner-logo: url("../img/banner-logo.svg");
   --layout-banner-logo-offset: 18px;
   --layout-banner-logo-height: 50px;
   --layout-max-width: 1400px;
@@ -53,8 +54,6 @@
   --layout-switchtheme-button-hover-color: var(--color-accent-1);
 
   /* Asciidoctor */
-  --asciidoctor-doc-embellishment-background: url("../img/doc-background.svg")
-    no-repeat top right / 305px 147px;
   --asciidoctor-doc-embellishment-margin-width: 250px;
   --asciidoctor-doc-background-embellishment-height: 147px;
   --asciidoctor-details-background: var(--color-accent-1);
@@ -161,8 +160,6 @@
 @media screen and (max-width: 1024px) {
   :root {
     --toc-width: 16rem;
-    --asciidoctor-doc-embellishment-background: url("../img/doc-background.svg")
-      no-repeat top right / 203px 95px;
     --asciidoctor-doc-embellishment-margin-width: 140px;
   }
 }
@@ -177,7 +174,6 @@
     --toc-bar-height: 24px;
     --toc-width: 0;
     --toc-display: none;
-    --asciidoctor-doc-embellishment-background: none;
     --asciidoctor-doc-embellishment-margin-width: 0;
   }
 }

@@ -36,7 +36,7 @@
 /* Doc background embellishment */
 
 #doc {
-  background: var(--asciidoctor-doc-embellishment-background);
+  background: url("../img/doc-background.svg") no-repeat top right / 305px 147px;
 }
 
 .doc #header {
@@ -909,4 +909,29 @@ i.fa.icon-warning {
   color: var(--asciidoctor-footer-font-color);
   padding: 2rem 0;
   border-top: 1px solid var(--asciidoctor-section-divider-color);
+}
+
+/* Responsive and Dark Theme Overrides */
+
+html.dark-theme #doc {
+  background: url("../img/doc-background-dark.svg") no-repeat top right / 305px
+    147px;
+}
+
+@media screen and (max-width: 1024px) {
+  #doc {
+    background: url("../img/doc-background.svg") no-repeat top right / 203px
+      95px;
+  }
+  html.dark-theme #doc {
+    background: url("../img/doc-background-dark.svg") no-repeat top right /
+      203px 95px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  html.dark-theme #doc,
+  #doc {
+    background: none;
+  }
 }
