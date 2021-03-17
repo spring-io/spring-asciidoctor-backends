@@ -18,7 +18,7 @@
 class SpringDocinfoProcessor < Asciidoctor::Extensions::DocinfoProcessor
   def process(document)
     %(<script src="js/setup.js"></script>
-    <script src="js/site.js" async></script>)
+    <script src="js/site.js" defer></script>)
   end
 end
 
