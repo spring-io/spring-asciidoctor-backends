@@ -242,6 +242,22 @@ Why not have some YAML:
 	    import: "optional:file:./dev.properties"
 ----
 
+Or some HTTP that also has `nowrap` set:
+
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/vnd.spring-boot.actuator.v3+json
+Content-Length: 121
+{
+  "events" : [ {
+    "timestamp" : "2021-03-18T16:49:30.625Z",
+    "principal" : "alice",
+    "type" : "logout"
+  } ]
+}
+----
+
 
 
 == Tables

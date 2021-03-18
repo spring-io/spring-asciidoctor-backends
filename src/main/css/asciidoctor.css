@@ -849,7 +849,7 @@ i.fa.icon-warning {
 
 /* Pass-though Classes */
 
-.doc .nowrap {
+.doc :not(pre).nowrap {
   white-space: nowrap;
 }
 
