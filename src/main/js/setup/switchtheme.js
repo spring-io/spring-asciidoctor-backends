@@ -47,10 +47,14 @@
       "(prefers-color-scheme: dark)"
     );
     const savedColorScheme = localStorage.getItem("theme");
-    if (savedColorScheme) {
-      return savedColorScheme === "dark";
+    switch (savedColorScheme) {
+      case "dark":
+        return true;
+      case "light":
+        return false;
+      default:
+        return prefersDarkColorScheme.matches;
     }
-    return prefersDarkColorScheme.matches;
   }
 
   function onThemeChange() {
