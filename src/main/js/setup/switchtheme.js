@@ -21,9 +21,6 @@
 
   const localStorage = window.localStorage;
   const htmlElement = document.documentElement;
-  const prefersDarkColorScheme = window.matchMedia(
-    "(prefers-color-scheme: dark)"
-  );
 
   swithInitialTheme();
   window.addEventListener("load", onWindowLoad);
@@ -46,9 +43,14 @@
   }
 
   function isInitialThemeDark() {
-    return (
-      localStorage.getItem("theme") === "dark" || prefersDarkColorScheme.matches
+    const prefersDarkColorScheme = window.matchMedia(
+      "(prefers-color-scheme: dark)"
     );
+    const savedColorScheme = localStorage.getItem("theme");
+    if (savedColorScheme) {
+      return savedColorScheme === "dark";
+    }
+    return prefersDarkColorScheme.matches;
   }
 
   function onThemeChange() {
