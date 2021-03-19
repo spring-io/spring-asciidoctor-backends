@@ -7,7 +7,7 @@ image_resource:
     tag: '0.0.5'
 inputs:
 - name: git-repo
-- name: artifactory-repo
+- name: version
 outputs:
 - name: generated-changelog
 params:
