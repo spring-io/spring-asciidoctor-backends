@@ -84,4 +84,9 @@ class FoldListingContentConverterTests {
 		assertThat(html.getElementHtml("code")).satisfies(expected);
 	}
 
+	@Test
+	void convertWhenFoldingIsTurnedOffOnTheLastLineReturnsFolded(ConvertedHtml html, ExpectedHtml expected) {
+		assertThat(html.getElementHtml("code")).satisfies(expected);
+	}
+
 }

@@ -271,7 +271,9 @@ class FoldListingContentConverter implements ListingContentConverter {
 					}
 				}
 			}
-			foldBlocks.add(createFoldArea(folder, lines, start, lines.length - 1));
+			if (start < lines.length) {
+				foldBlocks.add(createFoldArea(folder, lines, start, lines.length - 1));
+			}
 			return new FoldBlocks(foldBlocks.stream().filter(FoldBlock::hasLines));
 		}
 
