@@ -242,6 +242,39 @@ Why not have some YAML:
 	    import: "optional:file:./dev.properties"
 ----
 
+Or JSON:
+
+[source,json,indent=0]
+----
+{
+   "glossary" : {
+      "title" : "example glossary",
+      "GlossDiv" : {
+         "title" : "S",
+         "GlossList" : {
+            "GlossEntry" : {
+               "ID" : "SGML",
+               "SortAs" : "SGML",
+               "GlossTerm" : "Standard Generalized Markup Language",
+               "Acronym" : "SGML",
+               "Thing" : true,
+               "Size" : 12,
+               "Abbrev" : "ISO 8879:1986",
+               "GlossDef" : {
+                  "para" : "A meta-markup language, used to create markup languages such as DocBook.",
+                  "GlossSeeAlso" : [
+                     "GML",
+                     "XML"
+                  ]
+               },
+               "GlossSee" : "markup"
+            }
+         }
+      }
+   }
+}
+----
+
 Or some HTTP that also has `nowrap` set:
 
 [source,http,options="nowrap"]
