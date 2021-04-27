@@ -124,6 +124,20 @@ https://spring.io[Go to spring.io] to learn about Spring.
 
 https://github.com/asciidoctor[Asciidoctor is great!]
 
+Of course, you can also have https://spring.io[`monospaced links`].
+
+And in tables:
+
+.Spring Projects
+|===
+|Link
+
+|https://spring.io
+
+|https://spring.io[`monospaced links`]
+|===
+
+
 
 == Lists
 

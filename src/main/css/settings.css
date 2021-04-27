@@ -70,6 +70,7 @@
   --asciidoctor-hover-link-font-color: var(--hover-link-font-color);
   --asciidoctor-unresolved-link-font-color: #d32f2f;
   --asciidoctor-code-font-color: var(--asciidoctor-font-color);
+  --asciidoctor-code-link-font-color: var(--link-font-color);
   --asciidoctor-code-background: rgba(27, 31, 35, 0.05);
   --asciidoctor-code-data-lang-color: #999;
   --asciidoctor-table-border-color: var(--asciidoctor-panel-border-color);

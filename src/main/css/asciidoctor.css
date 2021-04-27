@@ -215,6 +215,12 @@
   padding: 0.125em 0.25em;
 }
 
+.doc p a code,
+.doc thead a code,
+.doc .admonitionblock a code {
+  color: var(--asciidoctor-code-link-font-color);
+}
+
 .doc code,
 .doc pre {
   hyphens: none;
