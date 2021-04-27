@@ -41,8 +41,13 @@ enum ChompOption {
 	/**
 	 * Chomp and formatter on/off comments.
 	 */
-	FORMATTERS;
+	FORMATTERS,
 
-	static final ChompOption[] DEFAULTS = { TAGS };
+	/**
+	 * Chomp {@code @SuppressWarnings} annotation.
+	 */
+	SUPPRESSWARNINGS;
+
+	static final ChompOption[] DEFAULTS = { TAGS, FORMATTERS, SUPPRESSWARNINGS };
 
 }

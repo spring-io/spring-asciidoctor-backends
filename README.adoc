@@ -355,7 +355,7 @@ The attribute value is a space delimited list containing one or more of the foll
 | Flag | Description
 
 | `default`
-| `tags` `formatters`
+| `tags` `formatters` `suppresswarnings`
 
 | `all`
 | Enable all chomping
@@ -371,6 +371,12 @@ The attribute value is a space delimited list containing one or more of the foll
 
 | `tags`
 | Chomp on the comment tags listed above
+
+| `formatters`
+| Chomp any `@formatter:on`/`@formatter:off` comments
+
+| `suppresswarnings`
+| Chomp any `@SuppressWarnings` annotations
 |===
 
 You can prefix the flag with `+` or `-` at the block level if you want to override a document setting.
