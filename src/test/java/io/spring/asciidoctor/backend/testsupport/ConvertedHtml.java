@@ -77,14 +77,26 @@ public class ConvertedHtml implements AssertProvider<AbstractStringAssert<?>> {
 	}
 
 	public RemoteWebDriver inWebBrowser(ChromeContainer chrome) {
-		return inWebBrowser(chrome, (logs) -> Assertions.assertThat(logs).isEmpty());
+		return inWebBrowser(chrome, (String) null);
+	}
+
+	public RemoteWebDriver inWebBrowser(ChromeContainer chrome, String anchor) {
+		return inWebBrowser(chrome, anchor, (logs) -> Assertions.assertThat(logs).isEmpty());
 	}
 
 	public RemoteWebDriver inWebBrowser(ChromeContainer chrome, Consumer<LogEntries> logChecks) {
+		return inWebBrowser(chrome, null, logChecks);
+	}
+
+	public RemoteWebDriver inWebBrowser(ChromeContainer chrome, String anchor, Consumer<LogEntries> logChecks) {
 		chrome.copyFileToContainer(Transferable.of(this.html.getBytes(StandardCharsets.UTF_8)), "/test.html");
 		copyAssets(chrome);
 		RemoteWebDriver driver = chrome.getWebDriver();
-		driver.get("file:///test.html");
+		String url = "file:///test.html";
+		if (anchor != null) {
+			url = url + "#" + anchor;
+		}
+		driver.get(url);
 		logChecks.accept(driver.manage().logs().get(LogType.BROWSER));
 		return driver;
 	}

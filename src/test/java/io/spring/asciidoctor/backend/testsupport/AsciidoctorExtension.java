@@ -88,8 +88,16 @@ public class AsciidoctorExtension implements ParameterResolver {
 				assertThat(inputStream).as(testClass + " " + asciidocFilename).isNotNull();
 				Files.copy(inputStream, source, StandardCopyOption.REPLACE_EXISTING);
 			}
+			InputStream anchorRewrite = testClass
+					.getResourceAsStream(asciidocFilename.replace(".adoc", "-anchor-rewrite.properties"));
+			if (anchorRewrite != null) {
+				Files.copy(anchorRewrite, temp.path().resolve("anchor-rewrite.properties"),
+						StandardCopyOption.REPLACE_EXISTING);
+				anchorRewrite.close();
+			}
 			OptionsBuilder options = OptionsBuilder.options();
 			options.safe(SafeMode.UNSAFE);
+			options.baseDir(temp.directory());
 			options.backend("spring-html");
 			options.toDir(temp.directory());
 			asciidoctor.convertFile(source.toFile(), options);

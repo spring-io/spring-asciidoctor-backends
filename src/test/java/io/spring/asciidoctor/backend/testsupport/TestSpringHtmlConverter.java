@@ -21,6 +21,7 @@ import java.io.File;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
 import org.asciidoctor.OptionsBuilder;
+import org.asciidoctor.SafeMode;
 
 /**
  * Utility class used to convert Asciidoctor files for testing.
@@ -58,8 +59,12 @@ public class TestSpringHtmlConverter {
 			destination.mkdirs();
 		}
 		assertIsDirectory(destination);
-		Options options = OptionsBuilder.options().backend("spring-html").toDir(destination).get();
+		OptionsBuilder optionsBuilder = OptionsBuilder.options().backend("spring-html").toDir(destination)
+				.safe(SafeMode.UNSAFE);
 		for (File source : sources) {
+			Options options = optionsBuilder
+					.baseDir(source.isDirectory() ? source.getAbsoluteFile() : source.getAbsoluteFile().getParentFile())
+					.get();
 			convert(destination, source, options);
 		}
 	}

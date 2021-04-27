@@ -16,6 +16,7 @@
 
 package io.spring.asciidoctor.backend;
 
+import io.spring.asciidoctor.backend.anchorrewrite.AnchorRewriteDocinfoProcessor;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.jruby.extension.spi.ExtensionRegistry;
 
@@ -29,6 +30,7 @@ public class SpringBackendsExtensionRegistry implements ExtensionRegistry {
 	@Override
 	public void register(Asciidoctor asciidoctor) {
 		asciidoctor.requireLibrary("spring-asciidoctor-backends");
+		asciidoctor.javaExtensionRegistry().docinfoProcessor(new AnchorRewriteDocinfoProcessor());
 	}
 
 }

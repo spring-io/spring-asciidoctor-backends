@@ -53,7 +53,7 @@ public class GradleProjectIntegrationTests {
 		assertThat(new File(generatedDocs, "js/site.js")).exists();
 		assertThat(htmlFile).exists();
 		assertThat(new String(Files.readAllBytes(htmlFile.toPath()), StandardCharsets.UTF_8))
-				.contains("<title>Gradle Example</title>").contains("main-container");
+				.contains("<title>Gradle Example</title>").contains("main-container").contains("new-anchor");
 	}
 
 }

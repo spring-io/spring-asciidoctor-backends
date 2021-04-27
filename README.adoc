@@ -441,6 +441,41 @@ For example, the following document will replace all package declarations with `
 
 
 
+=== Anchor Rewriting
+Anchor rewriting can be used if you need to evolve a document and change previously published anchor links.
+
+For example, say you publish a document with the following typo:
+
+[source,asciidoctor]
+----
+[[initializzzing]]
+== Initializing
+This is how to do it.
+----
+
+You then fix the typo and publish a new revision:
+
+[source,asciidoctor]
+----
+[[initializing]]
+== Initializing
+This is how to do it.
+----
+
+You can add a rewrite rule so that any links to `+++https://example.com/doc#initializzzing+++` will be automatically changed to `+++https://example.com/doc#initializing+++`.
+
+To define the rewrite rules, add a `anchor-rewrite.properties` file to your `base_dir` (usually the same directory as your `index.adoc` file).
+
+For example, the following file would be used in the example above:
+
+[source,properties]
+.anchor-rewrite.properties
+----
+initializzzing=initializing
+----
+
+
+
 == Contributing
 If you're looking to contribute to this project, or you're just trying to navigate the code please take a look at the link:CONTRIBUTING.adoc[CONTRIBUTING] file.
 

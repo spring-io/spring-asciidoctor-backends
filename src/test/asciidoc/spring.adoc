@@ -68,6 +68,7 @@ public void itAlsoLooksNice() {
 
 
 
+[[copy-to-clipboard]]
 == Copy to Clipboard
 Hover over any code block and a copy-to-clipboard button is available:
 
