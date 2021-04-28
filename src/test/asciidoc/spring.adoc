@@ -9,6 +9,7 @@ Andy Wilkinson; Phillip Webb
 This is an example asciidoctor file uses specific features of the Spring backend.
 
 
+
 == Tab Roles
 You can use the `role` attribute on source code to create tabs.
 You have one `primary` roles and one or more `secondary` roles.
@@ -64,6 +65,7 @@ public void itAlsoLooksNice() {
 }
 ----
 --
+
 
 
 == Copy to Clipboard
