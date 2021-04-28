@@ -22,11 +22,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.TreeMap;
 
 /**
  * Generates the script tag for anchor rewrites.
@@ -42,7 +42,7 @@ class AnchorRewriteScriptTag {
 	}
 
 	private Map<String, String> getValidEntries(Map<?, ?> entries) {
-		Map<String, String> validEntries = new LinkedHashMap<>();
+		Map<String, String> validEntries = new TreeMap<>();
 		entries.forEach((key, value) -> {
 			if (!Objects.equals(key, value)) {
 				validEntries.put(String.valueOf(key), String.valueOf(value));
