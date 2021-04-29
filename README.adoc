@@ -179,7 +179,7 @@ The unfolded (see below) version of the code text is always used when copying to
 
 === Tabs
 Tab support is included in the site Javascript and can be used without needing the `spring-asciidoctor-extensions-block-switch` extension.
-The Javascipt post-processes Asciidoctor's HTML output to collapse multiple blocks into one and provides tabs that can be used to switch between them.
+The Javascript post-processes Asciidoctor's HTML output to collapse multiple blocks into one and provides tabs that can be used to switch between them.
 
 To use tabs, one block must have the `role="primary"` attribute, and one or more blocks must have a `role="secondary"` attribute.
 The tabs are named using the block titles.
@@ -485,4 +485,4 @@ If you're looking to contribute to this project, or you're just trying to naviga
 With the exception of link:src/main/css/asciidoctor.css[`asciidoctor.css`], use of this software is granted under the terms of the https://www.apache.org/licenses/LICENSE-2.0[Apache License, Version 2.0] (Apache-2.0).
 See link:LICENSE.txt[] to find the full license text.
 
-The contents of link:src/main/css/asciidoctor.css[`src/main/css/asciidoctor.css`] as been derived from https://gitlab.com/antora/antora-ui-default/-/blob/8751b86b76d6779fbbcf0fccd58fafcf73c49260/src/css/doc.css[gitlab.com/antora/antora-ui-default CSS] and as such use of this file alone is granted under the terms of the https://www.mozilla.org/en-US/MPL/2.0/[Mozilla Public License Version 2.0] (MPL-2.0).
+The contents of link:src/main/css/asciidoctor.css[`src/main/css/asciidoctor.css`] have been derived from https://gitlab.com/antora/antora-ui-default/-/blob/8751b86b76d6779fbbcf0fccd58fafcf73c49260/src/css/doc.css[gitlab.com/antora/antora-ui-default CSS] and as such use of this file alone is granted under the terms of the https://www.mozilla.org/en-US/MPL/2.0/[Mozilla Public License Version 2.0] (MPL-2.0).
