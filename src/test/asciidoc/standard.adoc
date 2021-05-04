@@ -35,7 +35,15 @@ It's best to have one sentence per line in your source, it will still be wrapped
 
 
 
-=== Formatted text
+==== Paragraph Wrapping
+Lines should wrap in a sensible way. Here's some text from the Spring Boot docs.
+Spring Boot helps you to create stand-alone, production-grade Spring-based Applications that you can run.
+We take an opinionated view of the Spring platform and third-party libraries, so that you can get started with minimum fuss.
+Most Spring Boot applications need very little Spring configuration.
+
+
+
+=== Formatted Text
 *bold* & **bold**er**dash**
 
 _italic_ & __ital__ice__maker__

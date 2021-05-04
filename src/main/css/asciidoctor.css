@@ -10,7 +10,7 @@
 
 .doc {
   color: var(--asciidoctor-font-color);
-  hyphens: auto;
+  hyphens: none;
   line-height: 1.6;
   letter-spacing: -0.0027777778rem;
   margin: 0;
