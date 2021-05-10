@@ -87,7 +87,7 @@ You can do this by using the `asciidoctor` CLI command.
 
 [source,shell]
 ----
-$ asciidoctor --trace -r ./src/main/ruby/lib/spring-asciidoctor-backends.rb -b spring-html -D build/converted-asciidoc/ src/test/resources/standard.adoc
+$ asciidoctor --trace -r ./src/main/ruby/lib/spring-asciidoctor-backends.rb -b spring-html -D build/converted-asciidoc/ src/test/asciidoc/standard.adoc
 ----
 
 NOTE: Using asciidoctor directly means that JRuby doesn't run.
