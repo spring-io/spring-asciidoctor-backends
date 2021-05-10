@@ -344,9 +344,14 @@
 
 .doc .tableblock pre,
 .doc .tableblock code,
-.doc .tableblock p,
 .doc .listingblock.wrap pre {
   white-space: pre-wrap;
+}
+
+.doc td:nth-child(1) .tableblock pre,
+.doc td:nth-child(1) .tableblock code,
+.doc td:nth-child(1) .listingblock.wrap pre {
+  white-space: nowrap;
 }
 
 /* Admonition blocks */
