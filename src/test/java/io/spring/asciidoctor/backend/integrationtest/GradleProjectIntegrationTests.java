@@ -45,15 +45,18 @@ public class GradleProjectIntegrationTests {
 				new File("build/maven-repository").getAbsoluteFile().toURI().toString());
 
 		BuildResult result = GradleRunner.create().withProjectDir(projectDir).withEnvironment(environment)
-				.forwardOutput().withArguments("clean", "asciidoctor").build();
+				.forwardOutput().withArguments("clean", "asciidoctor", "asciidoctorPdf").build();
 		assertThat(result.task(":asciidoctor").getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
-		File generatedDocs = new File(projectDir, "build/docs/asciidoc");
-		File htmlFile = new File(generatedDocs, "index.html");
-		assertThat(new File(generatedDocs, "css/site.css")).exists();
-		assertThat(new File(generatedDocs, "js/site.js")).exists();
+		File generatedHtml = new File(projectDir, "build/docs/asciidoc");
+		File htmlFile = new File(generatedHtml, "index.html");
+		assertThat(new File(generatedHtml, "css/site.css")).exists();
+		assertThat(new File(generatedHtml, "js/site.js")).exists();
 		assertThat(htmlFile).exists();
 		assertThat(new String(Files.readAllBytes(htmlFile.toPath()), StandardCharsets.UTF_8))
 				.contains("<title>Gradle Example</title>").contains("main-container").contains("new-anchor");
+		File generatedPdf = new File(projectDir, "build/docs/asciidocPdf");
+		File pdfFile = new File(generatedPdf, "index.pdf");
+		assertThat(pdfFile).exists();
 	}
 
 }

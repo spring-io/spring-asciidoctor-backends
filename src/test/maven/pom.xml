@@ -39,8 +39,23 @@
 							<backend>spring-html</backend>
 						</configuration>
 					</execution>
+					<execution>
+						<id>generate-pdf-documentation</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>spring-pdf</backend>
+						</configuration>
+					</execution>
 				</executions>
 				<dependencies>
+					<dependency>
+						<groupId>org.asciidoctor</groupId>
+						<artifactId>asciidoctorj-pdf</artifactId>
+						<version>1.5.3</version>
+					</dependency>
 					<dependency>
 						<groupId>io.spring.asciidoctor.backends</groupId>
 						<artifactId>spring-asciidoctor-backends</artifactId>

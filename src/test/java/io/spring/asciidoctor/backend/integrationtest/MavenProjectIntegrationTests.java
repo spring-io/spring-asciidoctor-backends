@@ -56,6 +56,8 @@ public class MavenProjectIntegrationTests {
 		assertThat(htmlFile).exists();
 		assertThat(new String(Files.readAllBytes(htmlFile.toPath()), StandardCharsets.UTF_8))
 				.contains("<title>Maven Example</title>").contains("main-container").contains("new-anchor");
+		File pdfFile = new File(generatedDocs, "index.pdf");
+		assertThat(pdfFile).exists();
 	}
 
 	private InvocationRequest createRequest() throws Exception {

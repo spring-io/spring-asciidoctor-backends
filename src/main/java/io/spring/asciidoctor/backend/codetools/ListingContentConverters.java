@@ -16,7 +16,6 @@
 
 package io.spring.asciidoctor.backend.codetools;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,32 +24,22 @@ import org.asciidoctor.jruby.ast.impl.NodeConverter;
 import org.jruby.RubyObject;
 
 /**
- * Utility called by the Ruby code to apply modifications to code listings.
+ * A collection of {@link ListingContentConverter} instances.
  *
  * @author Phillip Webb
  */
-public final class ListingContentConverters {
+public class ListingContentConverters {
 
-	private static final List<ListingContentConverter> converters;
-	static {
-		List<ListingContentConverter> converterInstances = new ArrayList<>();
-		converterInstances.add(new ChompListingContentConverter());
-		converterInstances.add(new FoldListingContentConverter());
-		converters = Collections.unmodifiableList(converterInstances);
+	private final List<ListingContentConverter> converters;
+
+	ListingContentConverters(List<ListingContentConverter> converters) {
+		this.converters = Collections.unmodifiableList(converters);
 	}
 
-	private ListingContentConverters() {
-	}
-
-	/**
-	 * Convert the content of the given node before it is added to the HTML.
-	 * @param node the node to convert
-	 * @return the converted content
-	 */
-	public static RubyObject content(RubyObject node) {
+	RubyObject content(RubyObject node) {
 		Block listingBlock = (Block) NodeConverter.createASTNode(node);
 		String content = (String) listingBlock.getContent();
-		for (ListingContentConverter converter : converters) {
+		for (ListingContentConverter converter : this.converters) {
 			content = (content != null) ? content : "";
 			content = converter.convert(listingBlock, content);
 		}

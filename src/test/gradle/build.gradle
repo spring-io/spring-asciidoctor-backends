@@ -1,5 +1,5 @@
 plugins {
-	id 'org.asciidoctor.jvm.convert' version '3.1.0'
+	id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
 repositories {
@@ -15,7 +15,9 @@ configurations {
 
 dependencies {
 	asciidoctorExtensions "io.spring.asciidoctor.backends:spring-asciidoctor-backends:" + System.getenv("spring-asciidoctor-backends.version")
+	asciidoctorExtensions "org.asciidoctor:asciidoctorj-pdf:1.5.3"
 }
+
 
 asciidoctor {
 	configurations "asciidoctorExtensions"
@@ -23,5 +25,15 @@ asciidoctor {
 	baseDirFollowsSourceDir()
 	outputOptions {
 		backends "spring-html"
+	}
+}
+
+task asciidoctorPdf(type: org.asciidoctor.gradle.jvm.AsciidoctorTask) {
+	configurations "asciidoctorExtensions"
+	sourceDir "src/asciidoc"
+	baseDirFollowsSourceDir()
+	copyNoResources()
+	outputOptions {
+		backends "spring-pdf"
 	}
 }

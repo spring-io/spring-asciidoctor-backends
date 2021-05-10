@@ -17,3 +17,8 @@
 
 require_relative "spring-asciidoctor-backends/spring-docinfo-processor"
 require_relative "spring-asciidoctor-backends/spring-html5-converter"
+
+begin
+  require_relative "spring-asciidoctor-backends/spring-pdf-converter"
+rescue LoadError
+end

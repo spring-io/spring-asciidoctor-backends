@@ -14,24 +14,34 @@
  * limitations under the License.
  */
 
-package io.spring.asciidoctor.backend.codetools;
+package io.spring.asciidoctor.backend.testsupport;
 
-import org.asciidoctor.ast.Block;
+import java.io.IOException;
+import java.nio.file.Path;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 
 /**
- * Strategy interface used by {@link HtmlListingContentConverters} to convert listing
- * content.
+ * Represents a converted HTML document.
  *
  * @author Phillip Webb
+ * @see AsciidoctorExtension
  */
-interface ListingContentConverter {
+public class ConvertedPdf {
 
-	/**
-	 * Apply content conversion if nessary.
-	 * @param listingBlock the listing block being converted
-	 * @param content the content to convert
-	 * @return the converted content
-	 */
-	String convert(Block listingBlock, String content);
+	private final PDDocument document;
+
+	private final String text;
+
+	ConvertedPdf(Path pdf) throws IOException {
+		this.document = PDDocument.load(pdf.toFile());
+		this.text = new PDFTextStripper().getText(this.document);
+	}
+
+	@Override
+	public String toString() {
+		return this.text;
+	}
 
 }
