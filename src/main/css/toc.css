@@ -101,8 +101,8 @@ body.fixed-toc #toc {
 #back-to-index a::before {
   content: "";
   filter: var(--toc-back-to-index-filter);
-  background: url("../img/octicons-16.svg#view-chevron-left") no-repeat center /
-    16px 16px;
+  background: no-repeat center / 16px 16px;
+  background-image: url("../img/octicons-16.svg#view-chevron-left");
   display: block;
   position: absolute;
   min-width: 16px;

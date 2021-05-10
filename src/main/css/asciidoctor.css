@@ -36,7 +36,8 @@
 /* Doc background embellishment */
 
 #doc {
-  background: url("../img/doc-background.svg") no-repeat top right / 305px 147px;
+  background: no-repeat top right / 305px 147px;
+  background-image: url("../img/doc-background.svg");
 }
 
 .doc #header {
@@ -91,7 +92,7 @@
 }
 
 .doc h2 {
-  font-size: 2.0em;
+  font-size: 2em;
 }
 
 .doc h3 {
@@ -925,18 +926,18 @@ i.fa.icon-warning {
 /* Responsive and Dark Theme Overrides */
 
 html.dark-theme #doc {
-  background: url("../img/doc-background-dark.svg") no-repeat top right / 305px
-    147px;
+  background: no-repeat top right / 305px 147px;
+  background-image: url("../img/doc-background-dark.svg");
 }
 
 @media screen and (max-width: 1024px) {
   #doc {
-    background: url("../img/doc-background.svg") no-repeat top right / 203px
-      95px;
+    background: no-repeat top right / 203px 95px;
+    background-image: url("../img/doc-background.svg");
   }
   html.dark-theme #doc {
-    background: url("../img/doc-background-dark.svg") no-repeat top right /
-      203px 95px;
+    background: no-repeat top right / 203px 95px;
+    background-image: url("../img/doc-background-dark.svg");
   }
 }
 
