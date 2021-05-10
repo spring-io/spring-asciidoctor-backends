@@ -2,7 +2,7 @@ plugins {
 	id "checkstyle"
 	id 'com.github.node-gradle.node' version '3.0.1'
 	id "eclipse"
-	id "io.spring.nohttp" version "0.0.5.RELEASE"
+	id "io.spring.nohttp" version "0.0.7"
 	id "io.spring.javaformat"
 	id "java"
 	id "maven-publish"
