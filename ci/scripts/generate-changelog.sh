@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-version=$( cat version/version )
+version=$( cat artifactory-repo/build-info.json | jq -r '.buildInfo.modules[0].id' | sed 's/.*:.*:\(.*\)/\1/' )
 
 java -jar /github-changelog-generator.jar \
   --changelog.repository=spring-io/asciidoctor-spring-backend \
