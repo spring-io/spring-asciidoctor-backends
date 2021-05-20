@@ -1,0 +1,13 @@
+[source,indent=0,role="primary"]
+.Alpha
+----
+Alpha 1 <1>
+----
+<1> Alpha callout
+
+[source,indent=0,role="secondary"]
+.Bravo
+----
+Bravo 1 <1>
+----
+<1> Bravo callout

@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -77,6 +78,19 @@ public class TabIntegrationTests {
 				.hasDisplayedContentContaining("Alpha");
 		assertThatTabs(listings.get(1)).hasSelected("Charlie").hasUnselected("Delta", "Echo")
 				.hasDisplayedContentContaining("Charlie 1");
+	}
+
+	@Test
+	void givenASingleTabWithCalloutsWhenUnselectedItemIsClickedThenItBecomesSelectedAndItsCalloutsBecomeVisible(
+			@Source("singleSwitchWithCallouts.adoc") ConvertedHtml html) throws IOException {
+		RemoteWebDriver driver = html.inWebBrowser(this.chrome);
+		assertThat(driver.manage().logs().get(LogType.BROWSER)).isEmpty();
+		List<WebElement> listings = driver.findElementsByCssSelector(".listingblock.primary");
+		assertThat(listings).hasSize(1);
+		assertThatTabs(listings.get(0)).hasSelected("Alpha").hasUnselected("Bravo")
+				.hasDisplayedContentContaining("Alpha 1").hasDisplayedCalloutListContaining("Alpha callout")
+				.uponClicking("Bravo").hasSelected("Bravo").hasUnselected("Alpha")
+				.hasDisplayedCalloutListContaining("Bravo callout");
 	}
 
 	@Test
@@ -161,6 +175,15 @@ public class TabIntegrationTests {
 			assertThat(content.isDisplayed()).isTrue();
 			assertThat(content.getText()).contains(contained);
 			return this;
+		}
+
+		TabsAssert hasDisplayedCalloutListContaining(String contained) {
+			WebElement content = this.actual.findElement(By.cssSelector(".content:not(.hidden)"))
+					.findElement(By.cssSelector(".colist"));
+			assertThat(content.isDisplayed()).isTrue();
+			assertThat(content.getText()).contains(contained);
+			return this;
+
 		}
 
 		TabsAssert uponClicking(String item) {
