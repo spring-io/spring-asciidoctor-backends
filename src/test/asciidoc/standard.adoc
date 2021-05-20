@@ -313,6 +313,20 @@ Content-Length: 121
 }
 ----
 
+Here's some shell:
+
+[source,shell]
+----
+$ cat thefile.txt
+----
+
+Which can also be referenced as `bash`:
+
+[source,bash]
+----
+$ cat thefile.txt
+----
+
 
 
 == Tables
