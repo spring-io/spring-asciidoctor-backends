@@ -73,7 +73,7 @@
   }
 
   function nextSibling(element, selector) {
-    var sibling = element.nextElementSibling;
+    let sibling = element.nextElementSibling;
     while (sibling) {
       if (sibling.matches(selector)) {
         return sibling;
