@@ -52,6 +52,9 @@ public class ChompListingContentConverter implements ListingContentConverter {
 			if (options.has(ChompOption.FORMATTERS)) {
 				chompers.add(new FormatterChomper());
 			}
+			if (options.has(ChompOption.SUPPRESSWARNINGS)) {
+				chompers.add(new SuppressWarningsChomper());
+			}
 			return chomp(content, chompers);
 		}
 		return content;
@@ -173,6 +176,24 @@ public class ChompListingContentConverter implements ListingContentConverter {
 		@Override
 		public String chomp(String content) {
 			return PATTERN.matcher(content).replaceAll("");
+		}
+
+	}
+
+	private static class SuppressWarningsChomper implements Chomper {
+
+		@Override
+		public String chomp(String content) {
+			StringBuilder result = new StringBuilder(content.length());
+			String[] lines = content.split("\n");
+			for (String line : lines) {
+				String updatedline = line.replaceAll("@SuppressWarnings\\(.*\\)", "");
+				if (updatedline.equals(line) || !updatedline.trim().isEmpty()) {
+					result.append(updatedline);
+					result.append("\n");
+				}
+			}
+			return result.toString();
 		}
 
 	}

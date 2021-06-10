@@ -13,7 +13,7 @@ Here's the XML that was used:
 
 [source,xml,indent=0]
 ----
-include::../../pom.xml[tag=asciidoctor-maven-plugin]
+include::../../../pom.xml[tag=asciidoctor-maven-plugin]
 ----
 
 

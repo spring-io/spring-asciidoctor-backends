@@ -1,0 +1,10 @@
+= Test Document
+
+[source,java]
+----
+// @fold:on
+public class Test {
+
+}
+// @fold:off
+----

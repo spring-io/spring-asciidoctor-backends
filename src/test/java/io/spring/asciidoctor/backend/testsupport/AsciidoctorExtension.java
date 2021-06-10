@@ -58,7 +58,8 @@ public class AsciidoctorExtension implements ParameterResolver {
 	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
 			throws ParameterResolutionException {
 		Class<?> type = parameterContext.getParameter().getType();
-		return ConvertedHtml.class.isAssignableFrom(type) || ExpectedHtml.class.isAssignableFrom(type);
+		return ConvertedHtml.class.isAssignableFrom(type) || ExpectedHtml.class.isAssignableFrom(type)
+				|| ConvertedPdf.class.isAssignableFrom(type);
 	}
 
 	@Override
@@ -66,16 +67,44 @@ public class AsciidoctorExtension implements ParameterResolver {
 			throws ParameterResolutionException {
 		Class<?> type = parameterContext.getParameter().getType();
 		if (ConvertedHtml.class.isAssignableFrom(type)) {
-			return resolveConvertedHtmlParameter(parameterContext, extensionContext);
+			return resolveConvertedHtml(parameterContext, extensionContext);
 		}
 		if (ExpectedHtml.class.isAssignableFrom(type)) {
-			return resolveExpectedHtmlParameter(parameterContext, extensionContext);
+			return resolveExpectedHtml(parameterContext, extensionContext);
+		}
+		if (ConvertedPdf.class.isAssignableFrom(type)) {
+			return resolveConvertedPdf(parameterContext, extensionContext);
 		}
 		return null;
 	}
 
-	private ConvertedHtml resolveConvertedHtmlParameter(ParameterContext parameterContext,
-			ExtensionContext extensionContext) {
+	private ConvertedHtml resolveConvertedHtml(ParameterContext parameterContext, ExtensionContext extensionContext) {
+		return resolveConverted(parameterContext, extensionContext, "spring-html",
+				(path, name) -> new ConvertedHtml(path, path.resolve(name + ".html")));
+	}
+
+	private ExpectedHtml resolveExpectedHtml(ParameterContext parameterContext, ExtensionContext extensionContext) {
+		Class<?> testClass = extensionContext.getTestClass().get();
+		Method testMethod = extensionContext.getTestMethod().get();
+		String expectedHtmlFilename = getFilename(testClass, testMethod,
+				"_" + parameterContext.getParameter().getName() + ".html");
+		try {
+			try (Reader reader = getReader(testClass, expectedHtmlFilename)) {
+				return new ExpectedHtml(readFully(reader));
+			}
+		}
+		catch (Exception ex) {
+			throw new ParameterResolutionException("Error reading expected HTML file " + expectedHtmlFilename, ex);
+		}
+	}
+
+	private ConvertedPdf resolveConvertedPdf(ParameterContext parameterContext, ExtensionContext extensionContext) {
+		return resolveConverted(parameterContext, extensionContext, "spring-pdf",
+				(path, name) -> new ConvertedPdf(path.resolve(name + ".pdf")));
+	}
+
+	private <R> R resolveConverted(ParameterContext parameterContext, ExtensionContext extensionContext, String backend,
+			ResultFactory<R> resultFactory) {
 		Class<?> testClass = extensionContext.getTestClass().get();
 		Method testMethod = extensionContext.getTestMethod().get();
 		String asciidocFilename = parameterContext.findAnnotation(Source.class).map(Source::value)
@@ -88,31 +117,23 @@ public class AsciidoctorExtension implements ParameterResolver {
 				assertThat(inputStream).as(testClass + " " + asciidocFilename).isNotNull();
 				Files.copy(inputStream, source, StandardCopyOption.REPLACE_EXISTING);
 			}
+			InputStream anchorRewrite = testClass
+					.getResourceAsStream(asciidocFilename.replace(".adoc", "-anchor-rewrite.properties"));
+			if (anchorRewrite != null) {
+				Files.copy(anchorRewrite, temp.path().resolve("anchor-rewrite.properties"),
+						StandardCopyOption.REPLACE_EXISTING);
+				anchorRewrite.close();
+			}
 			OptionsBuilder options = OptionsBuilder.options();
 			options.safe(SafeMode.UNSAFE);
-			options.backend("spring-html");
+			options.baseDir(temp.directory());
+			options.backend(backend);
 			options.toDir(temp.directory());
 			asciidoctor.convertFile(source.toFile(), options);
-			return new ConvertedHtml(temp.path(), temp.path().resolve(name + ".html"));
+			return resultFactory.create(temp.path(), name);
 		}
 		catch (Exception ex) {
 			throw new ParameterResolutionException("Error converting asciidoc " + asciidocFilename, ex);
-		}
-	}
-
-	private ExpectedHtml resolveExpectedHtmlParameter(ParameterContext parameterContext,
-			ExtensionContext extensionContext) {
-		Class<?> testClass = extensionContext.getTestClass().get();
-		Method testMethod = extensionContext.getTestMethod().get();
-		String expectedHtmlFilename = getFilename(testClass, testMethod,
-				"_" + parameterContext.getParameter().getName() + ".html");
-		try {
-			try (Reader reader = getReader(testClass, expectedHtmlFilename)) {
-				return new ExpectedHtml(readFully(reader));
-			}
-		}
-		catch (Exception ex) {
-			throw new ParameterResolutionException("Error reading expected HTML file " + expectedHtmlFilename, ex);
 		}
 	}
 
@@ -170,6 +191,12 @@ public class AsciidoctorExtension implements ParameterResolver {
 				throw new ExtensionConfigurationException("Failed to create output directory", ex);
 			}
 		}
+
+	}
+
+	interface ResultFactory<R> {
+
+		R create(Path path, String name) throws IOException;
 
 	}
 

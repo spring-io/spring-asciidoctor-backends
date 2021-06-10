@@ -10,6 +10,13 @@ By participating, you are expected to uphold this code. Please report unacceptab
 
 
 
+== Sign the Contributor License Agreement
+Before we accept a non-trivial patch or pull request we will need you to https://cla.pivotal.io/sign/spring[sign the Contributor License Agreement].
+Signing the contributor's agreement does not grant anyone commit rights to the main repository, but it does mean that we can accept your contributions, and you will get an author credit if we do.
+Active contributors might be asked to join the core team, and given the ability to merge pull requests.
+
+
+
 == Building from Source
 Source can be built from the command line using https://gradle.org[Gradle] on JDK 1.8 or above.
 We include https://docs.gradle.org/current/userguide/gradle_wrapper.html[Gradle's wrapper scripts] (`./gradlew` or `gradlew.bat`) that you can run rather than needing to install Gradle locally.
@@ -87,7 +94,7 @@ You can do this by using the `asciidoctor` CLI command.
 
 [source,shell]
 ----
-$ asciidoctor --trace -r ./src/main/ruby/lib/spring-asciidoctor-backends.rb -b spring-html -D build/converted-asciidoc/ src/test/resources/standard.adoc
+$ asciidoctor --trace -r ./src/main/ruby/lib/spring-asciidoctor-backends.rb -b spring-html -D build/converted-asciidoc/ src/test/asciidoc/standard.adoc
 ----
 
 NOTE: Using asciidoctor directly means that JRuby doesn't run.

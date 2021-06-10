@@ -19,7 +19,8 @@ package io.spring.asciidoctor.backend.codetools;
 import org.asciidoctor.ast.Block;
 
 /**
- * Strategy interface used by {@link ListingContentConverters} to convert listing content.
+ * Strategy interface used by {@link HtmlListingContentConverters} to convert listing
+ * content.
  *
  * @author Phillip Webb
  */

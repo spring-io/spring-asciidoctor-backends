@@ -94,3 +94,12 @@
 .hljs-strong {
   font-weight: bold;
 }
+
+.language-json .hljs-number,
+.language-json .hljs-literal {
+  color: var(--highlight-variable-font-color);
+}
+
+.language-json .hljs-attr {
+  color: var(--highlight-string-font-color);
+}

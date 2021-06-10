@@ -35,7 +35,15 @@ It's best to have one sentence per line in your source, it will still be wrapped
 
 
 
-=== Formatted text
+==== Paragraph Wrapping
+Lines should wrap in a sensible way. Here's some text from the Spring Boot docs.
+Spring Boot helps you to create stand-alone, production-grade Spring-based Applications that you can run.
+We take an opinionated view of the Spring platform and third-party libraries, so that you can get started with minimum fuss.
+Most Spring Boot applications need very little Spring configuration.
+
+
+
+=== Formatted Text
 *bold* & **bold**er**dash**
 
 _italic_ & __ital__ice__maker__
@@ -123,6 +131,20 @@ https://spring.io - URLs get converted!
 https://spring.io[Go to spring.io] to learn about Spring.
 
 https://github.com/asciidoctor[Asciidoctor is great!]
+
+Of course, you can also have https://spring.io[`monospaced links`].
+
+And in tables:
+
+.Spring Projects
+|===
+|Link
+
+|https://spring.io
+
+|https://spring.io[`monospaced links`]
+|===
+
 
 
 == Lists
@@ -242,6 +264,39 @@ Why not have some YAML:
 	    import: "optional:file:./dev.properties"
 ----
 
+Or JSON:
+
+[source,json,indent=0]
+----
+{
+   "glossary" : {
+      "title" : "example glossary",
+      "GlossDiv" : {
+         "title" : "S",
+         "GlossList" : {
+            "GlossEntry" : {
+               "ID" : "SGML",
+               "SortAs" : "SGML",
+               "GlossTerm" : "Standard Generalized Markup Language",
+               "Acronym" : "SGML",
+               "Thing" : true,
+               "Size" : 12,
+               "Abbrev" : "ISO 8879:1986",
+               "GlossDef" : {
+                  "para" : "A meta-markup language, used to create markup languages such as DocBook.",
+                  "GlossSeeAlso" : [
+                     "GML",
+                     "XML"
+                  ]
+               },
+               "GlossSee" : "markup"
+            }
+         }
+      }
+   }
+}
+----
+
 Or some HTTP that also has `nowrap` set:
 
 [source,http,options="nowrap"]
@@ -256,6 +311,20 @@ Content-Length: 121
     "type" : "logout"
   } ]
 }
+----
+
+Here's some shell:
+
+[source,shell]
+----
+$ cat thefile.txt
+----
+
+Which can also be referenced as `bash`:
+
+[source,bash]
+----
+$ cat thefile.txt
 ----
 
 

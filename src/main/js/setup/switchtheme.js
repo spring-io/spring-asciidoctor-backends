@@ -46,8 +46,7 @@
     const prefersDarkColorScheme = window.matchMedia(
       "(prefers-color-scheme: dark)"
     );
-    const savedColorScheme = localStorage.getItem("theme");
-    switch (savedColorScheme) {
+    switch (loadTheme()) {
       case "dark":
         return true;
       case "light":
@@ -62,12 +61,22 @@
       delay(function () {
         htmlElement.classList.add("dark-theme");
       }, 100);
-      localStorage.setItem("theme", "dark");
+      saveTheme("dark");
     } else {
       delay(function () {
         htmlElement.classList.remove("dark-theme");
       }, 100);
-      localStorage.setItem("theme", "light");
+      saveTheme("light");
     }
+  }
+
+  function saveTheme(theme) {
+    if (localStorage) {
+      localStorage.setItem("theme", theme);
+    }
+  }
+
+  function loadTheme() {
+    return localStorage !== null ? localStorage.getItem("theme") : null;
   }
 })();

@@ -34,6 +34,38 @@ You can use the https://github.com/asciidoctor/asciidoctor-maven-plugin[Asciidoc
 </plugin>
 ----
 
+You will probably also need to add the Spring Maven repository:
+
+[source,xml]
+----
+<repositories>
+	<repository>
+		<id>spring-release</id>
+		<name>Spring Releases</name>
+		<url>https://repo.spring.io/release</url>
+		<snapshots>
+			<enabled>false</enabled>
+		</snapshots>
+	</repository>
+</repositories>
+----
+
+or for milestones:
+
+[source,xml]
+----
+<repositories>
+	<repository>
+		<id>spring-milestones</id>
+		<name>Spring Milestones</name>
+		<url>https://repo.spring.io/milestone</url>
+		<snapshots>
+			<enabled>false</enabled>
+		</snapshots>
+	</repository>
+</repositories>
+----
+
 
 
 == Gradle build integration
@@ -43,13 +75,6 @@ You can use the https://asciidoctor.org/docs/asciidoctor-gradle-plugin/[Asciidoc
 ----
 plugins {
 	id 'org.asciidoctor.jvm.convert' version '3.1.0'
-}
-
-repositories {
-	mavenCentral()
-	maven {
-		url "https://repo.spring.io/release"
-	}
 }
 
 configurations {
@@ -65,6 +90,30 @@ asciidoctor {
 	sourceDir "src/asciidoc"
 	outputOptions {
 		backends "spring-html"
+	}
+}
+----
+
+You will probably also need to add the Spring Maven repository:
+
+[source,gradle]
+----
+repositories {
+	mavenCentral()
+	maven {
+		url "https://repo.spring.io/release"
+	}
+}
+----
+
+or for milestones:
+
+[source,gradle]
+----
+repositories {
+	mavenCentral()
+	maven {
+		url "https://repo.spring.io/milestone"
 	}
 }
 ----
@@ -130,7 +179,7 @@ The unfolded (see below) version of the code text is always used when copying to
 
 === Tabs
 Tab support is included in the site Javascript and can be used without needing the `spring-asciidoctor-extensions-block-switch` extension.
-The Javascipt post-processes Asciidoctor's HTML output to collapse multiple blocks into one and provides tabs that can be used to switch between them.
+The Javascript post-processes Asciidoctor's HTML output to collapse multiple blocks into one and provides tabs that can be used to switch between them.
 
 To use tabs, one block must have the `role="primary"` attribute, and one or more blocks must have a `role="secondary"` attribute.
 The tabs are named using the block titles.
@@ -355,7 +404,7 @@ The attribute value is a space delimited list containing one or more of the foll
 | Flag | Description
 
 | `default`
-| `tags` `formatters`
+| `tags` `formatters` `suppresswarnings`
 
 | `all`
 | Enable all chomping
@@ -371,6 +420,12 @@ The attribute value is a space delimited list containing one or more of the foll
 
 | `tags`
 | Chomp on the comment tags listed above
+
+| `formatters`
+| Chomp any `@formatter:on`/`@formatter:off` comments
+
+| `suppresswarnings`
+| Chomp any `@SuppressWarnings` annotations
 |===
 
 You can prefix the flag with `+` or `-` at the block level if you want to override a document setting.
@@ -386,6 +441,41 @@ For example, the following document will replace all package declarations with `
 
 
 
+=== Anchor Rewriting
+Anchor rewriting can be used if you need to evolve a document and change previously published anchor links.
+
+For example, say you publish a document with the following typo:
+
+[source,asciidoctor]
+----
+[[initializzzing]]
+== Initializing
+This is how to do it.
+----
+
+You then fix the typo and publish a new revision:
+
+[source,asciidoctor]
+----
+[[initializing]]
+== Initializing
+This is how to do it.
+----
+
+You can add a rewrite rule so that any links to `+++https://example.com/doc#initializzzing+++` will be automatically changed to `+++https://example.com/doc#initializing+++`.
+
+To define the rewrite rules, add a `anchor-rewrite.properties` file to your `base_dir` (usually the same directory as your `index.adoc` file).
+
+For example, the following file would be used in the example above:
+
+[source,properties]
+.anchor-rewrite.properties
+----
+initializzzing=initializing
+----
+
+
+
 == Contributing
 If you're looking to contribute to this project, or you're just trying to navigate the code please take a look at the link:CONTRIBUTING.adoc[CONTRIBUTING] file.
 
@@ -395,4 +485,4 @@ If you're looking to contribute to this project, or you're just trying to naviga
 With the exception of link:src/main/css/asciidoctor.css[`asciidoctor.css`], use of this software is granted under the terms of the https://www.apache.org/licenses/LICENSE-2.0[Apache License, Version 2.0] (Apache-2.0).
 See link:LICENSE.txt[] to find the full license text.
 
-The contents of link:src/main/css/asciidoctor.css[`src/main/css/asciidoctor.css`] as been derived from https://gitlab.com/antora/antora-ui-default/-/blob/8751b86b76d6779fbbcf0fccd58fafcf73c49260/src/css/doc.css[gitlab.com/antora/antora-ui-default CSS] and as such use of this file alone is granted under the terms of the https://www.mozilla.org/en-US/MPL/2.0/[Mozilla Public License Version 2.0] (MPL-2.0).
+The contents of link:src/main/css/asciidoctor.css[`src/main/css/asciidoctor.css`] have been derived from https://gitlab.com/antora/antora-ui-default/-/blob/8751b86b76d6779fbbcf0fccd58fafcf73c49260/src/css/doc.css[gitlab.com/antora/antora-ui-default CSS] and as such use of this file alone is granted under the terms of the https://www.mozilla.org/en-US/MPL/2.0/[Mozilla Public License Version 2.0] (MPL-2.0).

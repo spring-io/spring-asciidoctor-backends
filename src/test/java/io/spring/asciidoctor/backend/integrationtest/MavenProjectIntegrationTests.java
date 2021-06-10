@@ -45,6 +45,7 @@ public class MavenProjectIntegrationTests {
 		Invoker invoker = new DefaultInvoker();
 		invoker.setMavenHome(getMavenHome());
 		invoker.setOutputHandler(System.out::println);
+		invoker.setErrorHandler(System.err::println);
 		InvocationRequest request = createRequest();
 		InvocationResult result = invoker.execute(request);
 		File generatedDocs = new File(this.baseDirectory, "target/generated-docs");
@@ -54,7 +55,9 @@ public class MavenProjectIntegrationTests {
 		assertThat(new File(generatedDocs, "js/site.js")).exists();
 		assertThat(htmlFile).exists();
 		assertThat(new String(Files.readAllBytes(htmlFile.toPath()), StandardCharsets.UTF_8))
-				.contains("<title>Maven Example</title>").contains("main-container");
+				.contains("<title>Maven Example</title>").contains("main-container").contains("new-anchor");
+		File pdfFile = new File(generatedDocs, "index.pdf");
+		assertThat(pdfFile).exists();
 	}
 
 	private InvocationRequest createRequest() throws Exception {
@@ -68,6 +71,7 @@ public class MavenProjectIntegrationTests {
 		request.setBaseDirectory(this.baseDirectory);
 		request.setUserSettingsFile(new File(this.baseDirectory, "settings.xml"));
 		request.setGoals(Arrays.asList("clean", "package"));
+		request.setUpdateSnapshots(true);
 		return request;
 	}
 

@@ -102,7 +102,7 @@ class SpringHtml5Converter
 
   def convert_listing_content(node)
     begin
-      return Java::IoSpringAsciidoctorBackendCodetools::ListingContentConverters.content node
+      return Java::IoSpringAsciidoctorBackendCodetools::HtmlListingContentConverters.content node
     rescue NameError
       return node.content
     end

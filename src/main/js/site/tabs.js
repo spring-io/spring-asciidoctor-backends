@@ -59,9 +59,9 @@
   function createTab(blockElement, tabsElement) {
     const title = blockElement.querySelector(".title").textContent;
     const content = blockElement.querySelectorAll(".content").item(0);
-    const colist = blockElement.querySelector(".colist");
+    const colist = nextSibling(blockElement, ".colist");
     if (colist) {
-      content.append();
+      content.append(colist);
     }
     const tabElement = createElementFromHtml(
       '<div class="tab">' + title + "</div>"
@@ -70,6 +70,16 @@
     content.dataset.blockName = title;
     tabsElement.append(tabElement);
     return { tabElement: tabElement, content: content };
+  }
+
+  function nextSibling(element, selector) {
+    let sibling = element.nextElementSibling;
+    while (sibling) {
+      if (sibling.matches(selector)) {
+        return sibling;
+      }
+      sibling = sibling.nextElementSibling;
+    }
   }
 
   function createElementFromHtml(html) {
