@@ -46,7 +46,8 @@
   }
 
   function isInitialThemeDark() {
-    return loadTheme() === "dark" || prefersDarkColorScheme.matches;
+    const theme = loadTheme();
+    return theme ? theme === "dark" : prefersDarkColorScheme.matches;
   }
 
   function onThemeChange() {
