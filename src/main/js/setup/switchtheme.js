@@ -21,6 +21,9 @@
 
   const localStorage = window.localStorage;
   const htmlElement = document.documentElement;
+  const prefersDarkColorScheme = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  );
 
   swithInitialTheme();
   window.addEventListener("load", onWindowLoad);
@@ -43,18 +46,8 @@
   }
 
   function isInitialThemeDark() {
-    const prefersDarkColorScheme = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
-    const savedColorScheme = loadTheme();
-    switch (savedColorScheme) {
-      case "dark":
-        return true;
-      case "light":
-        return false;
-      default:
-        return prefersDarkColorScheme.matches;
-    }
+    const theme = loadTheme();
+    return theme ? theme === "dark" : prefersDarkColorScheme.matches;
   }
 
   function onThemeChange() {
