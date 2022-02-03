@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 the original author or authors.
+ * Copyright 2021-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Comparator;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -58,16 +63,19 @@ public class AsciidoctorExtension implements ParameterResolver {
 	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
 			throws ParameterResolutionException {
 		Class<?> type = parameterContext.getParameter().getType();
-		return ConvertedHtml.class.isAssignableFrom(type) || ExpectedHtml.class.isAssignableFrom(type)
-				|| ConvertedPdf.class.isAssignableFrom(type);
+		return ConvertedHtml.class.isAssignableFrom(type) || ConvertedHtmlSupplier.class.isAssignableFrom(type)
+				|| ExpectedHtml.class.isAssignableFrom(type) || ConvertedPdf.class.isAssignableFrom(type);
 	}
 
 	@Override
 	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
 			throws ParameterResolutionException {
 		Class<?> type = parameterContext.getParameter().getType();
+		if (ConvertedHtmlSupplier.class.isAssignableFrom(type)) {
+			return (ConvertedHtmlSupplier) () -> resolveConvertedHtml(parameterContext, extensionContext, true);
+		}
 		if (ConvertedHtml.class.isAssignableFrom(type)) {
-			return resolveConvertedHtml(parameterContext, extensionContext);
+			return resolveConvertedHtml(parameterContext, extensionContext, false);
 		}
 		if (ExpectedHtml.class.isAssignableFrom(type)) {
 			return resolveExpectedHtml(parameterContext, extensionContext);
@@ -78,8 +86,9 @@ public class AsciidoctorExtension implements ParameterResolver {
 		return null;
 	}
 
-	private ConvertedHtml resolveConvertedHtml(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		return resolveConverted(parameterContext, extensionContext, "spring-html",
+	private ConvertedHtml resolveConvertedHtml(ParameterContext parameterContext, ExtensionContext extensionContext,
+			boolean supplier) {
+		return resolveConverted(parameterContext, extensionContext, supplier, "spring-html",
 				(path, name) -> new ConvertedHtml(path, path.resolve(name + ".html")));
 	}
 
@@ -99,12 +108,12 @@ public class AsciidoctorExtension implements ParameterResolver {
 	}
 
 	private ConvertedPdf resolveConvertedPdf(ParameterContext parameterContext, ExtensionContext extensionContext) {
-		return resolveConverted(parameterContext, extensionContext, "spring-pdf",
+		return resolveConverted(parameterContext, extensionContext, false, "spring-pdf",
 				(path, name) -> new ConvertedPdf(path.resolve(name + ".pdf")));
 	}
 
-	private <R> R resolveConverted(ParameterContext parameterContext, ExtensionContext extensionContext, String backend,
-			ResultFactory<R> resultFactory) {
+	private <R> R resolveConverted(ParameterContext parameterContext, ExtensionContext extensionContext,
+			boolean supplier, String backend, ResultFactory<R> resultFactory) {
 		Class<?> testClass = extensionContext.getTestClass().get();
 		Method testMethod = extensionContext.getTestMethod().get();
 		String asciidocFilename = parameterContext.findAnnotation(Source.class).map(Source::value)
@@ -124,6 +133,7 @@ public class AsciidoctorExtension implements ParameterResolver {
 						StandardCopyOption.REPLACE_EXISTING);
 				anchorRewrite.close();
 			}
+			copyRelatedFolder(testClass, asciidocFilename.replace(".adoc", ""), temp.path());
 			OptionsBuilder options = OptionsBuilder.options();
 			options.safe(SafeMode.UNSAFE);
 			options.baseDir(temp.directory());
@@ -133,6 +143,12 @@ public class AsciidoctorExtension implements ParameterResolver {
 			return resultFactory.create(temp.path(), name);
 		}
 		catch (Exception ex) {
+			if (supplier) {
+				if (ex instanceof RuntimeException) {
+					throw (RuntimeException) ex;
+				}
+				throw new IllegalStateException(ex);
+			}
 			throw new ParameterResolutionException("Error converting asciidoc " + asciidocFilename, ex);
 		}
 	}
@@ -153,6 +169,30 @@ public class AsciidoctorExtension implements ParameterResolver {
 		String testClassName = testClass.getName();
 		String root = testClassName.substring(testClassName.lastIndexOf('.') + 1);
 		return root + "_" + testMethod.getName() + suffix;
+	}
+
+	private void copyRelatedFolder(Class<?> testClass, String folder, Path destination) throws Exception {
+		URL resource = testClass.getResource(folder);
+		Path source = (resource != null) ? Paths.get(resource.toURI()) : null;
+		if (source != null && Files.isDirectory(source)) {
+			Files.walkFileTree(source, new SimpleFileVisitor<Path>() {
+
+				@Override
+				public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+					Files.createDirectories(destination.resolve(source.relativize(dir)));
+					return FileVisitResult.CONTINUE;
+				}
+
+				@Override
+				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+					Path relative = source.relativize(file).getParent()
+							.resolve(file.getFileName().toString().replace("._", "."));
+					Files.copy(file, destination.resolve(relative));
+					return FileVisitResult.CONTINUE;
+				}
+
+			});
+		}
 	}
 
 	private static class Temp implements CloseableResource {

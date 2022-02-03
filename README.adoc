@@ -476,6 +476,42 @@ initializzzing=initializing
 
 
 
+=== Convention Based Code Import
+Convention based code imports allows you to quickly import code snippets from package names that are constructed using the section ID.
+For example, the following `.adoc` file will try to import the Java file `{docs-java}/my/exampleproject/SomeCode.java`.
+
+[source,subs="verbatim,attributes"]
+....
+[[my.example-project]]
+== My Example Project
+import-code::SomeCode[]
+....
+
+The following languages are supported by convention based imports:
+
+|===
+| Language | Root Directory Property | Extension
+
+| Java
+| `{docs-java}`
+| `.java`
+
+| Kotlin
+| `{docs-kotlin}`
+| `.kt`
+
+| Groovy
+| `{docs-groovy}`
+| `.grovy`
+|===
+
+If more than one language file is found then tabs will automatically be created to allow the user to see all the examples.
+An exception will be raised if no files are found.
+
+The package name is constructed by removing all `-` characters from the section ID and replacing all `.`'s with `/`.
+
+
+
 == Contributing
 If you're looking to contribute to this project, or you're just trying to navigate the code please take a look at the link:CONTRIBUTING.adoc[CONTRIBUTING] file.
 

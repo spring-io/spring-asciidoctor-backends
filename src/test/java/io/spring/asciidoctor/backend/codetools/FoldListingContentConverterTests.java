@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 the original author or authors.
+ * Copyright 2021-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,59 +34,59 @@ class FoldListingContentConverterTests {
 
 	@Test
 	void convertWhenHasFoldCommentReturnsFolded(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenHasFoldCommentWithSpaceBeforeReturnsFolded(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenHasFoldCommentWithSpaceAfterReturnsFolded(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenHasFoldCommentWithAltReturnsFolded(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenHasImportsReturnsFolded(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenHasImportAndMultipleFoldComments(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenHasImportFoldingDisabledAsDocumentAttributeReturnsUnfolded(ConvertedHtml html,
 			ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenHasImportFoldingDisabledAsBlockAttributeReturnsUnfolded(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenHasCodeFoldingDisabledAsDocumentAttributeReturnsUnfolded(ConvertedHtml html,
 			ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenHasCodeFoldingDisabledAsBlockAttributeReturnsUnfolded(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenFoldingIsTurnedOffOnTheLastLineReturnsFolded(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 }

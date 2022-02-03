@@ -1,0 +1,8 @@
+= Test Document
+:docs-java: javacode
+:docs-kotlin: kotlincode
+
+[[some.convention-based-anchor]]
+== Some Convention Based Anchor
+
+include-code::SomeCode[]

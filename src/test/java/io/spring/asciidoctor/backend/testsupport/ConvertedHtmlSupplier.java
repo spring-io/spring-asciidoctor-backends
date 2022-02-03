@@ -1,5 +1,5 @@
 /*
- * Copyright 2021-2022 the original author or authors.
+ * Copyright 2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,31 +16,14 @@
 
 package io.spring.asciidoctor.backend.testsupport;
 
-import java.util.function.Consumer;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.function.Supplier;
 
 /**
- * An expected snippet of HTML.
+ * {@link Supplier} to provide {@link ConvertedHtml}.
  *
  * @author Phillip Webb
- * @see AsciidoctorExtension
  */
-public class ExpectedHtml implements Consumer<String> {
-
-	private final String expected;
-
-	ExpectedHtml(String expected) {
-		this.expected = expected;
-	}
-
-	@Override
-	public void accept(String actual) {
-		assertThat(actual).isEqualTo(this.expected);
-	}
-
-	public Consumer<String> whenIgnoringTrailingWhitespace() {
-		return (actual) -> assertThat(actual.replaceAll("(?m)\\s+$", "")).isEqualTo(this.expected);
-	}
+@FunctionalInterface
+public interface ConvertedHtmlSupplier extends Supplier<ConvertedHtml> {
 
 }

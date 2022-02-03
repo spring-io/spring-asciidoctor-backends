@@ -1,0 +1,7 @@
+= Test Document
+:docs-java: javacode
+
+[[some.convention-based-anchor]]
+== Some Convention Based Anchor
+
+include-code::SomeCode[]

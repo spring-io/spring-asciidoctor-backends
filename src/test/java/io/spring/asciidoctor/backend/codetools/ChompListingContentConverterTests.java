@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 the original author or authors.
+ * Copyright 2021-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,72 +34,72 @@ class ChompListingContentConverterTests {
 
 	@Test
 	void convertWhenNotSupportedLanguageReturnsContent(ConvertedHtml html) {
-		assertThat(html.getElementHtml("code")).isEqualTo("&lt;!-- /**/ test --&gt;");
+		assertThat(html.getElementByTag("code")).isEqualTo("&lt;!-- /**/ test --&gt;");
 	}
 
 	@Test
 	void convertWhenChompHeaderReturnsWithoutHeader(ConvertedHtml html) {
-		assertThat(html.getElementHtml("code")).isEqualTo("package com.example;");
+		assertThat(html.getElementByTag("code")).isEqualTo("package com.example;");
 	}
 
 	@Test
 	void convertWhenChompPackageReturnsWithoutPackage(ConvertedHtml html) {
-		assertThat(html.getElementHtml("code")).isEqualTo("public class Example {}");
+		assertThat(html.getElementByTag("code")).isEqualTo("public class Example {}");
 	}
 
 	@Test
 	void convertWhenChompPackageAndReplacementReturnsWithReplacedPackage(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenShortChompTagReturnsChompedLines(ConvertedHtml html) {
-		assertThat(html.getElementHtml("code")).isEqualTo("Object chomp = ...");
+		assertThat(html.getElementByTag("code")).isEqualTo("Object chomp = ...");
 	}
 
 	@Test
 	void convertWhenMultiLineShortChompTagsReturnsChompedLines(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenNoChompsReturnsContent(ConvertedHtml html) {
-		assertThat(html.getElementHtml("code")).isEqualTo("Object nonChomp = /* comment */ new Object();");
+		assertThat(html.getElementByTag("code")).isEqualTo("Object nonChomp = /* comment */ new Object();");
 	}
 
 	@Test
 	void convertWhenLineChompTagReturnsChompedLines(ConvertedHtml html) {
-		assertThat(html.getElementHtml("code")).isEqualTo("Object o =");
+		assertThat(html.getElementByTag("code")).isEqualTo("Object o =");
 	}
 
 	@Test
 	void convertWhenLineChompTagWithReplacementReturnsChompedLines(ConvertedHtml html) {
-		assertThat(html.getElementHtml("code")).isEqualTo("Object o = // ... your instance");
+		assertThat(html.getElementByTag("code")).isEqualTo("Object o = // ... your instance");
 	}
 
 	@Test
 	void convertWhenFileChompTagReturnsChompedLines(ConvertedHtml html) {
-		assertThat(html.getElementHtml("code")).isEqualTo("public class Example {}");
+		assertThat(html.getElementByTag("code")).isEqualTo("public class Example {}");
 	}
 
 	@Test
 	void convertWhenFormattersChompReturnsChompedLines(ConvertedHtml html) {
-		assertThat(html.getElementHtml("code")).isEqualTo("public class Example {}");
+		assertThat(html.getElementByTag("code")).isEqualTo("public class Example {}");
 	}
 
 	@Test
 	void convertWhenMethodFormattersChompReturnsChompedLines(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenSuppressWarningsChompReturnsChompedLines(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 	@Test
 	void convertWhenMultipleChompsReturnsChompedLines(ConvertedHtml html, ExpectedHtml expected) {
-		assertThat(html.getElementHtml("code")).satisfies(expected);
+		assertThat(html.getElementByTag("code")).satisfies(expected);
 	}
 
 }
