@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 the original author or authors.
+ * Copyright 2021-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package io.spring.asciidoctor.backend.codetools;
 
+import io.spring.asciidoctor.backend.language.Language;
 import org.asciidoctor.ast.Block;
 
 /**
@@ -28,8 +29,8 @@ class FoldRemovalListingContentConverter implements ListingContentConverter {
 	@Override
 	public String convert(Block listingBlock, String content) {
 		Options<FoldOption> options = Options.get(listingBlock, "fold", FoldOption.class, FoldOption.DEFAULTS);
-		String lang = (String) listingBlock.getAttribute("language");
-		if ("java".equals(lang) && options.has(FoldOption.TAGS)) {
+		Language language = Language.get(listingBlock);
+		if (Language.isJavaLike(language) && options.has(FoldOption.TAGS)) {
 			return removeFoldTags(content);
 		}
 		return content;

@@ -1,0 +1,9 @@
+= Test Document
+:chomp: packages
+
+[source,kotlin]
+----
+package com.example
+
+public class Example {}
+----

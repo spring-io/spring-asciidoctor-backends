@@ -1,0 +1,9 @@
+= Test Document
+:chomp: packages
+
+[source,groovy]
+----
+package com.example
+
+public class Example {}
+----

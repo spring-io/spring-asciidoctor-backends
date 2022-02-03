@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import io.spring.asciidoctor.backend.language.Language;
 import org.asciidoctor.ast.Block;
 import org.asciidoctor.ast.ContentNode;
 import org.asciidoctor.ast.Document;
@@ -126,7 +127,7 @@ public class IncludeCodeBlockMacroProcessor extends BlockMacroProcessor {
 		Block createBlock(Processor processor, StructuralNode parent) {
 			Block block = processor.createBlock(parent, "listing", this.content);
 			block.setStyle("source");
-			block.setAttribute("language", this.language.getLanguage(), true);
+			block.setAttribute("language", this.language.getId(), true);
 			block.setAttribute("indent", 0, true);
 			block.setAttribute("subs", "verbatim", true);
 			block.setTitle(this.language.getTitle());

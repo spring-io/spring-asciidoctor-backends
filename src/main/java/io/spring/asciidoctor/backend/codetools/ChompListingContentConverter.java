@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 the original author or authors.
+ * Copyright 2021-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.spring.asciidoctor.backend.language.Language;
 import org.asciidoctor.ast.Block;
 
 /**
@@ -37,14 +38,14 @@ public class ChompListingContentConverter implements ListingContentConverter {
 		Options<ChompOption> options = Options.get(listingBlock, "chomp", ChompOption.class, ChompOption.DEFAULTS);
 		String packageReplacement = (String) listingBlock.getAttribute(PACKAGE_REPLACEMENT_ATTR,
 				listingBlock.getDocument().getAttribute(PACKAGE_REPLACEMENT_ATTR));
-		String lang = (String) listingBlock.getAttribute("language");
-		if ("java".equals(lang)) {
+		Language language = Language.get(listingBlock);
+		if (Language.isJavaLike(language)) {
 			List<Chomper> chompers = new ArrayList<>();
 			if (options.has(ChompOption.HEADERS)) {
-				chompers.add(new HeaderChomper());
+				chompers.add(new HeaderChomper(language));
 			}
 			if (options.has(ChompOption.PACKAGES)) {
-				chompers.add(new PackageChomper(packageReplacement));
+				chompers.add(new PackageChomper(language, packageReplacement));
 			}
 			if (options.has(ChompOption.TAGS)) {
 				chompers.add(new TagChomper());
@@ -81,11 +82,16 @@ public class ChompListingContentConverter implements ListingContentConverter {
 	 */
 	private static class HeaderChomper implements Chomper {
 
-		private static final Pattern PATTERN = Pattern.compile("^.*?(package\\ [\\w\\.]+;)", Pattern.DOTALL);
+		private final Pattern pattern;
+
+		HeaderChomper(Language language) {
+			this.pattern = Pattern.compile("^.*?(package\\ [\\w\\.]+" + language.getStatementTerminator() + ")",
+					Pattern.DOTALL);
+		}
 
 		@Override
 		public String chomp(String content) {
-			Matcher matcher = PATTERN.matcher(content);
+			Matcher matcher = this.pattern.matcher(content);
 			if (matcher.find()) {
 				StringBuffer updated = new StringBuffer();
 				matcher.appendReplacement(updated, matcher.group(1));
@@ -102,18 +108,20 @@ public class ChompListingContentConverter implements ListingContentConverter {
 	 */
 	private static class PackageChomper implements Chomper {
 
-		private static final Pattern PATTERN = Pattern.compile("package\\ [\\w\\.]+;\\s*", Pattern.DOTALL);
+		private static Pattern pattern;
 
 		private final String replacement;
 
-		PackageChomper(String replacement) {
-			this.replacement = (replacement != null && !replacement.isEmpty()) ? "package " + replacement + ";\n\n"
-					: "";
+		PackageChomper(Language language, String replacement) {
+			pattern = Pattern.compile("package\\ [\\w\\.]+" + language.getStatementTerminator() + "\\s*",
+					Pattern.DOTALL);
+			this.replacement = (replacement != null && !replacement.isEmpty())
+					? "package " + replacement + language.getStatementTerminator() + "\n\n" : "";
 		}
 
 		@Override
 		public String chomp(String content) {
-			return PATTERN.matcher(content).replaceFirst(this.replacement);
+			return pattern.matcher(content).replaceFirst(this.replacement);
 		}
 
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 the original author or authors.
+ * Copyright 2021-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import io.spring.asciidoctor.backend.language.Language;
 import org.asciidoctor.ast.Block;
 
 /**
@@ -36,8 +37,8 @@ class FoldListingContentConverter implements ListingContentConverter {
 	@Override
 	public String convert(Block listingBlock, String content) {
 		Options<FoldOption> options = Options.get(listingBlock, "fold", FoldOption.class, FoldOption.DEFAULTS);
-		String lang = (String) listingBlock.getAttribute("language");
-		if ("java".equals(lang)) {
+		Language language = Language.get(listingBlock);
+		if (Language.isJavaLike(language)) {
 			List<Folder> folders = new ArrayList<>();
 			if (options.has(FoldOption.IMPORTS)) {
 				folders.add(new ImportsFolder());

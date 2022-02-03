@@ -43,7 +43,22 @@ class ChompListingContentConverterTests {
 	}
 
 	@Test
+	void convertWhenChompHeaderAndKotlinReturnsWithoutHeader(ConvertedHtml html) {
+		assertThat(html.getElementByTag("code")).isEqualTo("package com.example");
+	}
+
+	@Test
 	void convertWhenChompPackageReturnsWithoutPackage(ConvertedHtml html) {
+		assertThat(html.getElementByTag("code")).isEqualTo("public class Example {}");
+	}
+
+	@Test
+	void convertWhenChompPackageAndKotlinReturnsWithoutPackage(ConvertedHtml html) {
+		assertThat(html.getElementByTag("code")).isEqualTo("public class Example {}");
+	}
+
+	@Test
+	void convertWhenChompPackageAndGroovyReturnsWithoutPackage(ConvertedHtml html) {
 		assertThat(html.getElementByTag("code")).isEqualTo("public class Example {}");
 	}
 
