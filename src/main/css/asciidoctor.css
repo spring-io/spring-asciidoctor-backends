@@ -63,15 +63,22 @@
   display: none;
 }
 
-.doc #header .details span.author:after {
+.doc #header .details span.author:not(:last-of-type)::after {
   content: "\2022";
   font-weight: 400;
   margin: 0.4em;
   color: var(--asciidoctor-author-separator-color);
 }
 
-#header .details span.author:nth-last-child(2):after {
-  content: "";
+.doc #header .details span.last-author::after {
+  display: none;
+}
+
+.doc #header .details #revnumber {
+  flex-basis: 100%;
+  margin-top: 0.5rem;
+  text-transform: capitalize;
+  font-weight: 200;
 }
 
 /* Section setup */

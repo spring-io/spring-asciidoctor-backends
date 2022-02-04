@@ -1,6 +1,7 @@
 [[spring]]
 = Asciidoctor Spring Extensions Document
 Andy Wilkinson; Phillip Webb
+v1.23
 :description: Asciidoctor using Spring extensions
 :toc: left
 :toc-levels: 4
