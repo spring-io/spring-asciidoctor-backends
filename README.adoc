@@ -484,7 +484,7 @@ For example, the following `.adoc` file will try to import the Java file `{docs-
 ....
 [[my.example-project]]
 == My Example Project
-import-code::SomeCode[]
+import::code:SomeCode[]
 ....
 
 The following languages are supported by convention based imports:

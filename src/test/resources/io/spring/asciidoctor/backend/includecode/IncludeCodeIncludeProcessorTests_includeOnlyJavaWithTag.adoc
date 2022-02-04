@@ -1,8 +1,7 @@
 = Test Document
-:docs-java: javacode
-:docs-kotlin: kotlincode
+:docs-java: {docdir}/javacode
 
 [[some.convention-based-anchor]]
 == Some Convention Based Anchor
 
-include-code::SomeCode[]
+include::code:SomeCode[tag=thecode]

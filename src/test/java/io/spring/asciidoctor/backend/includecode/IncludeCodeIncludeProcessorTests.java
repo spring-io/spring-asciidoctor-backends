@@ -27,15 +27,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 /**
- * Tests for {@link IncludeCodeBlockMacroProcessor}.
+ * Tests for {@link IncludeCodeIncludeProcessor}.
  *
  * @author Phillip Webb
  */
 @ExtendWith(AsciidoctorExtension.class)
-class IncludeCodeBlockMacroProcessorTests {
+class IncludeCodeIncludeProcessorTests {
 
 	@Test
 	void includeOnlyJava(ConvertedHtml html, ExpectedHtml expected) {
+		assertThat(html.getElementByClass("sectionbody")).satisfies(expected.whenIgnoringTrailingWhitespace());
+	}
+
+	@Test
+	void includeOnlyJavaWithTag(ConvertedHtml html, ExpectedHtml expected) {
 		assertThat(html.getElementByClass("sectionbody")).satisfies(expected.whenIgnoringTrailingWhitespace());
 	}
 

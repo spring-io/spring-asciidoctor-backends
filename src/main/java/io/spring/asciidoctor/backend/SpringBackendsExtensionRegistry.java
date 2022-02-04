@@ -17,7 +17,7 @@
 package io.spring.asciidoctor.backend;
 
 import io.spring.asciidoctor.backend.anchorrewrite.AnchorRewriteDocinfoProcessor;
-import io.spring.asciidoctor.backend.includecode.IncludeCodeBlockMacroProcessor;
+import io.spring.asciidoctor.backend.includecode.IncludeCodeIncludeProcessor;
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.jruby.extension.spi.ExtensionRegistry;
 
@@ -32,7 +32,9 @@ public class SpringBackendsExtensionRegistry implements ExtensionRegistry {
 	public void register(Asciidoctor asciidoctor) {
 		asciidoctor.requireLibrary("spring-asciidoctor-backends");
 		asciidoctor.javaExtensionRegistry().docinfoProcessor(new AnchorRewriteDocinfoProcessor());
-		asciidoctor.javaExtensionRegistry().blockMacro(new IncludeCodeBlockMacroProcessor());
+		// asciidoctor.javaExtensionRegistry().blockMacro(new
+		// IncludeCodeBlockMacroProcessor());
+		asciidoctor.javaExtensionRegistry().includeProcessor(new IncludeCodeIncludeProcessor());
 	}
 
 }
