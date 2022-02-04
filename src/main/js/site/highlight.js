@@ -16,7 +16,7 @@
 
 (function () {
   'use strict';
-  
+
   const highlightJs = require('highlight.js/lib/core');
 
   highlightJs.registerLanguage('asciidoc', require('highlight.js/lib/languages/asciidoc'));
@@ -42,8 +42,10 @@
   highlightJs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
   highlightJs.registerLanguage('yaml', require('highlight.js/lib/languages/yaml'));
 
+  highlightJs.configure({ignoreUnescapedHTML: true});
+
   for(const codeElement of document.querySelectorAll('pre.highlight > code')) {
     highlightJs.highlightBlock(codeElement);
   }
-  
+
 })();
