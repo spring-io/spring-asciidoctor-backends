@@ -24,7 +24,7 @@
     "gulp-tap": "^2.0.0",
     "gulp-terser": "^2.0.1",
     "gulplog": "^1.0.0",
-    "highlight.js": "^11.4.0",
+    "highlight.js": "^10.6.0",
     "lodash": "^4.17.21",
     "postcss": "^8.2.6",
     "postcss-import": "^14.0.0",
