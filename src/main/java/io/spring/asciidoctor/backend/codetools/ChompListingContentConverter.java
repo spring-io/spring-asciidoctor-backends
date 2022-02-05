@@ -17,6 +17,7 @@
 package io.spring.asciidoctor.backend.codetools;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -190,18 +191,33 @@ public class ChompListingContentConverter implements ListingContentConverter {
 
 	private static class SuppressWarningsChomper implements Chomper {
 
+		private static final List<Pattern> PATTERNS;
+		static {
+			List<Pattern> patterns = new ArrayList<>();
+			patterns.add(Pattern.compile("@SuppressWarnings\\(.*\\)"));
+			patterns.add(Pattern.compile("@Suppress\\(.*\\)"));
+			PATTERNS = Collections.unmodifiableList(patterns);
+		}
+
 		@Override
 		public String chomp(String content) {
 			StringBuilder result = new StringBuilder(content.length());
 			String[] lines = content.split("\n");
 			for (String line : lines) {
-				String updatedline = line.replaceAll("@SuppressWarnings\\(.*\\)", "");
-				if (updatedline.equals(line) || !updatedline.trim().isEmpty()) {
-					result.append(updatedline);
+				String strippedline = strip(line);
+				if (strippedline.equals(line) || !strippedline.trim().isEmpty()) {
+					result.append(strippedline);
 					result.append("\n");
 				}
 			}
 			return result.toString();
+		}
+
+		private String strip(String line) {
+			for (Pattern pattern : PATTERNS) {
+				line = pattern.matcher(line).replaceAll("");
+			}
+			return line;
 		}
 
 	}

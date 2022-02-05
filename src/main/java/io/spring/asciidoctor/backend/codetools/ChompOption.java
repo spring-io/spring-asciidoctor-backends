@@ -44,7 +44,7 @@ enum ChompOption {
 	FORMATTERS,
 
 	/**
-	 * Chomp {@code @SuppressWarnings} annotation.
+	 * Chomp {@code @SuppressWarnings} and {@code Suppress} annotations.
 	 */
 	SUPPRESSWARNINGS;
 

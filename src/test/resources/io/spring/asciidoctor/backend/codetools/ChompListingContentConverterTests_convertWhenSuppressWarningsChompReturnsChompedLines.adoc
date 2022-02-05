@@ -6,7 +6,10 @@
 public class Example {
 
 	@SuppressWarnings("unused")
-	private String field;
+	private String field1;
+
+	@Suppress("unused")
+	private String field2;
 
 }
 ----
