@@ -45,6 +45,15 @@ function css() {
     .pipe(connect.reload());
 }
 
+function fontawesomeCss() {
+  return src("node_modules/fontawesome-4.7/css/font-awesome.css").pipe(dest(output + "/css"));
+}
+
+function fontawesomeFonts() {
+  return src("node_modules/fontawesome-4.7/fonts/*").pipe(dest(output + "/fonts"));
+}
+
+
 function img() {
   return src("src/main/img/*").pipe(dest(output + "/img"));
 }
@@ -101,7 +110,7 @@ function watchFiles(cb) {
   cb();
 }
 
-const build = series(info, css, img, jsSetup, jsSite);
+const build = series(info, css, fontawesomeCss, fontawesomeFonts, img, jsSetup, jsSite);
 
 exports.default = build;
 exports.build = build;

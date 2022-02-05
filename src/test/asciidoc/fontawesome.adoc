@@ -1,0 +1,15 @@
+[[standard]]
+= Asciidoctor Font Awesome Document
+Carrie Bradshaw; Jessica Fletcher; Diane Nguyen; Paul Sheldon; Jack Torrance
+:description: Asciidoctor using only standard markup
+:toc: left
+:toc-levels: 4
+:sectnums:
+:iconfont-fontawesome:
+
+This is an example asciidoctor file that uses font-awsome in the document.
+You need to set the `iconfont-complete` attribute for this to work.
+
+NOTE: You don't need font awesome for regular admon icons.
+
+The folder icon is icon:folder[].

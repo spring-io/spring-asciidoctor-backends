@@ -512,6 +512,25 @@ The package name is constructed by removing all `-` characters from the section 
 
 
 
+=== Font Awesome Support
+Font Awesome support is available in the standard Asciidoctor HTML 5 backend, however, it is not available by default in this backend.
+This is to align with https://antora.org[Antora], which https://gitlab.com/antora/antora-ui-default/-/issues/58[doesn't currently support Font Awesome].
+
+If you want to enable Font Awesome 4 support in your documents you can set the `iconfont-fontawesome` attribute.
+This will allow you to use `+++icon:<name>[]+++` macros inside your markup, with images being resolved from the locally bundled `fontawesome.css` stylesheet.
+
+For example:
+
+[source,asciidoctor]
+----
+= Asciidoctor Font Awesome Document
+:iconfont-fontawesome:
+
+The folder icon is icon:folder[].
+----
+
+
+
 == Contributing
 If you're looking to contribute to this project, or you're just trying to navigate the code please take a look at the link:CONTRIBUTING.adoc[CONTRIBUTING] file.
 

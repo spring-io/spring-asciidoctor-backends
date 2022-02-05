@@ -1,0 +1,4 @@
+= Font Awesome
+:iconfont-fontawesome:
+
+icon:folder[].

@@ -41,7 +41,7 @@ class SpringHtml5Converter
   def convert(node, transform = node.node_name, opts = nil)
     if transform == "document"
       configure_node_attrs node
-      return postprocess @htmlConverter.convert(node, transform, opts)
+      return postprocess(node, @htmlConverter.convert(node, transform, opts))
     end
     if transform == "listing"
       return convert_listing node
@@ -68,8 +68,12 @@ class SpringHtml5Converter
     node.remove_attr "copycss"
   end
 
-  def postprocess(html)
-    html = html.gsub(/<link\ rel="stylesheet"(?!.*site\.css).*>\R?/, "")
+  def postprocess(node, html)
+    if node.attr? 'iconfont-fontawesome'
+      html = html.gsub(/<link\ rel="stylesheet"(?!.*(site|font-awesome)\.css).*>\R?/, "")
+    else
+      html = html.gsub(/<link\ rel="stylesheet"(?!.*site\.css).*>\R?/, "")
+    end
     match = html.match(/^(.*<body.*?>)(.*)(<\/body>.*)$/m)
     templateFile = File.join(File.dirname(File.expand_path(__FILE__)), "body_template.html")
     body = File.read(templateFile) % { :body => match[2] }
