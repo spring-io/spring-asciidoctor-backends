@@ -31,6 +31,11 @@ resource_types:
   source:
     repository: springio/artifactory-resource
     tag: 0.0.13
+- name: github-release
+  type: registry-image
+  source:
+    repository: concourse/github-release-resource
+    tag: 1.7.0
 resources:
 - name: git-repo
   type: git
