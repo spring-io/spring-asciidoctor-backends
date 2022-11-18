@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 the original author or authors.
+ * Copyright 2021-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -148,6 +148,15 @@ public class TabIntegrationTests {
 		assertThat(secondaries).hasSize(1);
 	}
 
+	@Test
+	void tabsWithAndWithoutCallouts(@Source("tabsWithAndWithoutCallouts.adoc") ConvertedHtml html) throws IOException {
+		RemoteWebDriver driver = html.inWebBrowser(this.chrome);
+		List<WebElement> listings = driver.findElementsByCssSelector(".listingblock");
+		assertThat(listings).hasSize(3);
+		assertThatTabs(listings.get(0)).hasNoCalloutList();
+		assertThatTabs(listings.get(2)).hasDisplayedCalloutListContaining("Callout for tab one");
+	}
+
 	private static TabsAssert assertThatTabs(WebElement actual) {
 		return assertThat(new TabsAssert(actual));
 	}
@@ -184,6 +193,11 @@ public class TabIntegrationTests {
 			assertThat(content.getText()).contains(contained);
 			return this;
 
+		}
+
+		TabsAssert hasNoCalloutList() {
+			assertThat(this.actual.findElements(By.cssSelector(".colist"))).isEmpty();
+			return this;
 		}
 
 		TabsAssert uponClicking(String item) {

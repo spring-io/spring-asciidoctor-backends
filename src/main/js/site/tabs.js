@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 the original author or authors.
+ * Copyright 2021-2022 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the 'License');
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@
   function createTab(blockElement, tabsElement) {
     const title = blockElement.querySelector(".title").textContent;
     const content = blockElement.querySelectorAll(".content").item(0);
-    const colist = nextSibling(blockElement, ".colist");
+    const colist = nextSibling(blockElement, ".colist", ".listingblock");
     if (colist) {
       content.append(colist);
     }
@@ -72,11 +72,14 @@
     return { tabElement: tabElement, content: content };
   }
 
-  function nextSibling(element, selector) {
+  function nextSibling(element, selector, stopSelector) {
     let sibling = element.nextElementSibling;
     while (sibling) {
       if (sibling.matches(selector)) {
         return sibling;
+      }
+      if (sibling.matches(stopSelector)) {
+        return;
       }
       sibling = sibling.nextElementSibling;
     }
