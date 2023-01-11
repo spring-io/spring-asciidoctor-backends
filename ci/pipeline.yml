@@ -183,7 +183,6 @@ jobs:
 - name: promote-milestone
   serial: true
   plan:
-  - get: ci-image
   - get: git-repo
     trigger: false
   - get: artifactory-repo
@@ -192,7 +191,6 @@ jobs:
     params:
       save_build_info: true
   - task: promote
-    image: ci-image
     file: git-repo/ci/tasks/promote.yml
     params:
       RELEASE_TYPE: M
@@ -211,7 +209,6 @@ jobs:
 - name: promote-rc
   serial: true
   plan:
-  - get: ci-image
   - get: git-repo
     trigger: false
   - get: artifactory-repo
@@ -221,7 +218,6 @@ jobs:
       download_artifacts: false
       save_build_info: true
   - task: promote
-    image: ci-image
     file: git-repo/ci/tasks/promote.yml
     params:
       RELEASE_TYPE: RC
@@ -240,7 +236,6 @@ jobs:
 - name: promote-release
   serial: true
   plan:
-  - get: ci-image
   - get: git-repo
     trigger: false
   - get: artifactory-repo
@@ -250,22 +245,14 @@ jobs:
       download_artifacts: true
       save_build_info: true
   - task: promote
-    image: ci-image
     file: git-repo/ci/tasks/promote.yml
     params:
       RELEASE_TYPE: RELEASE
       <<: *artifactory-task-params
-- name: create-github-release
-  serial: true
-  plan:
-  - get: ci-image
-  - get: git-repo
-  - get: artifactory-repo
-    trigger: true
-    passed: [promote-release]
-    params:
-      download_artifacts: false
-      save_build_info: true
+      SONATYPE_USERNAME: ((s01-user-token))
+      SONATYPE_PASSWORD: ((s01-user-token-password))
+      SONATYPE_URL: ((sonatype-url))
+      SONATYPE_STAGING_PROFILE_ID: ((sonatype-staging-profile-id))
   - task: generate-changelog
     file: git-repo/ci/tasks/generate-changelog.yml
     params:
@@ -281,7 +268,7 @@ groups:
 - name: "builds"
   jobs: ["build"]
 - name: "releases"
-  jobs: ["stage-milestone", "stage-rc", "stage-release", "promote-milestone", "promote-rc", "promote-release", "create-github-release"]
+  jobs: ["stage-milestone", "stage-rc", "stage-release", "promote-milestone", "promote-rc", "promote-release"]
 - name: "ci-image"
   jobs: ["build-ci-image"]
       

@@ -9,6 +9,7 @@ plugins {
 }
 
 group = 'io.spring.asciidoctor.backends'
+description = 'Spring Asciidoctor Backends'
 
 apply from: "$rootDir/gradle/publish-maven.gradle"
 
