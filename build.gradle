@@ -19,6 +19,11 @@ def mavenProjectRepository = "$buildDir/maven-repository"
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
+java {
+	withJavadocJar()
+	withSourcesJar()
+}
+
 sourceSets {
 	main {
 		output.dir(generatedAssets, builtBy: "gulp")
