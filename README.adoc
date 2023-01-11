@@ -34,38 +34,6 @@ You can use the https://github.com/asciidoctor/asciidoctor-maven-plugin[Asciidoc
 </plugin>
 ----
 
-You will probably also need to add the Spring Maven repository:
-
-[source,xml]
-----
-<repositories>
-	<repository>
-		<id>spring-release</id>
-		<name>Spring Releases</name>
-		<url>https://repo.spring.io/release</url>
-		<snapshots>
-			<enabled>false</enabled>
-		</snapshots>
-	</repository>
-</repositories>
-----
-
-or for milestones:
-
-[source,xml]
-----
-<repositories>
-	<repository>
-		<id>spring-milestones</id>
-		<name>Spring Milestones</name>
-		<url>https://repo.spring.io/milestone</url>
-		<snapshots>
-			<enabled>false</enabled>
-		</snapshots>
-	</repository>
-</repositories>
-----
-
 
 
 == Gradle build integration
@@ -90,30 +58,6 @@ asciidoctor {
 	sourceDir "src/asciidoc"
 	outputOptions {
 		backends "spring-html"
-	}
-}
-----
-
-You will probably also need to add the Spring Maven repository:
-
-[source,gradle]
-----
-repositories {
-	mavenCentral()
-	maven {
-		url "https://repo.spring.io/release"
-	}
-}
-----
-
-or for milestones:
-
-[source,gradle]
-----
-repositories {
-	mavenCentral()
-	maven {
-		url "https://repo.spring.io/milestone"
 	}
 }
 ----
