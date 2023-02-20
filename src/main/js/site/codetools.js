@@ -121,7 +121,7 @@
   }
 
   function updateFoldUnfoldButton(button, unfold) {
-    const label = unfold ? "Expanded folded text" : "Collapse foldable text";
+    const label = unfold ? "Expand folded text" : "Collapse foldable text";
     button.classList.remove(unfold ? "fold-button" : "unfold-button");
     button.classList.add(unfold ? "unfold-button" : "fold-button");
     button.querySelector("span.label").innerText = label;
