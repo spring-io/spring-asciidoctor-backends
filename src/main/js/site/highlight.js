@@ -24,6 +24,7 @@
   highlightJs.registerLanguage('css', require('highlight.js/lib/languages/css'));
   highlightJs.registerLanguage('diff', require('highlight.js/lib/languages/diff'));
   highlightJs.registerLanguage('dockerfile', require('highlight.js/lib/languages/dockerfile'));
+  highlightJs.registerLanguage('dos', require('highlight.js/lib/languages/dos'));
   highlightJs.registerLanguage('gradle', require('highlight.js/lib/languages/gradle'));
   highlightJs.registerLanguage('groovy', require('highlight.js/lib/languages/groovy'));
   highlightJs.registerLanguage('http', require('highlight.js/lib/languages/http'));
@@ -33,11 +34,11 @@
   highlightJs.registerLanguage('kotlin', require('highlight.js/lib/languages/kotlin'));
   highlightJs.registerLanguage('markdown', require('highlight.js/lib/languages/markdown'));
   highlightJs.registerLanguage('nix', require('highlight.js/lib/languages/nix'));
+  highlightJs.registerLanguage('powershell', require('highlight.js/lib/languages/powershell'));
   highlightJs.registerLanguage('properties', require('highlight.js/lib/languages/properties'));
   highlightJs.registerLanguage('ruby', require('highlight.js/lib/languages/ruby'));
   highlightJs.registerLanguage('scala', require('highlight.js/lib/languages/scala'));
   highlightJs.registerLanguage('shell', require('highlight.js/lib/languages/shell'));
-  highlightJs.registerLanguage('bash', require('highlight.js/lib/languages/shell'));
   highlightJs.registerLanguage('sql', require('highlight.js/lib/languages/sql'));
   highlightJs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
   highlightJs.registerLanguage('yaml', require('highlight.js/lib/languages/yaml'));
