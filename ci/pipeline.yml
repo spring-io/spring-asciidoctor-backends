@@ -31,11 +31,15 @@ resource_types:
 - name: artifactory-resource
   type: registry-image
   source:
+    username: ((docker-hub-username))
+    password: ((docker-hub-password))
     repository: springio/artifactory-resource
-    tag: 0.0.17
+    tag: 0.0.18
 - name: github-release
   type: registry-image
   source:
+    username: ((docker-hub-username))
+    password: ((docker-hub-password))
     repository: concourse/github-release-resource
     tag: 1.7.0
 resources:
