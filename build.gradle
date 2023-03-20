@@ -40,7 +40,9 @@ configurations {
 }
 
 repositories {
+	maven { url = 'https://maven.aliyun.com/repository/central' }
 	mavenCentral()
+	maven { url "https://repo.spring.io/release" }
 }
 
 dependencies {
@@ -68,8 +70,9 @@ dependencies {
 }
 
 node {
-	version = '15.11.0'
+	version = '16.13.0'
 	download = true
+	distBaseUrl = 'https://npm.taobao.org/mirrors/node/'
 }
 
 tasks.withType(JavaCompile) {

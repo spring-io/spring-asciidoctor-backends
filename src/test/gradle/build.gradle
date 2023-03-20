@@ -15,7 +15,7 @@ configurations {
 
 dependencies {
 	asciidoctorExtensions "io.spring.asciidoctor.backends:spring-asciidoctor-backends:" + System.getenv("spring-asciidoctor-backends.version")
-	asciidoctorExtensions "org.asciidoctor:asciidoctorj-pdf:1.5.3"
+	asciidoctorExtensions "org.asciidoctor:asciidoctorj-pdf:2.3.4"
 }
 
 

@@ -26,7 +26,7 @@ class SpringPdfConverter < Asciidoctor::PDF::Converter
 
   register_for "spring-pdf"
 
-  def convert_listing_or_literal node
+  def convert_code node
     if (node.style != 'source')
       return super
     end
@@ -35,11 +35,14 @@ class SpringPdfConverter < Asciidoctor::PDF::Converter
     source_chunks = (XMLMarkupRx.match? source_string) ? (text_formatter.format source_string) : [text: source_string]
     adjusted_font_size = ((node.option? 'autofit') || (node.document.attr? 'autofit-option')) ? (theme_font_size_autofit source_chunks, :code) : nil
     theme_margin :block, :top
-    keep_together do |box_height = nil|
-      caption_height = node.title? ? (layout_caption node, category: :code) : 0
-      theme_font :code do
-        theme_fill_and_stroke_block :code, (box_height - caption_height), background_color: nil, split_from_top: false if box_height
-        pad_box @theme.code_padding do
+    caption_below = @theme.code_caption_end&.to_sym == :bottom
+    arrange_block node do |extent|
+#       caption_height = node.title? ? (layout_caption node, category: :code) : 0
+      tare_first_page_content_stream do
+        theme_fill_and_stroke_block :code, extent, background_color: nil, caption_node: caption_below ? nil : node
+      end
+      pad_box @theme.code_padding do
+        theme_font :code do
           typeset_formatted_text source_chunks, (calc_line_metrics @theme.code_line_height || @theme.base_line_height),
               color: (@theme.code_font_color || @font_color),
               size: adjusted_font_size
@@ -59,6 +62,6 @@ class SpringPdfConverter < Asciidoctor::PDF::Converter
   end
 
 
-  alias convert_listing convert_listing_or_literal
+  alias convert_listing convert_code
 
 end

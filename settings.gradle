@@ -10,8 +10,10 @@ pluginManagement {
 		}
 	}
 	repositories {
+		maven { url = 'https://maven.aliyun.com/repository/gradle-plugin' }
 		gradlePluginPortal()
 		mavenCentral()
+		maven { url "https://repo.spring.io/plugins-release" }
 	}
 }
 
