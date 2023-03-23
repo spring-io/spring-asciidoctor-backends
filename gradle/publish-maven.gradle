@@ -1,14 +1,4 @@
 publishing {
-	repositories {
-		maven {
-			credentials {
-				username System.getenv("ALIYUN_USERNAME")
-				password System.getenv("ALIYUN_PASSWORD")
-			}
-			name "jcohy"
-			url version.endsWith('SNAPSHOT') ? "https://packages.aliyun.com/maven/repository/2114765-snapshot-6mT705/" : "https://packages.aliyun.com/maven/repository/2114765-release-sAPkIv/"
-		}
-	}
 	publications.withType(MavenPublication) {
 		pom {
 			name = project.description

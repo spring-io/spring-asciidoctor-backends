@@ -6,19 +6,28 @@ plugins {
 	id "io.spring.javaformat"
 	id "java"
 	id "maven-publish"
+	id "io.github.gradle-nexus.publish-plugin" version "1.1.0"
 }
 
-group = 'io.spring.asciidoctor.backends'
+ext {
+	set('signing.keyId',System.getenv('SIGNING_KEYID'))
+	set('signing.password',System.getenv('SIGNING_PASSWORD'))
+	set('signing.secretKeyRingFile',System.getenv('SIGNING_SECRETKEYRINGFILE'))
+}
+
+group = 'com.jcohy.asciidoctor.backends'
 description = 'Spring Asciidoctor Backends'
 
 apply from: "$rootDir/gradle/publish-maven.gradle"
+apply from: "$rootDir/gradle/nexusPublications.gradle"
+apply plugin: 'signing'
 
 def generatedGem = "$buildDir/generated-resources/gem"
 def generatedAssets = "$buildDir/generated-resources/assets"
 def mavenProjectRepository = "$buildDir/maven-repository"
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
+sourceCompatibility = "17"
+targetCompatibility = "17"
 
 java {
 	withJavadocJar()
@@ -153,14 +162,27 @@ format.dependsOn prettierFormat
 
 publishing {
 	publications {
-		maven(MavenPublication) {
+		mavenJava(MavenPublication) {
 			from components.java
 		}
 	}
 	repositories {
 		maven {
-			name "project"
-			url file(mavenProjectRepository).toURI()
+			credentials {
+				username System.getenv("NEXUS_OSS_USER_NAME")
+				password System.getenv("NEXUS_OSS_PASS_WORD")
+			}
+			url version.endsWith('SNAPSHOT') ? "https://oss.sonatype.org/content/repositories/snapshots" : "https://oss.sonatype.org/service/local/staging/deploy/maven2"
 		}
 	}
+//	repositories {
+//		maven {
+//			name "project"
+//			url file(mavenProjectRepository).toURI()
+//		}
+//	}
+}
+
+signing {
+	sign publishing.publications.mavenJava
 }

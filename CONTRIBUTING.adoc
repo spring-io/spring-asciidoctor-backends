@@ -227,3 +227,10 @@ Saving any source file will trigger a rebuild and "live reload".
 Java, Javascipt and CSS files can be formatted by running `./gradlew format`.
 Java files are formatted using `spring-javaformat`.
 Other files are formatted using https://prettier.io/[prettier].
+
+=== Upload
+
+[source,shell]
+----
+./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
+----
