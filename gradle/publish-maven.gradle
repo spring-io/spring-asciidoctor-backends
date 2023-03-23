@@ -1,13 +1,23 @@
 publishing {
+	repositories {
+		maven {
+			credentials {
+				username System.getenv("ALIYUN_USERNAME")
+				password System.getenv("ALIYUN_PASSWORD")
+			}
+			name "jcohy"
+			url version.endsWith('SNAPSHOT') ? "https://packages.aliyun.com/maven/repository/2114765-snapshot-6mT705/" : "https://packages.aliyun.com/maven/repository/2114765-release-sAPkIv/"
+		}
+	}
 	publications.withType(MavenPublication) {
 		pom {
 			name = project.description
 			description = project.description
 			artifactId = "spring-asciidoctor-backends"
-			url = "https://github.com/spring-io/spring-asciidoctor-backends"
+			url = "https://github.com/jcohy-fork/spring-asciidoctor-backends"
 			organization {
-				name = "Spring IO"
-				url = "https://spring.io"
+				name = "Jcohy"
+				url = "https://github.com/jcohy-fork"
 			}
 			licenses {
 				license {
@@ -17,20 +27,20 @@ publishing {
 				}
 			}
 			scm {
-				url = "https://github.com/spring-io/spring-asciidoctor-backends"
-				connection = "scm:git:git://github.com/spring-io/spring-asciidoctor-backends"
-				developerConnection = "scm:git:git://github.com/spring-io/spring-asciidoctor-backends"
+				url = "https://github.com/jcohy-fork/spring-asciidoctor-backends"
+				connection = "scm:git:git://github.com/jcohy-fork/spring-asciidoctor-backends"
+				developerConnection = "scm:git:git://github.com/jcohy-fork/spring-asciidoctor-backends"
 			}
 			developers {
 				developer {
-					id = "spring"
-					name = "Spring Team"
-					email = "team@spring.io"
+					id = "jcohy"
+					name = "Jcohy Team"
+					email = "jia_chao23@126.com"
 				}
 			}
 			issueManagement {
 				system = "GitHub"
-				url = "https://github.com/spring-io/spring-asciidoctor-backends/issues"
+				url = "https://github.com/jcohy-fork/spring-asciidoctor-backends/issues"
 			}
 		}
 	}
