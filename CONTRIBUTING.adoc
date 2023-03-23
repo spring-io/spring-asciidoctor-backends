@@ -228,9 +228,18 @@ Java, Javascipt and CSS files can be formatted by running `./gradlew format`.
 Java files are formatted using `spring-javaformat`.
 Other files are formatted using https://prettier.io/[prettier].
 
-=== Upload
+=== Publish
+
+发布到中央仓库
 
 [source,shell]
 ----
-./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository
+./gradlew clean publishToSonatype closeAndReleaseSonatypeStagingRepository
+----
+
+发布到阿里云私服
+
+[source,shell]
+----
+./gradlew clean publishMavenJavaPublicationToJcohyRepository
 ----

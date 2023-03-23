@@ -169,10 +169,11 @@ publishing {
 	repositories {
 		maven {
 			credentials {
-				username System.getenv("NEXUS_OSS_USER_NAME")
-				password System.getenv("NEXUS_OSS_PASS_WORD")
+				username System.getenv("ALIYUN_USERNAME")
+				password System.getenv("ALIYUN_PASSWORD")
 			}
-			url version.endsWith('SNAPSHOT') ? "https://oss.sonatype.org/content/repositories/snapshots" : "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+			name "jcohy"
+			url version.endsWith('SNAPSHOT') ? "https://packages.aliyun.com/maven/repository/2114765-snapshot-6mT705/" : "https://packages.aliyun.com/maven/repository/2114765-release-sAPkIv/"
 		}
 	}
 //	repositories {
