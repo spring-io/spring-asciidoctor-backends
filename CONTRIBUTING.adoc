@@ -243,3 +243,10 @@ Other files are formatted using https://prettier.io/[prettier].
 ----
 ./gradlew clean publishMavenJavaPublicationToJcohyRepository
 ----
+
+发布到 XW 私服
+
+[source,shell]
+----
+./gradlew clean publishMavenJavaPublicationToXwRepository
+----

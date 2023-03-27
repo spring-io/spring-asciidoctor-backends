@@ -81,6 +81,34 @@
   font-weight: 200;
 }
 
+.doc #header .details #revdate {
+  flex-basis: 100%;
+  margin-top: 0.5rem;
+  text-transform: capitalize;
+  font-weight: 200;
+}
+
+.doc #header .details #revremark {
+  flex-basis: 100%;
+  margin-top: 0.5rem;
+  text-transform: capitalize;
+  font-weight: 200;
+}
+
+.doc #header .details #email {
+  flex-basis: 100%;
+  margin-top: 0.5rem;
+  text-transform: capitalize;
+  font-weight: 200;
+}
+
+.doc #header .details #author {
+  flex-basis: 100%;
+  margin-top: 0.5rem;
+  text-transform: capitalize;
+  font-weight: 200;
+}
+
 /* Section setup */
 
 .doc #preamble + .sect1,

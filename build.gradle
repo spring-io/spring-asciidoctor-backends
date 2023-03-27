@@ -176,6 +176,17 @@ publishing {
 			url version.endsWith('SNAPSHOT') ? "https://packages.aliyun.com/maven/repository/2114765-snapshot-6mT705/" : "https://packages.aliyun.com/maven/repository/2114765-release-sAPkIv/"
 		}
 	}
+	repositories {
+		maven {
+			credentials {
+				username "xw-developer"
+				password "xxx"
+			}
+			name "xw"
+			allowInsecureProtocol true
+			url version.endsWith('SNAPSHOT') ? "http://3b7t671894.zicp.vip:53740/repository/snapshot" : "http://3b7t671894.zicp.vip:53740/repository/releases"
+		}
+	}
 //	repositories {
 //		maven {
 //			name "project"
