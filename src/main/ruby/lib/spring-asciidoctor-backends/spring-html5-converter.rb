@@ -76,7 +76,7 @@ class SpringHtml5Converter
     end
     match = html.match(/^(.*<body.*?>)(.*)(<\/body>.*)$/m)
     templateFile = File.join(File.dirname(File.expand_path(__FILE__)), "body_template.html")
-    body = File.read(templateFile) % { :body => match[2] }
+    body = File.read(templateFile, :encoding => 'UTF-8') % { :body => match[2] }
     return match[1] + body + match[3]
   end
 
