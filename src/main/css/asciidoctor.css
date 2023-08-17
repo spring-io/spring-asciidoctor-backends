@@ -424,6 +424,7 @@
   content: attr(title);
   text-transform: capitalize;
   filter: invert(100%);
+  font-family: var(--font-family);
   font-weight: var(--asciidoctor-admonition-label-font-weight);
   color: var(--asciidoctor-admonition-font-color);
   font-style: normal;
