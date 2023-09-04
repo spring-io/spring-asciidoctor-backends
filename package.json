@@ -29,7 +29,7 @@
     "postcss": "^8.2.6",
     "postcss-import": "^14.0.0",
     "prettier": "2.5.1",
-    "stylelint": "^13.0.0",
+    "stylelint": "^15.10.1",
     "stylelint-config-standard": "^20.0.0"
   },
   "scripts": {
