@@ -137,7 +137,7 @@ public class IncludeCodeIncludeProcessor extends IncludeProcessor {
 
 		private Path source;
 
-		Include(Language language, String includeAttributes, Path source) throws IOException {
+		Include(Language language, String includeAttributes, Path source) {
 			this.language = language;
 			this.includeAttributes = includeAttributes;
 			this.source = source;
@@ -158,7 +158,7 @@ public class IncludeCodeIncludeProcessor extends IncludeProcessor {
 		}
 
 		static Include load(Document document, Language language, String includeAttributes, String packagePath,
-				String target) throws IOException {
+				String target) {
 			String path = (String) document.getAttribute(language.getPathAttribute());
 			if (path != null) {
 				Path source = cleanPath(path + "/" + packagePath + "/" + target + "." + language.GetExtension());
