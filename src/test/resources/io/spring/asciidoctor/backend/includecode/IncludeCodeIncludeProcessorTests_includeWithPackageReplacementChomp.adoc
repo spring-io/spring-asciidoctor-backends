@@ -1,0 +1,9 @@
+= Test Document
+:docs-java: {docdir}/javacode
+:chomp: packages
+
+[[some.convention-based-anchor]]
+== Some Convention Based Anchor
+
+[chomp_package_replacement=com.example]
+include::code:SomeCode[]

@@ -59,4 +59,9 @@ class IncludeCodeIncludeProcessorTests {
 		assertThatIllegalStateException().isThrownBy(() -> html.get()).withStackTraceContaining("Unable to find code");
 	}
 
+	@Test
+	void includeWithPackageReplacementChomp(ConvertedHtml html) {
+		assertThat(html.getElementByTag("code")).contains("package com.example;");
+	}
+
 }

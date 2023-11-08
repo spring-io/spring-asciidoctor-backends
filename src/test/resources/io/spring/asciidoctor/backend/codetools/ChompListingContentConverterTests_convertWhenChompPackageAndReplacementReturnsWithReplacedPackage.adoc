@@ -1,7 +1,8 @@
 = Test Document
 :chomp: packages
 
-[source,java,chomp_package_replacement=com.example]
+[chomp_package_replacement=com.example]
+[source,java]
 ----
 package com.example.somepackage;
 
