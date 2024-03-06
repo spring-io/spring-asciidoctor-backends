@@ -447,6 +447,10 @@ The following languages are supported by convention based imports:
 | Groovy
 | `{docs-groovy}`
 | `.grovy`
+|
+| XML
+| `{docs-xml}`
+| `.xml`
 |===
 
 If more than one language file is found then tabs will automatically be created to allow the user to see all the examples.
