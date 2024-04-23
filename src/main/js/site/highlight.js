@@ -40,6 +40,7 @@
   highlightJs.registerLanguage('scala', require('highlight.js/lib/languages/scala'));
   highlightJs.registerLanguage('shell', require('highlight.js/lib/languages/shell'));
   highlightJs.registerLanguage('sql', require('highlight.js/lib/languages/sql'));
+  highlightJs.registerLanguage('swift', require('highlight.js/lib/languages/swift'));
   highlightJs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
   highlightJs.registerLanguage('yaml', require('highlight.js/lib/languages/yaml'));
 
