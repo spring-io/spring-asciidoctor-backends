@@ -8,8 +8,8 @@ plugins {
 	id "maven-publish"
 }
 
-group = 'io.spring.asciidoctor.backends'
-description = 'Spring Asciidoctor Backends'
+group = 'com.sktelecom.asciidoctor.backends'
+description = 'Spring Asciidoctor Backends by skt'
 
 apply from: "$rootDir/gradle/publish-maven.gradle"
 
@@ -156,8 +156,12 @@ publishing {
 	}
 	repositories {
 		maven {
-			name "project"
-			url file(mavenProjectRepository).toURI()
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/sktston/spring-asciidoctor-backends-custom")
+			credentials {
+				username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+				password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+			}
 		}
 	}
 }
