@@ -1,6 +1,6 @@
 plugins {
 	id "checkstyle"
-	id 'com.github.node-gradle.node' version '3.0.1'
+	id 'com.github.node-gradle.node' version '7.0.2'
 	id "eclipse"
 	id "io.spring.nohttp" version "0.0.7"
 	id "io.spring.javaformat"
@@ -68,7 +68,7 @@ dependencies {
 }
 
 node {
-	version = '20.9.0'
+	version = '16.19.1'
 	download = true
 }
 
