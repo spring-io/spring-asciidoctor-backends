@@ -33,22 +33,22 @@ html.dark-theme {
   --asciidoctor-admonition-warning-background: #967745;
   --asciidoctor-footer-font-color: #5e5e5e;
 
-  /* Highlight JS (colors based on https://github.com/primer/github-syntax-dark) */
-  --highlight-background-color: var(--asciidoctor-pre-background);
-  --highlight-font-color: #f6f8fa;
-  --highlight-keyword-font-color: #ea4a5a;
-  --highlight-comment-font-color: #959da5;
-  --highlight-string-font-color: #79b8ff;
-  --highlight-meta-font-color: #959da5;
-  --highlight-constant-font-color: #79b8ff;
-  --highlight-variable-font-color: #c8e1ff;
-  --highlight-tag-font-color: #7bcc72;
-  --highlight-tag-attribute-font-color: #b392f0;
-  --highlight-type-font-color: #b392f0;
-  --highlight-link-font-color: #1565c0;
-  --highlight-addition-font-color: #7bcc72;
-  --highlight-deletion-font-color: #f6f8fa;
-  --highlight-regex-font-color: #79b8ff;
+  /* Highlight JS (colors based on atom-one-dark) */
+  --highlight-background-color: #282c34;
+  --highlight-font-color: #abb2bf;
+  --highlight-keyword-font-color: #c678dd;
+  --highlight-comment-font-color: #5c6370;
+  --highlight-string-font-color: #98c379;
+  --highlight-meta-font-color: #e06c75;
+  --highlight-constant-font-color: #d19a66;
+  --highlight-variable-font-color: #e06c75;
+  --highlight-tag-font-color: #e06c75;
+  --highlight-tag-attribute-font-color: #d19a66;
+  --highlight-type-font-color: #56b6c2;
+  --highlight-link-font-color: #61afef;
+  --highlight-addition-font-color: #98c379;
+  --highlight-deletion-font-color: #e06c75;
+  --highlight-regex-font-color: #56b6c2;
 
   /* TOC */
   --toc-back-to-index-filter: invert();
