@@ -108,6 +108,41 @@ NOTE: Please do use a link that readers might reasonably think would be an index
 
 
 
+=== Section Number Custom Design (custom)
+For HTML output, if the section number is activated, then for the level 1 sections, the section numbers are wrapped with a `<span>` tag.
+Thus, you could modify the style for the section numbers.
+
+
+
+=== "Swagger (Open API Spec)" Link (custom)
+For HTML output, if you would like to expose the link for swagger page (also known as Open API Spec),
+you could specify the link by specifying a `swagger-link` attribute in your document.
+The link will open the new tab with target attribute set to `_blank`.
+For example, the following attribute would add link to the Swagger with following link `https://skt-passkey.io/open-api/index.html`:
+
+[source, asciidoctor]
+----
+:swagger-link: https://skt-passkey.io/open-api/index.html
+----
+
+
+
+=== Remove Details from the Header (custom)
+If you have some attributes such as revision number, authors and etc, Asciidoctor will include details section below the `title`.
+If you don't want to present such details in the document, you could add a `no-details` attribute in your document.
+
+[source, asciidoctor]
+----
+:no-details:
+----
+
+
+
+=== More language highlighting (custom)
+Swift language supporting for highlight.js is added.
+
+
+
 === Dark Mode
 A "dark mode" switcher is included at the top of each page.
 By default the theme will match the users system preferences, but it can be switched easily.

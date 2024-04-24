@@ -36,8 +36,6 @@
 /* Doc background embellishment */
 
 #doc {
-  background: no-repeat top right / 305px 147px;
-  background-image: url("../img/doc-background.svg");
 }
 
 .doc #header {
@@ -934,18 +932,12 @@ i.fa.icon-warning {
 /* Responsive and Dark Theme Overrides */
 
 html.dark-theme #doc {
-  background: no-repeat top right / 305px 147px;
-  background-image: url("../img/doc-background-dark.svg");
 }
 
 @media screen and (max-width: 1024px) {
   #doc {
-    background: no-repeat top right / 203px 95px;
-    background-image: url("../img/doc-background.svg");
   }
   html.dark-theme #doc {
-    background: no-repeat top right / 203px 95px;
-    background-image: url("../img/doc-background-dark.svg");
   }
 }
 

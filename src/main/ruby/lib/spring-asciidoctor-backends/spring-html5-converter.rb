@@ -74,6 +74,12 @@ class SpringHtml5Converter
     else
       html = html.gsub(/<link\ rel="stylesheet"(?!.*site\.css).*>\R?/, "")
     end
+
+    # Remove <div class="details">...</div> if 'no-details' attribute is set
+    if node.attr? 'no-details'
+      html = html.gsub(/<div class="details">.*?<\/div>/m, "")
+    end
+
     match = html.match(/^(.*<body.*?>)(.*)(<\/body>.*)$/m)
     templateFile = File.join(File.dirname(File.expand_path(__FILE__)), "body_template.html")
     body = File.read(templateFile, :encoding => 'UTF-8') % { :body => match[2] }
@@ -116,9 +122,21 @@ end
 class DelegateHtml5Converter < Asciidoctor::Converter::Html5Converter
   def convert_outline(node, opts = {})
     outline = super
+
+    # Modify the TOC to wrap section numbers with a <span> tag for level 1 section
+    if outline != nil && node.node_name == "document"
+      outline.gsub!(/(<a href="#.+?>)(\d+)(\.)(\s+)/) do
+        "#{$1}<span class=\"sectnum\">#{$2}</span>#{$3}#{$4}"
+      end
+    end
+
     if node.node_name == "document" && node.attr("docname") != "index"
       index_href = node.attr "index-link", "index.html"
+      swagger_href = node.attr "swagger-link"
       outline = %(<span id="back-to-index"><a href="#{index_href}">Back to index</a></span>) + outline
+      if swagger_href != nil
+        outline = outline + %(<span id="swagger"><a href="#{swagger_href}" target="_blank">Swagger (Open API Spec)</a></span>)
+      end
     end
     return outline
   end
