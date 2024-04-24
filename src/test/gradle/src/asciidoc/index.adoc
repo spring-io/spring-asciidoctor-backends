@@ -16,6 +16,20 @@ Here's the `build.gradle` that was used:
 include::../../build.gradle[]
 ----
 
+== Swift
+
+[source, swift, options=nowrap]
+----
+let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: domain)
+
+// Fetch the challenge from the server. The challenge needs to be unique for each request.
+// The userID is the identifier for the user's account.
+let challenge = Data()
+let userID = Data(UUID().uuidString.utf8)
+
+let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: challenge,
+----
+
 
 
 == Summary

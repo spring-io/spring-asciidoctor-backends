@@ -156,12 +156,8 @@ publishing {
 	}
 	repositories {
 		maven {
-			name = "GitHubPackages"
-			url = uri("https://maven.pkg.github.com/sktston/spring-asciidoctor-backends-custom")
-			credentials {
-				username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
-				password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
-			}
+			name = "project"
+			url = file(mavenProjectRepository).toURI()
 		}
 	}
 }

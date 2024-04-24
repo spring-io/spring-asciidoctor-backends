@@ -57,7 +57,7 @@
 						<version>1.5.3</version>
 					</dependency>
 					<dependency>
-						<groupId>io.spring.asciidoctor.backends</groupId>
+						<groupId>com.sktelecom.asciidoctor.backends</groupId>
 						<artifactId>spring-asciidoctor-backends</artifactId>
 						<version>${spring-asciidoctor-backends.version}</version>
 					</dependency>

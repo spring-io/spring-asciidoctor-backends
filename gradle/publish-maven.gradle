@@ -4,41 +4,17 @@ publishing {
 			name = project.description
 			description = project.description
 			artifactId = "spring-asciidoctor-backends"
-			url = "https://github.com/spring-io/spring-asciidoctor-backends"
-			organization {
-				name = "Spring IO"
-				url = "https://spring.io"
-			}
-			licenses {
-				license {
-					name = 'The Apache Software License, Version 2.0'
-					url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-					distribution = 'repo'
-				}
-			}
-			scm {
-				url = "https://github.com/spring-io/spring-asciidoctor-backends"
-				connection = "scm:git:git://github.com/spring-io/spring-asciidoctor-backends"
-				developerConnection = "scm:git:git://github.com/spring-io/spring-asciidoctor-backends"
-			}
-			developers {
-				developer {
-					id = "spring"
-					name = "Spring Team"
-					email = "team@spring.io"
-				}
-			}
-			issueManagement {
-				system = "GitHub"
-				url = "https://github.com/spring-io/spring-asciidoctor-backends/issues"
-			}
 		}
 	}
-	if (project.hasProperty("distributionRepository")) {
+	if (project.hasProperty("github")) {
 		repositories {
 			maven {
-				url = "${distributionRepository}"
-				name = "distribution"
+				name = "GitHubPackages"
+				url = uri("https://maven.pkg.github.com/sktston/spring-asciidoctor-backends-custom")
+				credentials {
+					username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+					password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+				}
 			}
 		}
 	}
