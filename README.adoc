@@ -1,6 +1,6 @@
 = Asciidoctor Spring Backends
 
-Alternative HTML conversion for Asciidoctor with a Spring "look and feel".
+Alternative HTML conversion for Asciidoctor with a Spring "look and feel" with customization.
 
 
 == Maven build integration
@@ -26,7 +26,7 @@ You can use the https://github.com/asciidoctor/asciidoctor-maven-plugin[Asciidoc
 	</executions>
 	<dependencies>
 		<dependency>
-			<groupId>io.spring.asciidoctor.backends</groupId>
+			<groupId>com.sktelecom.asciidoctor.backends</groupId>
 			<artifactId>spring-asciidoctor-backends</artifactId>
 			<version>${spring-asciidoctor-backends.version}</version>
 		</dependency>
@@ -50,7 +50,7 @@ configurations {
 }
 
 dependencies {
-	asciidoctorExtensions "io.spring.asciidoctor.backends:spring-asciidoctor-backends:${spring-asciidoctor-backends.version}"
+	asciidoctorExtensions "com.sktelecom.asciidoctor.backends:spring-asciidoctor-backends:${spring-asciidoctor-backends.version}"
 }
 
 asciidoctor {
