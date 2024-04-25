@@ -123,10 +123,10 @@ class DelegateHtml5Converter < Asciidoctor::Converter::Html5Converter
   def convert_outline(node, opts = {})
     outline = super
 
-    # Modify the TOC to wrap section numbers with a <span> tag for level 1 section
+    # Modify the TOC to remove the period after top-level section numbers and wrap the number with a <span> tag
     if outline != nil && node.node_name == "document"
       outline.gsub!(/(<a href="#.+?>)(\d+)(\.)(\s+)/) do
-        "#{$1}<span class=\"sectnum\">#{$2}</span>#{$3}#{$4}"
+        "#{$1}<span class=\"sectnum\">#{$2}</span>#{$4}"  # Removed #{$3} which represents the period
       end
     end
 
