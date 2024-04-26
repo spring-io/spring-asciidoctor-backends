@@ -64,3 +64,64 @@ table {
 mark {
   background: var(--mark-background-color);
 }
+
+/* Tooltip container */
+a[data-tooltip-position="top"] {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+a[data-tooltip-position="top"]::after {
+  content: attr(aria-label); /* Use the aria-label as the tooltip text */
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%); /* Center the tooltip */
+  max-width: 300px; /* Manageable width for tooltips */
+  background-color: #191919;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 12px; /* Appropriate font size */
+  white-space: nowrap; /* Keep text in a single line */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis to overflow */
+  opacity: 0; /* Initial state for fade in */
+  transition: opacity 0.6s; /* Fade in effect */
+}
+
+/* Tooltip arrow */
+a[data-tooltip-position="top"]::before {
+  content: "";
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent; /* Arrow with black color */
+  transition: opacity 0.6s;
+}
+
+/* Show the tooltip text when hovering */
+a[data-tooltip-position="top"]:hover::after,
+a[data-tooltip-position="top"]:hover::before {
+  visibility: visible;
+  opacity: 1;
+}
+
+.external-link {
+  background-image: linear-gradient(transparent, transparent),
+    url("../img/external_link.svg");
+  background-position: center right;
+  background-position-y: 4px;
+  background-repeat: no-repeat;
+  background-size: 13px;
+  padding-right: 16px;
+}

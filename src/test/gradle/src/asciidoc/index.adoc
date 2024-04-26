@@ -31,6 +31,18 @@ let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrati
 ----
 
 
+== External Link Test
+https://asciidoctor.org[ASCII Doctor]
+
+https://asciidoctor.org[ASCII Doctor with seperate window, window=_blank]
+
+== Link in Table Test
+
+[cols="1,1"]
+|===
+|https://example.com[Link with same window]
+|https://example.com[Link with separate window, window=_blank]
+|===
 
 == Summary
 That's all folks!

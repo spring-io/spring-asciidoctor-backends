@@ -126,7 +126,7 @@ class DelegateHtml5Converter < Asciidoctor::Converter::Html5Converter
     # Modify the TOC to remove the period after top-level section numbers and wrap the number with a <span> tag
     if outline != nil && node.node_name == "document"
       outline.gsub!(/(<a href="#.+?>)(\d+)(\.)(\s+)/) do
-        "#{$1}<span class=\"sectnum\">#{$2}</span>#{$4}"  # Removed #{$3} which represents the period
+        "#{$1}<span class=\"sectnum\">#{$2}</span>#{$4}" # Removed #{$3} which represents the period
       end
     end
 
@@ -140,4 +140,35 @@ class DelegateHtml5Converter < Asciidoctor::Converter::Html5Converter
     end
     return outline
   end
+
+  def convert_inline_anchor(node)
+    if inside_table?(node)
+      # Use default processing for links inside tables
+      super
+    elsif node.type == :link
+      attrs = node.id ? [%( id="#{node.id}")] : []
+      if node.attr('window')
+        attrs << %( class="external-link") # Add "external-link" only if 'window' is true
+        target = %( target="_blank" rel="noopener")
+      else
+        target = ''
+      end
+      attrs << %( class="#{node.role}") if node.role
+      title = node.attr('title') || "Visit #{node.target}" # Providing a default title if none is specified
+      attrs << %( title="#{title}" data-tooltip-position="top" aria-label="#{node.target}")
+      %(<a href="#{node.target}"#{attrs.join}#{target}>#{node.text}</a>)
+    else
+      super
+    end
+  end
+
+  def inside_table?(node)
+    current = node.parent
+    while current
+      return true if current.context == :table
+      current = current.parent
+    end
+    false
+  end
+
 end
