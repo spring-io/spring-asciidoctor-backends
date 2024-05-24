@@ -128,6 +128,9 @@ class DelegateHtml5Converter < Asciidoctor::Converter::Html5Converter
       outline.gsub!(/(<a href="#.+?>)(\d+)(\.)(\s+)/) do
         "#{$1}<span class=\"sectnum\">#{$2}</span>#{$4}" # Removed #{$3} which represents the period
       end
+      outline.gsub!(/(<a href="#[^"]+">)((\d+\.)+)(\s+)/) do
+        "#{$1}<span class=\"sectnum\">#{$2}</span>#{$4}"
+      end
     end
 
     if node.node_name == "document" && node.attr("docname") != "index"
