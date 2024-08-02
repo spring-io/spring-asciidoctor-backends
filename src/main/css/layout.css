@@ -22,9 +22,22 @@
 
 #banner {
   height: 100%;
-  background: no-repeat top var(--layout-banner-logo-offset) left
-    var(--layout-banner-logo-offset) / auto var(--layout-banner-logo-height);
-  background-image: url("../img/banner-logo.svg");
+  background-image: none !important;
+}
+
+#logo-link {
+  display: block;
+  position: absolute;
+  top: var(--layout-banner-logo-offset);
+  left: var(--layout-banner-logo-offset);
+  height: var(--layout-banner-logo-height);
+}
+
+#logo-image {
+  height: 100%;
+  width: auto;
+  display: block;
+  content: url("../img/banner-logo.svg");
 }
 
 #doc {

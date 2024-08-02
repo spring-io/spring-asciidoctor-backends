@@ -143,6 +143,28 @@ Swift language supporting for highlight.js is added.
 
 
 
+=== Configure link for the banner logo (custom)
+You can customize the link for the banner logo by setting `logo-link-url` attribute in your document.
+
+[source, asciidoctor]
+----
+:logo-link-url: https://example.com
+----
+
+
+
+=== Configure banner logo image (custom)
+You can customize banner image by setting your own css.
+
+[source, css]
+----
+#logo-image {
+  content: url("../img/new-banner-logo.svg");
+}
+----
+
+
+
 === Dark Mode
 A "dark mode" switcher is included at the top of each page.
 By default the theme will match the users system preferences, but it can be switched easily.

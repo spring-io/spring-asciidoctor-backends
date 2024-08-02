@@ -81,8 +81,14 @@ class SpringHtml5Converter
     end
 
     match = html.match(/^(.*<body.*?>)(.*)(<\/body>.*)$/m)
-    templateFile = File.join(File.dirname(File.expand_path(__FILE__)), "body_template.html")
-    body = File.read(templateFile, :encoding => 'UTF-8') % { :body => match[2] }
+    template_file = File.join(File.dirname(File.expand_path(__FILE__)), "body_template.html")
+    body = File.read(template_file, encoding: 'UTF-8') % { body: match[2] }
+
+    # Replace the logo-link-url placeholder with the actual attribute value
+    logo_link_url = node.attr 'logo-link-url', 'https://spring.io' # Fallback to a default URL if not set
+    body.gsub!('{{logo_link_url}}', logo_link_url)
+    body.gsub!('{{body}}', match[2])
+
     return match[1] + body + match[3]
   end
 
